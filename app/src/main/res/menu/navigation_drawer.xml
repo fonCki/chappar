@@ -1,0 +1,41 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:id="@+id/data">
+        <item
+            android:id="@+id/nav_users"
+            android:icon="@drawable/users"
+            android:title="@string/title_users" />
+        <item
+            android:id="@+id/nav_location"
+            android:icon="@drawable/ic_baseline_location_on_24"
+            android:title="@string/title_location" />
+        <item
+            android:id="@+id/nav_chat_list"
+            android:icon="@drawable/chats"
+            android:title="@string/title_chats" />
+
+    </group>
+    <group android:id="@+id/tools">
+
+        <item
+            android:id="@+id/nav_type_chart"
+            android:icon="@drawable/settings"
+            android:title="@string/menu_settings" />
+
+        <item
+            android:id="@+id/nav_iv_calculator"
+            android:icon="@drawable/about"
+            android:title="@string/menu_about" />
+    </group>
+    <group android:id="@+id/status">
+
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/logout"
+            android:title="@string/logout" />
+    </group>
+
+
+</menu>
