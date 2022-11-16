@@ -1,4 +1,4 @@
-package com.example.chappar10;
+package com.example.chappar10.ui;
 
 import android.Manifest;
 import android.content.Context;
@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.example.chappar10.R;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.LocationCallback;

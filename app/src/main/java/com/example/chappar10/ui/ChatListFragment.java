@@ -1,4 +1,4 @@
-package com.example.chappar10;
+package com.example.chappar10.ui;
 
 
 import android.os.Bundle;
@@ -8,9 +8,11 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-public class UserListFragment extends Fragment {
+import com.example.chappar10.R;
+
+public class ChatListFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_user_list, container, false);
+        return inflater.inflate(R.layout.fragment_chat_list, container, false);
     }
 }

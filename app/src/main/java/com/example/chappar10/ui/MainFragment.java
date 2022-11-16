@@ -1,4 +1,4 @@
-package com.example.chappar10;
+package com.example.chappar10.ui;
 
 
 import android.content.Intent;
@@ -14,7 +14,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.chappar10.data.User;
+import com.example.chappar10.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 
@@ -46,11 +46,6 @@ public class MainFragment extends Fragment {
             viewModel.getMessage().observe(this, message -> {
                 if (message != null)
                     viewMessage.setText(message.getBody());
-            });
-
-            viewModel.getUsers().observe(this, user -> {
-                if (user != null)
-                    viewList.setText(user.email);
             });
 
 

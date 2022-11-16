@@ -1,4 +1,4 @@
-package com.example.chappar10;
+package com.example.chappar10.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.example.chappar10.R;
 import com.example.chappar10.data.DataRepository;
 import com.example.chappar10.data.Location;
 import com.google.android.gms.common.api.ApiException;

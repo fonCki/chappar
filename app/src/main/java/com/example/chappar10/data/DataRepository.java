@@ -10,13 +10,32 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DataRepository {
     private static DataRepository instance;
     private DatabaseReference myRef;
     private LiveData message;
-    private UsersLiveData users;
+    private ArrayList<User> users;
 
-    private DataRepository(){}
+
+    private DataRepository(){
+        initUsers();
+    }
+
+    private void initUsers() {
+        // Create a list of 25 random users with real names, emails and age
+        users = new ArrayList<>();
+        for (int i = 0; i < 25; i++) {
+            User user = new User();
+            user.setNickname("User " + (i + 1));
+            user.setEmail("user" + (i + 1) + "@gmail.com");
+            user.setAge((int) (Math.random() * 60 + 18));
+            users.add(user);
+        }
+
+    }
 
     public static synchronized DataRepository getInstance() {
         if(instance == null)
@@ -27,7 +46,6 @@ public class DataRepository {
     public void init(String userId) {
         myRef = FirebaseDatabase.getInstance().getReference().child("message").child(userId);
         message = new LiveData(myRef);
-        users = new UsersLiveData();
     }
 
     public void saveMessage(String message) {
@@ -49,7 +67,7 @@ public class DataRepository {
         return added[0];
     }
 
-    public UsersLiveData getUsers() {
+    public ArrayList<User> getUsers() {
         return users;
     }
 

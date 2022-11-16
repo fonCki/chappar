@@ -1,4 +1,4 @@
-package com.example.chappar10;
+package com.example.chappar10.ui;
 
 import android.app.Application;
 
@@ -8,8 +8,10 @@ import androidx.lifecycle.LiveData;
 
 import com.example.chappar10.data.DataRepository;
 import com.example.chappar10.data.Message;
+import com.example.chappar10.data.User;
 import com.example.chappar10.data.UserRepository;
-import com.example.chappar10.data.UsersLiveData;
+
+import java.util.List;
 
 public class MainFragmentViewModel extends AndroidViewModel {
 
@@ -35,9 +37,8 @@ public class MainFragmentViewModel extends AndroidViewModel {
         return dataRepository.getMessage();
     }
 
-    public UsersLiveData getUsers() {
+    public List<User> getUsers() {
         return dataRepository.getUsers();
-//        return null;
     }
 
 }

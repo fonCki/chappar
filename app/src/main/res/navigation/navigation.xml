@@ -8,20 +8,31 @@
 
     <fragment
         android:id="@+id/nav_main"
-        android:name="com.example.chappar10.MainFragment"
+        android:name="com.example.chappar10.ui.MainFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_main" />
 
     <fragment
         android:id="@+id/nav_location"
-        android:name="com.example.chappar10.LocationFragment"
+        android:name="com.example.chappar10.ui.LocationFragment"
         android:label="@string/menu_location"
         tools:layout="@layout/fragment_location" />
 
     <fragment
         android:id="@+id/nav_chat_list"
-        android:name="com.example.chappar10.ChatListFragment"
+        android:name="com.example.chappar10.ui.ChatListFragment"
         android:label="@string/title_chats"
         tools:layout="@layout/fragment_chat_list" />
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="com.example.chappar10.ui.SettingsFragment"
+        android:label="@string/menu_settings"
+        tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/nav_users"
+        android:name="com.example.chappar10.ui.UserListFragment"
+        android:label="@string/title_users"
+        tools:layout="@layout/fragment_user_list" />
 
 </navigation>
