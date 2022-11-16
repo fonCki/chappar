@@ -25,7 +25,7 @@ public class DataRepository {
     }
 
     public void init(String userId) {
-        myRef = FirebaseDatabase.getInstance().getReference().child("users").child(userId);
+        myRef = FirebaseDatabase.getInstance().getReference().child("message").child(userId);
         message = new LiveData(myRef);
         users = new UsersLiveData();
     }

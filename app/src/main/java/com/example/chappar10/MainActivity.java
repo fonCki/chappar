@@ -33,14 +33,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() == null) {
             Log.i("User", "Not logged in");
             startActivity(new Intent(this, Login.class));
+        } else {
+            setContentView(R.layout.activity_main);
+            initViews();
+            setupNavigation();
         }
-        initViews();
-        setupNavigation();
+
     }
 
     private void initViews() {

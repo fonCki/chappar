@@ -1,27 +1,22 @@
 package com.example.chappar10;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
 import android.content.Context;
-import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
-import android.util.Log;
+import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
-import com.example.chappar10.data.DataRepository;
-import com.example.chappar10.data.Location;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.LocationCallback;
@@ -33,67 +28,84 @@ import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 
-public class Login extends AppCompatActivity {
-    private FirebaseAuth mAuth;
-    private Button login;
-    private EditText email, password;
+public class GPSActivity extends AppCompatActivity {
 
+    private TextView AddressText;
+    private Button LocationButton;
+    private LocationRequest locationRequest;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_gpsactivity);
 
-        TextView register = findViewById(R.id.register);
-        register.setOnClickListener(v -> {
-            startActivity(new Intent(this, SignUp.class));
-        });
+        AddressText = findViewById(R.id.addressText);
+        LocationButton = findViewById(R.id.locationButton);
 
-        email = findViewById(R.id.editTextTextEmailAddress);
-        password = findViewById(R.id.editTextTextPassword);
-
-        login = findViewById(R.id.login);
-        login.setOnClickListener(v -> {
-            mAuth = FirebaseAuth.getInstance();
-            mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            Log.i("User", "Logged in");
-                            Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                            updateLocation();
-                            startActivity(new Intent(this, MainActivity.class));
-                        } else {
-                            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        });
-    }
-
-
-    //UPDATE LOCATION
-
-    private LocationRequest locationRequest;
-
-    private void updateLocation() {
         locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         locationRequest.setInterval(5000);
         locationRequest.setFastestInterval(2000);
 
+        LocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                getCurrentLocation();
+            }
+        });
+
+    }
+
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//
+//        if (requestCode == 1){
+//            if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
+//
+//                if (isGPSEnabled()) {
+//
+//                    getCurrentLocation();
+//
+//                }else {
+//
+//                    turnOnGPS();
+//                }
+//            }
+//        }
+//
+//
+//    }
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if (requestCode == 2) {
+//            if (resultCode == Activity.RESULT_OK) {
+//
+//                getCurrentLocation();
+//            }
+//        }
+//    }
+
+    private void getCurrentLocation() {
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ActivityCompat.checkSelfPermission(Login.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(GPSActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
                 if (isGPSEnabled()) {
-                    LocationServices.getFusedLocationProviderClient(Login.this)
+
+                    LocationServices.getFusedLocationProviderClient(GPSActivity.this)
                             .requestLocationUpdates(locationRequest, new LocationCallback() {
                                 @Override
                                 public void onLocationResult(@NonNull LocationResult locationResult) {
                                     super.onLocationResult(locationResult);
 
-                                    LocationServices.getFusedLocationProviderClient(Login.this)
+                                    LocationServices.getFusedLocationProviderClient(GPSActivity.this)
                                             .removeLocationUpdates(this);
 
                                     if (locationResult != null && locationResult.getLocations().size() >0){
@@ -102,10 +114,7 @@ public class Login extends AppCompatActivity {
                                         double latitude = locationResult.getLocations().get(index).getLatitude();
                                         double longitude = locationResult.getLocations().get(index).getLongitude();
 
-                                        DataRepository.getInstance().init(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                                        DataRepository.getInstance().addLocation(FirebaseAuth.getInstance().getCurrentUser().getUid(), new Location(latitude, longitude));
-                                        Toast.makeText(Login.this, "Location Updated", Toast.LENGTH_SHORT).show();
-                                        Log.i("Location", "Location Updated");
+                                        AddressText.setText("Latitude: "+ latitude + "\n" + "Longitude: "+ longitude);
                                     }
                                 }
                             }, Looper.getMainLooper());
@@ -118,7 +127,6 @@ public class Login extends AppCompatActivity {
                 requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             }
         }
-
     }
 
     private void turnOnGPS() {
@@ -138,7 +146,7 @@ public class Login extends AppCompatActivity {
 
                 try {
                     LocationSettingsResponse response = task.getResult(ApiException.class);
-                    Toast.makeText(Login.this, "GPS is already tured on", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GPSActivity.this, "GPS is already tured on", Toast.LENGTH_SHORT).show();
 
                 } catch (ApiException e) {
 
@@ -147,7 +155,7 @@ public class Login extends AppCompatActivity {
 
                             try {
                                 ResolvableApiException resolvableApiException = (ResolvableApiException) e;
-                                resolvableApiException.startResolutionForResult(Login.this, 2);
+                                resolvableApiException.startResolutionForResult(GPSActivity.this, 2);
                             } catch (IntentSender.SendIntentException ex) {
                                 ex.printStackTrace();
                             }
