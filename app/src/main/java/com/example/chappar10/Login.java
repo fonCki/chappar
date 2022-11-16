@@ -61,7 +61,9 @@ public class Login extends AppCompatActivity {
             mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            updateLocation();
+                            Log.i("User", "Logged in");
+                            Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
+//                            updateLocation();
                             startActivity(new Intent(this, MainActivity.class));
                         } else {
                             Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
