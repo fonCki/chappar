@@ -52,7 +52,7 @@
 
         <!--        edit text with white solid background-->
         <EditText
-            android:id="@+id/nickname"
+            android:id="@+id/editTextNickName"
             android:layout_width="300dp"
             android:layout_height="45dp"
             android:layout_marginTop="20dp"

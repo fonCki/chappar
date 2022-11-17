@@ -52,7 +52,7 @@ public class DataRepository {
     }
 
     public void addLocation(String userId, Location location) {
-        FirebaseDatabase.getInstance().getReference().child("users").child(userId).child("locations").push().setValue(location);
+        FirebaseDatabase.getInstance().getReference().child("users").child(userId).child("location").push().setValue(location);
     }
 
     public boolean addUser(User user) {

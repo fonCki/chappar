@@ -18,8 +18,9 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.Date;
 
 public class AccessViewModel extends AndroidViewModel {
-    private FirebaseAuth firebaseAuth;
+    private final FirebaseAuth firebaseAuth;
     DataRepository dataRepository;
+
 
     public AccessViewModel(@NonNull Application application) {
         super(application);
@@ -53,5 +54,7 @@ public class AccessViewModel extends AndroidViewModel {
     public FirebaseUser getCurrentUser() {
         return firebaseAuth.getCurrentUser();
     }
+
+
 
 }

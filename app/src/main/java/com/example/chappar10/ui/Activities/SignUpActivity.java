@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -31,18 +32,16 @@ import java.util.Date;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SignUpActivity extends AppCompatActivity {
-    private FirebaseAuth mAuth;
-    private EditText name, email, password;
+
+    private EditText nickName, email, password;
+    private String nickNameString, emailString, passwordString;
+    DatePicker datePicker;
     private Switch aSwitch;
     private Date birthDate;
     CircleImageView profile;
 
     AccessViewModel viewModel;
-
     Button register;
-
-    FirebaseStorage storage;
-
 
     boolean profileSelected = false;
 
@@ -53,25 +52,17 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up2);
 
-        mAuth = FirebaseAuth.getInstance();
-        storage = FirebaseStorage.getInstance();
-
-        birthDate = new Date();
-
-        //set birhDate to current date
-        birthDate.setTime(System.currentTimeMillis());
-
+        viewModel = new ViewModelProvider(this).get(AccessViewModel.class);
 
         register = findViewById(R.id.register);
 
         email = findViewById(R.id.editTextEmail);
         password = findViewById(R.id.editTextPassword);
-        name = findViewById(R.id.nickname);
+        nickName = findViewById(R.id.editTextNickName);
         aSwitch = findViewById(R.id.gender_switch);
-
         profile = findViewById(R.id.profile_img);
+        datePicker = findViewById(R.id.datePicker);
 
-        viewModel = new ViewModelProvider(this).get(AccessViewModel.class);
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,66 +77,53 @@ public class SignUpActivity extends AppCompatActivity {
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (profileSelected == false) {
-                    if (isChecked) {
-                        profile.setImageResource(R.drawable.angelina);
-                    } else {
-                        profile.setImageResource(R.drawable.brad_pitt);
-                    }
+                    profile.setImageResource(isChecked?R.drawable.angelina:R.drawable.brad_pitt);
                 }
-
             }
         });
 
-
         register.setOnClickListener(v -> {
-            registerUser();
-
+            if (validateFields()) {
+                viewModel.createUser(emailString, passwordString, nickNameString, !aSwitch.isChecked(), "URI", birthDate);
+                Toast.makeText(this, "User created", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, MainActivity.class);
+            }
         });
 
-
-
-    }
-
-
-    private void registerUser() {
-        String email = this.email.getText().toString();
-        String password = this.password.getText().toString();
-        String nickName = this.name.getText().toString();
-
-        if (email.isEmpty()) {
-            this.email.setError("Email is required");
-            this.email.requestFocus();
-            return;
-        }
-
-        if (password.isEmpty()) {
-            this.password.setError("Password is required");
-            this.password.requestFocus();
-            return;
-        }
-
-        if (nickName.isEmpty()) {
-            this.name.setError("nickname is required");
-            this.name.requestFocus();
-            return;
-        }
-
-        viewModel.createUser(email, password, nickName, aSwitch.isChecked(), "URI", birthDate);
 
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (data.getData() != null) {
             profileSelected = true;
             uri = data.getData();
             profile.setImageURI(uri);
-            Log.i("#TAG2", "onSuccess: " + uri);
-
         }
+    }
 
+    private boolean validateFields() {
+        nickNameString = nickName.getText().toString();
+        emailString = email.getText().toString();
+        passwordString = password.getText().toString();
+        birthDate = new Date(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
 
+        if (emailString.isEmpty()) {
+            this.email.setError("Email is required");
+            this.email.requestFocus();
+            return false;
+        }
+        if (passwordString.isEmpty()) {
+            this.password.setError("Password is required");
+            this.password.requestFocus();
+            return false;
+        }
+        if (nickNameString.isEmpty()) {
+            this.nickName.setError("nickname is required");
+            this.nickName.requestFocus();
+            return false;
+        }
+        return true;
     }
 }
