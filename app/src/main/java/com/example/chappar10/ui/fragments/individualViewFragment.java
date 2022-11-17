@@ -1,4 +1,4 @@
-package com.example.chappar10.ui;
+package com.example.chappar10.ui.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

@@ -1,4 +1,4 @@
-package com.example.chappar10.ui;
+package com.example.chappar10.ui.Activities;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -27,7 +26,7 @@ import com.google.firebase.storage.UploadTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class SignUp extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText name, email, password;
     private Switch aSwitch;
@@ -126,11 +125,11 @@ public class SignUp extends AppCompatActivity {
             reference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(SignUp.this, "Image Uploaded", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, "Image Uploaded", Toast.LENGTH_SHORT).show();
                 }
             }   );
             mAuth.signOut();
-            startActivity(new Intent(this, Login.class));
+            startActivity(new Intent(this, LoginActivity.class));
         });
     }
 

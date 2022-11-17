@@ -1,4 +1,4 @@
-package com.example.chappar10.ui;
+package com.example.chappar10.ui.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() == null) {
             Log.i("User", "Not logged in");
-            startActivity(new Intent(this, Login.class));
+            startActivity(new Intent(this, LoginActivity.class));
         } else {
             setContentView(R.layout.activity_main);
             initViews();

@@ -1,9 +1,8 @@
-package com.example.chappar10.ui;
+package com.example.chappar10.ui.fragments;
 
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +13,10 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
 
 import com.example.chappar10.R;
-import com.google.android.material.navigation.NavigationView;
+import com.example.chappar10.ui.Activities.LoginActivity;
+import com.example.chappar10.ui.view_model.MainFragmentViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 
 
@@ -38,7 +37,7 @@ public class MainFragment extends Fragment {
             button = view.findViewById(R.id.button);
             button.setOnClickListener(v -> {
                 mAuth.signOut();
-                Intent intent = new Intent(getActivity(), Login.class);
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
             });
             viewModel = new ViewModelProvider(this).get(MainFragmentViewModel.class);

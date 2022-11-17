@@ -1,4 +1,4 @@
-package com.example.chappar10.ui;
+package com.example.chappar10.ui.fragments;
 
 
 import android.os.Bundle;
@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.chappar10.R;
 import com.example.chappar10.data.DataRepository;
 import com.example.chappar10.data.User;
+import com.example.chappar10.ui.UsersAdapter;
 
 public class UserListFragment extends Fragment {
 

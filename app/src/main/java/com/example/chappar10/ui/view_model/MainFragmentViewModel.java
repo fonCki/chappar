@@ -1,4 +1,4 @@
-package com.example.chappar10.ui;
+package com.example.chappar10.ui.view_model;
 
 import android.app.Application;
 
