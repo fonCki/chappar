@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.chappar10.R;
 import com.example.chappar10.ui.Activities.LoginActivity;
+import com.example.chappar10.ui.view_model.AccessViewModel;
 import com.example.chappar10.ui.view_model.MainFragmentViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -24,19 +25,20 @@ public class MainFragment extends Fragment {
     EditText message;
     TextView viewMessage, viewList;
     MainFragmentViewModel viewModel;
-    private FirebaseAuth mAuth;
+    AccessViewModel accessViewModel;
     Button button;
 
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             return inflater.inflate(R.layout.fragment_main, container, false);
 
+
         }
 
         public void onViewCreated(View view, Bundle savedInstanceState) {
-            mAuth = FirebaseAuth.getInstance();
+            accessViewModel = new ViewModelProvider(this).get(AccessViewModel.class);
             button = view.findViewById(R.id.button);
             button.setOnClickListener(v -> {
-                mAuth.signOut();
+                accessViewModel.logout();
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
             });

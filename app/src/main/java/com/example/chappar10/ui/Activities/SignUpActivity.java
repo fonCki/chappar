@@ -84,12 +84,17 @@ public class SignUpActivity extends AppCompatActivity {
 
         register.setOnClickListener(v -> {
             if (validateFields()) {
-                viewModel.createUser(emailString, passwordString, nickNameString, !aSwitch.isChecked(), "URI", birthDate);
-                Toast.makeText(this, "User created", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this, MainActivity.class);
+                viewModel.createUser(emailString, passwordString, nickNameString, !aSwitch.isChecked(), "URI", birthDate).addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(this, "User created", Toast.LENGTH_SHORT).show();
+                        viewModel.updateLocation();
+                        startActivity(new Intent(this, MainActivity.class));
+                    } else {
+                        Toast.makeText(this, "User creation failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
-
 
     }
 

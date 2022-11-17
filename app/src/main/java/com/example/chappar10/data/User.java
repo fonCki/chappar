@@ -10,14 +10,13 @@ public class User implements Serializable {
         this.nickname = nickname;
         this.email = email;
         this.status = Status.OFFLINE;
-        location = new Location();
         this.isMale = isMale;
         this.profileurl = profileurl;
         this.birthDate = birthDate;
 
     }
 
-    enum Status {
+    public enum Status {
         ONLINE,
         OFFLINE
     }

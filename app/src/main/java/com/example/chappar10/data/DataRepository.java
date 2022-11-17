@@ -52,6 +52,7 @@ public class DataRepository {
     }
 
     public void addLocation(String userId, Location location) {
+        init(userId);
         FirebaseDatabase.getInstance().getReference().child("users").child(userId).child("location").push().setValue(location);
     }
 
@@ -64,6 +65,10 @@ public class DataRepository {
             }
         });
         return added[0];
+    }
+
+    public void updateStatus(String userId, User.Status status) {
+        FirebaseDatabase.getInstance().getReference().child("users").child(userId).child("status").setValue(status);
     }
 
     public ArrayList<User> getUsers() {
