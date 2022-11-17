@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        startActivity(new Intent(this, GPSActivity.class));
         mAuth = FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() == null) {
             Log.i("User", "Not logged in");
@@ -59,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
 
         appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_main,
-                R.id.nav_chat_list)
+                R.id.nav_chat_list,
+                R.id.nav_location)
                 .setOpenableLayout(drawerLayout)
                 .build();
 
@@ -72,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     private void setBottomNavigationVisibility() {
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             final int id = destination.getId();
-            if (id == R.id.nav_main || id == R.id.nav_chat_list) {
+            if (id == R.id.nav_main || id == R.id.nav_chat_list || id == R.id.nav_location) {
                 bottomNavigationView.setVisibility(View.VISIBLE);
             } else {
                 bottomNavigationView.setVisibility(View.GONE);
@@ -95,7 +97,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (navController.getCurrentDestination().getId() == R.id.nav_main) {
+        if (navController.getCurrentDestination().getId() == R.id.nav_main
+                || navController.getCurrentDestination().getId() == R.id.nav_chat_list
+                || navController.getCurrentDestination().getId() == R.id.nav_location) {
             getMenuInflater().inflate(R.menu.appbar, menu);
             return true;
         }
@@ -107,4 +111,5 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         return NavigationUI.onNavDestinationSelected(item, navController) || super.onOptionsItemSelected(item);
     }
+
 }

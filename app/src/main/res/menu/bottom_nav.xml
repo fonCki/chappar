@@ -7,13 +7,13 @@
         android:title="Main" />
 
     <item
-        android:id="@+id/nav_chat_list"
-        android:icon="@drawable/chats"
-        android:title="Chat List" />
-
-    <item
         android:id="@+id/nav_location"
         android:icon="@drawable/ic_baseline_location_on_24"
         android:title="Location" />
+
+    <item
+        android:id="@+id/nav_chat_list"
+        android:icon="@drawable/chats"
+        android:title="Chats" />
 
 </menu>

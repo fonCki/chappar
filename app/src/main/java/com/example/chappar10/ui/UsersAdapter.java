@@ -17,11 +17,15 @@ import java.util.ArrayList;
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> {
 
     private final ArrayList<User> users;
+    private OnClickListener onClickListener;
 
     public UsersAdapter(ArrayList<User> users) {
         this.users = users;
     }
 
+    public void setOnClickListener(OnClickListener listener) {
+        this.onClickListener = listener;
+    }
 
     @NonNull
     @Override
@@ -40,7 +44,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return 0;
+        return users.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -51,7 +55,15 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
             super(itemView);
             name = itemView.findViewById(R.id.tv_name);
             icon = itemView.findViewById(R.id.iv_icon);
+            itemView.setOnClickListener(v -> {
+                onClickListener.onClick(users.get(getBindingAdapterPosition()));
+            });
+            }
         }
+
+
+    public interface OnClickListener {
+        void onClick(User user);
     }
 }
 

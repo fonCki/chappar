@@ -27,7 +27,7 @@ public class DataRepository {
     private void initUsers() {
         // Create a list of 25 random users with real names, emails and age
         users = new ArrayList<>();
-        for (int i = 0; i < 25; i++) {
+        for (int i = 0; i < 1005; i++) {
             User user = new User();
             user.setNickname("User " + (i + 1));
             user.setEmail("user" + (i + 1) + "@gmail.com");

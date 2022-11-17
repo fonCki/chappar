@@ -9,8 +9,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.chappar10.R;
@@ -27,20 +29,23 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SignUp extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    private EditText name, lastname, email, password;
+    private EditText name, email, password;
+    private Switch aSwitch;
     CircleImageView profile;
-    ProgressBar progressBar;
+
     Button register;
 
     FirebaseStorage storage;
     FirebaseDatabase database;
+
+    boolean profileSelected = false;
 
     Uri uri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_sign_up2);
 
         mAuth = FirebaseAuth.getInstance();
         storage = FirebaseStorage.getInstance();
@@ -52,10 +57,8 @@ public class SignUp extends AppCompatActivity {
 
         email = findViewById(R.id.editTextEmail);
         password = findViewById(R.id.editTextPassword);
-        name = findViewById(R.id.editTextName);
-        lastname = findViewById(R.id.editTextLastName);
-        progressBar = findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.GONE);
+        name = findViewById(R.id.nickname);
+        aSwitch = findViewById(R.id.gender_switch);
 
         profile = findViewById(R.id.profile_img);
 
@@ -66,6 +69,19 @@ public class SignUp extends AppCompatActivity {
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 intent.setType("image/*");
                 startActivityForResult(intent, 33);
+            }
+        });
+
+        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (profileSelected == false) {
+                    if (isChecked) {
+                        profile.setImageResource(R.drawable.angelina);
+                    } else {
+                        profile.setImageResource(R.drawable.brad_pitt);
+                    }
+                }
+
             }
         });
 
@@ -83,8 +99,7 @@ public class SignUp extends AppCompatActivity {
     private void registerUser() {
         String email = this.email.getText().toString();
         String password = this.password.getText().toString();
-        String name = this.name.getText().toString();
-        String lastname = this.lastname.getText().toString();
+        String nickName = this.name.getText().toString();
 
         if (email.isEmpty()) {
             this.email.setError("Email is required");
@@ -98,21 +113,15 @@ public class SignUp extends AppCompatActivity {
             return;
         }
 
-        if (name.isEmpty()) {
-            this.name.setError("Name is required");
+        if (nickName.isEmpty()) {
+            this.name.setError("nickname is required");
             this.name.requestFocus();
             return;
         }
 
-        if (lastname.isEmpty()) {
-            this.lastname.setError("Lastname is required");
-            this.lastname.requestFocus();
-            return;
-        }
 
-        progressBar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-            DataRepository.getInstance().addUser(mAuth.getCurrentUser().getUid(), new User(name, email));
+            DataRepository.getInstance().addUser(mAuth.getCurrentUser().getUid(), new User(nickName, email));
             StorageReference reference = storage.getReference().child("profile_pics").child(mAuth.getCurrentUser().getUid()).child("profile.jpg");
             reference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
@@ -130,6 +139,7 @@ public class SignUp extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (data.getData() != null) {
+            profileSelected = true;
             uri = data.getData();
             profile.setImageURI(uri);
             Log.i("#TAG2", "onSuccess: " + uri);

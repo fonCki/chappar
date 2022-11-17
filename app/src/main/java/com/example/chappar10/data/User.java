@@ -1,6 +1,9 @@
 package com.example.chappar10.data;
 
-public class User {
+import java.io.Serializable;
+import java.util.Date;
+
+public class User implements Serializable {
     enum Status {
         ONLINE,
         OFFLINE
@@ -12,6 +15,7 @@ public class User {
     public Status status;
     public Location location;
     public String ImageUrl;
+    public Date birthDate;
     public int age;
 
 

@@ -3,6 +3,7 @@ package com.example.chappar10.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +14,10 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.example.chappar10.R;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 
@@ -57,5 +60,13 @@ public class MainFragment extends Fragment {
                 Toast.makeText(getActivity(), messagev, Toast.LENGTH_SHORT).show();
                 viewModel.saveMessage(messagev);
             });
+
+//            NavigationView navigationView = getActivity().findViewById(R.id.item_logout);
+//            navigationView.getMenu().findItem(R.id.item_logout).setOnMenuItemClickListener(menuItem -> {
+//                Log.d("TAG", "onViewCreated: ");
+//                return true;
+//            });
+
         }
+
 }

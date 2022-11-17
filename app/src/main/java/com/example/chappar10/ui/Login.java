@@ -53,10 +53,10 @@ public class Login extends AppCompatActivity {
             startActivity(new Intent(this, SignUp.class));
         });
 
-        email = findViewById(R.id.editTextTextEmailAddress);
-        password = findViewById(R.id.editTextTextPassword);
+        email = findViewById(R.id.editTextEmail);
+        password = findViewById(R.id.editTextPassword);
 
-        login = findViewById(R.id.login);
+        login = findViewById(R.id.loginButton);
         login.setOnClickListener(v -> {
             mAuth = FirebaseAuth.getInstance();
             mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
