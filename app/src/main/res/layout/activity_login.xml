@@ -33,7 +33,7 @@
             android:background="@drawable/circular_white_border"
             android:hint="Email"
             android:inputType="textEmailAddress"
-            android:text="email@gmail.com"
+            android:text="brad_pitt@gmail.com"
             android:padding="10dp"
             android:textColor="@color/white"
             android:textColorHint="@color/white" />
@@ -47,7 +47,7 @@
             android:background="@drawable/circular_white_border"
             android:hint="Password"
             android:inputType="textPassword"
-            android:text="password"
+            android:text="IamBradPitt"
             android:padding="10dp"
             android:textColor="@color/white"
             android:textColorHint="@color/white" />

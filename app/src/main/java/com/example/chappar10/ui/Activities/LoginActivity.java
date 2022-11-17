@@ -3,6 +3,7 @@ package com.example.chappar10.ui.Activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
 import android.content.Context;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 import com.example.chappar10.R;
 import com.example.chappar10.data.DataRepository;
 import com.example.chappar10.data.Location;
+import com.example.chappar10.ui.view_model.AccessViewModel;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.LocationCallback;
@@ -37,7 +39,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
-    private FirebaseAuth mAuth;
+    private AccessViewModel loginViewModel;
     private Button login;
     private EditText email, password;
 
@@ -48,28 +50,21 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        loginViewModel = new ViewModelProvider(this).get(AccessViewModel.class);
+
         TextView register = findViewById(R.id.register);
         register.setOnClickListener(v -> {
             startActivity(new Intent(this, SignUpActivity.class));
         });
 
+
         email = findViewById(R.id.editTextEmail);
         password = findViewById(R.id.editTextPassword);
-
         login = findViewById(R.id.loginButton);
+
         login.setOnClickListener(v -> {
-            mAuth = FirebaseAuth.getInstance();
-            mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            Log.i("User", "Logged in");
-                            Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                            updateLocation();
-                            startActivity(new Intent(this, MainActivity.class));
-                        } else {
-                            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+           loginViewModel.login(email.getText().toString(), password.getText().toString());
+           updateLocation();
         });
     }
 

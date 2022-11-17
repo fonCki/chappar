@@ -2,6 +2,7 @@ package com.example.chappar10.ui.Activities;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.example.chappar10.R;
 import com.example.chappar10.data.DataRepository;
 import com.example.chappar10.data.User;
+import com.example.chappar10.ui.view_model.AccessViewModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
@@ -24,18 +26,23 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.Date;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText name, email, password;
     private Switch aSwitch;
+    private Date birthDate;
     CircleImageView profile;
+
+    AccessViewModel viewModel;
 
     Button register;
 
     FirebaseStorage storage;
-    FirebaseDatabase database;
+
 
     boolean profileSelected = false;
 
@@ -48,8 +55,11 @@ public class SignUpActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         storage = FirebaseStorage.getInstance();
-        database = FirebaseDatabase.getInstance();
 
+        birthDate = new Date();
+
+        //set birhDate to current date
+        birthDate.setTime(System.currentTimeMillis());
 
 
         register = findViewById(R.id.register);
@@ -60,6 +70,8 @@ public class SignUpActivity extends AppCompatActivity {
         aSwitch = findViewById(R.id.gender_switch);
 
         profile = findViewById(R.id.profile_img);
+
+        viewModel = new ViewModelProvider(this).get(AccessViewModel.class);
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,19 +130,8 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
 
+        viewModel.createUser(email, password, nickName, aSwitch.isChecked(), "URI", birthDate);
 
-        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-            DataRepository.getInstance().addUser(mAuth.getCurrentUser().getUid(), new User(nickName, email));
-            StorageReference reference = storage.getReference().child("profile_pics").child(mAuth.getCurrentUser().getUid()).child("profile.jpg");
-            reference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(SignUpActivity.this, "Image Uploaded", Toast.LENGTH_SHORT).show();
-                }
-            }   );
-            mAuth.signOut();
-            startActivity(new Intent(this, LoginActivity.class));
-        });
     }
 
     @Override
