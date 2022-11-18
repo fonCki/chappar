@@ -1,5 +1,7 @@
 package com.example.chappar10.ui;
 
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chappar10.R;
 import com.example.chappar10.data.User;
+import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> {
 
@@ -38,8 +43,9 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.name.setText(users.get(position).getNickname());
-//        holder.icon.setImageResource(users.get(position).getIconId());
-
+//        Uri uri = Uri.parse("https://i.picsum.photos/id/25/200/300.jpg?hmac=ScdLbPfGd_kI3MUHvJUb12Fsg1meDQEaHY_mM613BVM");
+//        holder.avatar.setImageURI(uri);
+        holder.avatar.setImageResource(R.drawable.brad_pitt);
     }
 
     @Override
@@ -49,12 +55,12 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView name;
-        ImageView icon;
+        ShapeableImageView avatar;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.tv_name);
-            icon = itemView.findViewById(R.id.iv_icon);
+            avatar = itemView.findViewById(R.id.tv_image);
             itemView.setOnClickListener(v -> {
                 onClickListener.onClick(users.get(getBindingAdapterPosition()));
             });

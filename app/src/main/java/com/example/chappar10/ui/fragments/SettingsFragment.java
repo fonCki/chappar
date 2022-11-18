@@ -49,8 +49,10 @@ public class SettingsFragment extends Fragment {
         profile = view.findViewById(R.id.profile_img);
         mAuth = FirebaseAuth.getInstance();
         storage = FirebaseStorage.getInstance();
-        Uri uri = Uri.parse("https://firebasestorage.googleapis.com/v0/b/chappar-865a9.appspot.com/o/profile_pics%2FbEW4bylqAwWq1X1oOucWKJ1A8Fh1%2Fprofile.jpg?alt=media&token=a417bb9c-7c70-43ba-bb4c-36f7a2155d5c");
-        profile.setImageURI(uri);
+//        Uri uri = Uri.parse("https://i.picsum.photos/id/25/200/300.jpg?hmac=ScdLbPfGd_kI3MUHvJUb12Fsg1meDQEaHY_mM613BVM");
+//        profile.setImageURI(uri);
+        profile.setImageResource(R.drawable.brad_pitt); //TODO: change to user's profile picture
+
 
         storage.getReference().child("profile_pics").child(mAuth.getCurrentUser().getUid()).child("profile.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override

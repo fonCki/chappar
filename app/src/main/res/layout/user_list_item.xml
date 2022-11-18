@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#e4e4e4">
+    android:gravity="center"
+    android:layout_margin="10dp"
+    android:orientation="vertical">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/tv_image"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_margin="8dp"
+        app:shapeAppearanceOverlay="@style/roundedImageView"
+        android:scaleType="centerCrop"
+        android:src="@drawable/angelina"/>
 
     <TextView
         android:id="@+id/tv_name"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="Bulbasaur" />
-
-    <ImageView
-        android:id="@+id/iv_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/chats" />
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1"
+        android:text="NickName" />
 
 </LinearLayout>

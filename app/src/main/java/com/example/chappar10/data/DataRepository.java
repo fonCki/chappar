@@ -30,10 +30,23 @@ public class DataRepository {
         // Create a list of 25 random users with real String UID, String nickname, String email, boolean isMale, String profileurl, Date birthDate
         users = new ArrayList<>();
         for (int i = 0; i < 25; i++) {
-            users.add(new User("UID" + i, "nickname" + i, "email" + i, i % 2 == 0, "profileurl" + i, new Date()));
-
+            User user = new User();
+            user.setUid("uid" + i);
+            user.setNickname("nickname" + i);
+            user.setEmail("email" + i);
+            user.setMale(i % 2 == 0);
+            user.setProfileurl("profileurl" + i);
+            user.setBirthDate(new Date());
+            user.setLocation(generateRandomCorrdinates());
+            users.add(user);
         }
+    }
 
+    private Location generateRandomCorrdinates() {
+        // Generate random coordinates
+        double lat = Math.random() * 180 - 90;
+        double lng = Math.random() * 360 - 180;
+        return new Location(lat, lng);
     }
 
     public static synchronized DataRepository getInstance() {
@@ -77,6 +90,15 @@ public class DataRepository {
 
     public LiveData getMessage() {
         return message;
+    }
+
+    public User getUserById(String userId) {
+        for (User user : users) {
+            if (user.getUid().equals(userId)) {
+                return user;
+            }
+        }
+        return null;
     }
 
 }
