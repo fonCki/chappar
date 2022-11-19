@@ -85,7 +85,7 @@ public class DataRepository {
     }
 
     public void uploadProfilePicture(Uri uri, String uid) {
-        FirebaseStorage.getInstance().getReference().child("profile").child(uid).putFile(uri).addOnSuccessListener(taskSnapshot -> {
+        FirebaseStorage.getInstance().getReference().child("profile").child(uid).child("profile_photo").putFile(uri).addOnSuccessListener(taskSnapshot -> {
             Log.d("TAG", "onSuccess: " + taskSnapshot.getMetadata().getReference().getDownloadUrl());
             taskSnapshot.getMetadata().getReference().getDownloadUrl().addOnSuccessListener(uriFinal -> {
                 FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("profileurl").setValue(uriFinal.toString());

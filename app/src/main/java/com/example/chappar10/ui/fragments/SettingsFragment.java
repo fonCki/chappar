@@ -16,11 +16,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.chappar10.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 
 import java.io.IOException;
@@ -49,29 +51,22 @@ public class SettingsFragment extends Fragment {
         profile = view.findViewById(R.id.profile_img);
         mAuth = FirebaseAuth.getInstance();
         storage = FirebaseStorage.getInstance();
-//        Uri uri = Uri.parse("https://i.picsum.photos/id/25/200/300.jpg?hmac=ScdLbPfGd_kI3MUHvJUb12Fsg1meDQEaHY_mM613BVM");
-//        profile.setImageURI(uri);
-//        profile.setImageResource(R.drawable.brad_pitt); //TODO: change to user's profile picture
 
-
-        storage.getReference().child("profile").child(mAuth.getCurrentUser().getUid()).child("profile.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        FirebaseStorage.getInstance().getReference().child("profile").child(mAuth.getUid()).child("profile_photo").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                // Got the download URL for 'users/me/profile.png'
-                Log.i("#TAG1", "onSuccess: " + uri);
-                new DownloadImageTask((ImageView) view.findViewById(R.id.profile_img))
-                        .execute(uri.toString());
-
+                Log.d("TAG", uri.toString());
+                new DownloadImageTask(profile).execute(uri.toString());
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
-            public void onFailure(@NonNull Exception exception) {
-                Log.i("TAG", "onFailure: " + exception);
-                // Handle any errors
+            public void onFailure(@NonNull Exception e) {
+                Log.d("TAG", "onFailure: " + e.getMessage());
             }
         });
 
     }
+
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
