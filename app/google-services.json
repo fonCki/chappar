@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "884891439871",
+    "firebase_url": "https://chappar-865a9-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "chappar-865a9",
+    "storage_bucket": "chappar-865a9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:884891439871:android:ca140599facc1af7b2f2ca",
+        "android_client_info": {
+          "package_name": "com.example.chappar10"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "884891439871-ddfe7o3al4p65l5bp97husjlh8klrp14.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjl6EqNzOsIN8tAUpX7s-kvjPyp1cCSQQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "884891439871-ddfe7o3al4p65l5bp97husjlh8klrp14.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
