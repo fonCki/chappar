@@ -1,6 +1,7 @@
 package com.example.chappar10.ui.view_model;
 import android.app.Application;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -45,13 +46,14 @@ public class AccessViewModel extends AndroidViewModel {
 
     }
 
-    public Task createUser(String email, String password, String name, boolean isMale, String profileUrl, Date birthDate) {
+    public Task createUser(String email, String password, String name, boolean isMale, Uri uri, Date birthDate) {
        return firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
            if (task.isSuccessful()) {
                     Log.d("LoginViewModel", "createUser: success");
-                    User user = new User(firebaseAuth.getCurrentUser().getUid(), name, email, isMale, profileUrl, birthDate);
+                    User user = new User(firebaseAuth.getCurrentUser().getUid(), name, email, isMale,  birthDate);
                     dataRepository.addUser(user);
                     dataRepository.updateStatus(firebaseAuth.getCurrentUser().getUid(), User.Status.ONLINE);
+                    if (uri != null) dataRepository.uploadProfilePicture(uri, firebaseAuth.getCurrentUser().getUid());
                     Intent intent = new Intent(getApplication(), MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     getApplication().startActivity(intent);

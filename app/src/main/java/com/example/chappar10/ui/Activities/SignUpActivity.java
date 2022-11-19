@@ -84,7 +84,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         register.setOnClickListener(v -> {
             if (validateFields()) {
-                viewModel.createUser(emailString, passwordString, nickNameString, !aSwitch.isChecked(), "URI", birthDate).addOnCompleteListener(task -> {
+                viewModel.createUser(emailString, passwordString, nickNameString, !aSwitch.isChecked(), uri, birthDate).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(this, "User created", Toast.LENGTH_SHORT).show();
                         viewModel.updateLocation();

@@ -1,5 +1,6 @@
 package com.example.chappar10.data;
 
+import android.net.Uri;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -10,6 +11,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,6 +22,8 @@ public class DataRepository {
     private DatabaseReference myRef;
     private LiveData message;
     private ArrayList<User> users;
+
+
 
 
     private DataRepository(){
@@ -66,7 +70,7 @@ public class DataRepository {
 
     public void addLocation(String userId, Location location) {
         init(userId);
-        FirebaseDatabase.getInstance().getReference().child("users").child(userId).child("location").push().setValue(location);
+        FirebaseDatabase.getInstance().getReference().child("users").child(userId).child("location").setValue(location);
     }
 
     public boolean addUser(User user) {
@@ -78,6 +82,15 @@ public class DataRepository {
             }
         });
         return added[0];
+    }
+
+    public void uploadProfilePicture(Uri uri, String uid) {
+        FirebaseStorage.getInstance().getReference().child("profile").child(uid).putFile(uri).addOnSuccessListener(taskSnapshot -> {
+            Log.d("TAG", "onSuccess: " + taskSnapshot.getMetadata().getReference().getDownloadUrl());
+            taskSnapshot.getMetadata().getReference().getDownloadUrl().addOnSuccessListener(uriFinal -> {
+                FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("profileurl").setValue(uriFinal.toString());
+            });
+        });
     }
 
     public void updateStatus(String userId, User.Status status) {
@@ -100,5 +113,6 @@ public class DataRepository {
         }
         return null;
     }
+
 
 }
