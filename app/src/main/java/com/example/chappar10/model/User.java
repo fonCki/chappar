@@ -1,9 +1,16 @@
-package com.example.chappar10.data;
+package com.example.chappar10.model;
 
 import java.io.Serializable;
 import java.util.Date;
 
 public class User implements Serializable {
+
+
+    public enum Status {
+        ONLINE,
+        OFFLINE
+    }
+
 
 
     public User(String uid, String nickname, String email, boolean isMale, Date birthDate) {
@@ -14,12 +21,7 @@ public class User implements Serializable {
         this.isMale = isMale;
         this.profileurl = profileurl;
         this.birthDate = birthDate;
-
-    }
-
-    public enum Status {
-        ONLINE,
-        OFFLINE
+        location = new Location();
     }
 
 
@@ -31,6 +33,7 @@ public class User implements Serializable {
     public boolean isMale;
     public String profileurl;
     public Date birthDate;
+
 
 
     public User() {}
@@ -98,4 +101,5 @@ public class User implements Serializable {
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
+
 }

@@ -33,28 +33,28 @@
             android:value="AIzaSyBtpB4pdRPUftIPROurVZPtmAErbgFlcpE" />
 
         <activity
-            android:name=".ui.Activities.LoginActivity"
+            android:name=".ui.activities.LoginActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.Activities.SignUpActivity"
+            android:name=".ui.activities.SignUpActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.Activities.GPSActivity"
+            android:name=".ui.activities.GPSActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.Activities.MainActivity"
+            android:name=".ui.activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

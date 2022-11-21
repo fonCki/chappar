@@ -2,6 +2,7 @@ package com.example.chappar10.data;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.chappar10.model.User;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
@@ -20,6 +21,7 @@ public class UserLiveData extends LiveData<User> {
     };
 
     DatabaseReference userReference;
+
     public UserLiveData(String userId) {
         userReference = FirebaseDatabase.getInstance().getReference("users").child(userId);
     }

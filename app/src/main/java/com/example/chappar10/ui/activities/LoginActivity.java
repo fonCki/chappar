@@ -1,4 +1,4 @@
-package com.example.chappar10.ui.Activities;
+package com.example.chappar10.ui.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;

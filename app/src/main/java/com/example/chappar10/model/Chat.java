@@ -1,4 +1,4 @@
-package com.example.chappar10.data;
+package com.example.chappar10.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;

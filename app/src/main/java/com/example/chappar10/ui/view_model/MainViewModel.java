@@ -6,21 +6,17 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
-import com.example.chappar10.data.DataRepository;
-import com.example.chappar10.data.User;
+import com.example.chappar10.data.UsersDataRepository;
 import com.example.chappar10.data.UserListLiveData;
 import com.example.chappar10.data.UserLiveData;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class MainViewModel extends AndroidViewModel {
 
-    private final DataRepository dataRepository;
+    private final UsersDataRepository dataRepository;
 
     public MainViewModel(@NonNull Application application) {
         super(application);
-        this.dataRepository = DataRepository.getInstance();
+        this.dataRepository = UsersDataRepository.getInstance();
     }
 
     public UserLiveData getUser(String uid) {
@@ -28,6 +24,10 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public UserListLiveData getUsers() {
-        return dataRepository.getUsersList();
+        return dataRepository.getUsersListLiveData();
     }
+
+//    public LiveData<List<Chat>> getChats() {
+//        return dataRepository.getChatLiveData(FirebaseAuth.getInstance().getUid());
+//    }
 }

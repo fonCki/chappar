@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chappar10.R;
-import com.example.chappar10.data.User;
+import com.example.chappar10.model.User;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;

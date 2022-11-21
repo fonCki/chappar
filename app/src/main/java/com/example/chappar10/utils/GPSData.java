@@ -13,8 +13,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 
-import com.example.chappar10.data.DataRepository;
-import com.example.chappar10.data.Location;
+import com.example.chappar10.data.UsersDataRepository;
+import com.example.chappar10.model.Location;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -31,7 +31,7 @@ public class GPSData {
     private static LocationRequest locationRequest;
     private static Application application;
 
-    public static Location getCurrentLocation(Application app, String userId, DataRepository dataRepository) {
+    public static Location getCurrentLocation(Application app, String userId, UsersDataRepository dataRepository) {
         application = app;
         final Location[] location = new Location[1];
         locationRequest = LocationRequest.create();

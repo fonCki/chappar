@@ -6,10 +6,10 @@ import android.util.Log;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import com.example.chappar10.data.DataRepository;
-import com.example.chappar10.data.Location;
-import com.example.chappar10.data.User;
-import com.example.chappar10.ui.Activities.MainActivity;
+import com.example.chappar10.data.UsersDataRepository;
+import com.example.chappar10.model.Location;
+import com.example.chappar10.model.User;
+import com.example.chappar10.ui.activities.MainActivity;
 import com.example.chappar10.utils.GPSData;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,21 +19,22 @@ import java.util.Date;
 
 public class AccessViewModel extends AndroidViewModel {
     private final FirebaseAuth firebaseAuth;
-    DataRepository dataRepository;
+    UsersDataRepository dataRepository;
     Application application = getApplication();
 
 
     public AccessViewModel(@NonNull Application application) {
         super(application);
         firebaseAuth = FirebaseAuth.getInstance();
-        dataRepository = DataRepository.getInstance();
+        dataRepository = UsersDataRepository.getInstance();
     }
 
     public Task login(String email, String password) {
        return firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
+                    if (task.isSuccessful()) { //once the user is logged in
                         Log.d("LoginViewModel", "login: success");
+                        //Change the status of the user to online
                         dataRepository.updateStatus(firebaseAuth.getCurrentUser().getUid(), User.Status.ONLINE);
                         Intent intent = new Intent(getApplication(), MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -50,10 +51,11 @@ public class AccessViewModel extends AndroidViewModel {
        return firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
            if (task.isSuccessful()) {
                     Log.d("LoginViewModel", "createUser: success");
-                    User user = new User(firebaseAuth.getCurrentUser().getUid(), name, email, isMale,  birthDate);
+                    String userId = firebaseAuth.getCurrentUser().getUid();
+                    User user = new User(userId, name, email, isMale,  birthDate);
                     dataRepository.addUser(user);
-                    dataRepository.updateStatus(firebaseAuth.getCurrentUser().getUid(), User.Status.ONLINE);
-                    if (uri != null) dataRepository.uploadProfilePicture(uri, firebaseAuth.getCurrentUser().getUid());
+                    dataRepository.updateStatus(userId, User.Status.ONLINE);
+                    if (uri != null) dataRepository.uploadProfilePicture(uri, userId);
                     Intent intent = new Intent(getApplication(), MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     getApplication().startActivity(intent);
@@ -62,10 +64,6 @@ public class AccessViewModel extends AndroidViewModel {
                     Toast.makeText(getApplication(), "Create user failed", Toast.LENGTH_SHORT).show();
                 }
         });
-    }
-
-    public FirebaseUser getCurrentUser() {
-        return firebaseAuth.getCurrentUser();
     }
 
     public void updateLocation() {

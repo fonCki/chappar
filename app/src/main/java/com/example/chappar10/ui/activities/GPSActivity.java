@@ -1,4 +1,4 @@
-package com.example.chappar10.ui.Activities;
+package com.example.chappar10.ui.activities;
 
 import android.Manifest;
 import android.content.Context;

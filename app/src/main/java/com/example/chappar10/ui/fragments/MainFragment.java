@@ -9,16 +9,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.chappar10.R;
-import com.example.chappar10.ui.Activities.LoginActivity;
+import com.example.chappar10.ui.activities.LoginActivity;
 import com.example.chappar10.ui.view_model.AccessViewModel;
 import com.example.chappar10.ui.view_model.MainFragmentViewModel;
-import com.google.firebase.auth.FirebaseAuth;
 
 
 public class MainFragment extends Fragment {
@@ -43,24 +41,24 @@ public class MainFragment extends Fragment {
                 startActivity(intent);
             });
             viewModel = new ViewModelProvider(this).get(MainFragmentViewModel.class);
-            viewModel.init();
+//            viewModel.init();
             viewMessage = view.findViewById(R.id.textView3);
             viewList = view.findViewById(R.id.textView4);
 
-            viewModel.getMessage().observe(this, message -> {
-                if (message != null)
-                    viewMessage.setText(message.getMessage());
-            });
+//            viewModel.getMessage().observe(this, message -> {
+//                if (message != null)
+//                    viewMessage.setText(message.getMessage());
+//            });
 
 
 
             Button sendButton = view.findViewById(R.id.send);
-            sendButton.setOnClickListener(v -> {
-                message = view.findViewById(R.id.message);
-                String messagev= message.getText().toString();
-                Toast.makeText(getActivity(), messagev, Toast.LENGTH_SHORT).show();
-                viewModel.saveMessage(messagev);
-            });
+//            sendButton.setOnClickListener(v -> {
+//                message = view.findViewById(R.id.message);
+//                String messagev= message.getText().toString();
+//                Toast.makeText(getActivity(), messagev, Toast.LENGTH_SHORT).show();
+//                viewModel.saveMessage(messagev);
+//            });
 
 //            NavigationView navigationView = getActivity().findViewById(R.id.item_logout);
 //            navigationView.getMenu().findItem(R.id.item_logout).setOnMenuItemClickListener(menuItem -> {

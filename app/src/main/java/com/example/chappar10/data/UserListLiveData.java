@@ -2,6 +2,7 @@ package com.example.chappar10.data;
 
 import androidx.annotation.NonNull;
 
+import com.example.chappar10.model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

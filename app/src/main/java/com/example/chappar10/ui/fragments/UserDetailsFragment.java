@@ -14,7 +14,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.chappar10.R;
-import com.example.chappar10.data.User;
+import com.example.chappar10.model.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class UserDetailsFragment extends Fragment {

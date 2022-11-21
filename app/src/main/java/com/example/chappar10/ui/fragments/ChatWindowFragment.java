@@ -9,8 +9,8 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.chappar10.R;
-import com.example.chappar10.data.Chat;
-import com.example.chappar10.data.User;
+import com.example.chappar10.model.Chat;
+import com.example.chappar10.model.User;
 
 public class ChatWindowFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

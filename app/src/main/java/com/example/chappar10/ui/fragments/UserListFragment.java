@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -15,19 +14,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chappar10.R;
-import com.example.chappar10.data.DataRepository;
-import com.example.chappar10.data.User;
-import com.example.chappar10.data.UserListLiveData;
+import com.example.chappar10.data.UsersDataRepository;
 import com.example.chappar10.ui.adapters.UsersAdapter;
-import com.example.chappar10.ui.view_model.MainFragmentViewModel;
 import com.example.chappar10.ui.view_model.MainViewModel;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -36,7 +25,7 @@ public class UserListFragment extends Fragment {
     RecyclerView userList;
     UsersAdapter adapter;
 
-    DataRepository dataRepository;
+    UsersDataRepository dataRepository;
 
     MainViewModel viewModel;
 
@@ -49,7 +38,7 @@ public class UserListFragment extends Fragment {
         userList = view.findViewById(R.id.user_list);
         userList.hasFixedSize();
         userList.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        dataRepository = DataRepository.getInstance();
+        dataRepository = UsersDataRepository.getInstance();
 
         adapter = new UsersAdapter(new ArrayList<>());
 

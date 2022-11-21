@@ -9,12 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chappar10.R;
-import com.example.chappar10.data.Chat;
-import com.example.chappar10.data.Message;
-import com.example.chappar10.data.User;
-import com.google.android.material.imageview.ShapeableImageView;
+import com.example.chappar10.model.Chat;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -51,6 +49,12 @@ public class ChatAdapters extends RecyclerView.Adapter<ChatAdapters.ViewHolder> 
     @Override
     public int getItemCount() {
         return chats.size();
+    }
+
+    public void setChats(List<Chat> chats) {
+        this.chats.clear();
+        this.chats.addAll(chats);
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

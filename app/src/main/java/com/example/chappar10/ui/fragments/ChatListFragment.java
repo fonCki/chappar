@@ -8,23 +8,29 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chappar10.R;
-import com.example.chappar10.data.DataRepository;
+import com.example.chappar10.data.UsersDataRepository;
 import com.example.chappar10.ui.adapters.ChatAdapters;
+import com.example.chappar10.ui.view_model.MainViewModel;
+
+import java.util.ArrayList;
 
 public class ChatListFragment extends Fragment {
     RecyclerView chatList;
     ChatAdapters adapter;
 
-    DataRepository dataRepository;
+    UsersDataRepository dataRepository;
+
+    MainViewModel viewModel;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         return inflater.inflate(R.layout.fragment_chat_list, container, false);
     }
 
@@ -32,9 +38,9 @@ public class ChatListFragment extends Fragment {
         chatList = view.findViewById(R.id.chat_list);
         chatList.hasFixedSize();
         chatList.setLayoutManager(new LinearLayoutManager(getContext()));
-        dataRepository = DataRepository.getInstance();
-        adapter = new ChatAdapters(dataRepository.getChats());
-        chatList.setAdapter(adapter);
+        dataRepository = UsersDataRepository.getInstance();
+        adapter = new ChatAdapters(new ArrayList<>());
+
 
         adapter.setOnClickListener(chat -> {
             //send user to next fragment
@@ -44,5 +50,11 @@ public class ChatListFragment extends Fragment {
             NavController navController = Navigation.findNavController(view);
             navController.navigate(R.id.nav_chat_window, bundle);
         });
+
+        chatList.setAdapter(adapter);
+
+//        viewModel.getChats().observe(getViewLifecycleOwner(), chats -> {
+//            adapter.setChats(chats);
+//        });
     }
 }
