@@ -37,8 +37,4 @@ public class MainFragmentViewModel extends AndroidViewModel {
         return dataRepository.getMessage();
     }
 
-    public List<User> getUsers() {
-        return dataRepository.getUsers();
-    }
-
 }

@@ -21,29 +21,39 @@ public class DataRepository {
     private static DataRepository instance;
     private DatabaseReference myRef;
     private LiveData message;
-    private ArrayList<User> users;
+//    private ArrayList<User> users;
     private ArrayList<Chat> chats;
 
+    UserListLiveData userListLiveData;
+
     private DataRepository(){
-        initUsers();
+        userListLiveData = new UserListLiveData(FirebaseDatabase.getInstance().getReference("users"));
+//        initUsers();
         initChats();
     }
 
-    // Create a list of 25 random users with real String UID, String nickname, String email, boolean isMale, String profileurl, Date birthDate
-    private void initUsers() {
-        users = new ArrayList<>();
-        for (int i = 0; i < 25; i++) {
-            User user = new User();
-            user.setUid("uid" + i);
-            user.setNickname("nickname" + i);
-            user.setEmail("email" + i);
-            user.setMale(i % 2 == 0);
-            user.setProfileurl("profileurl" + i);
-            user.setBirthDate(new Date());
-            user.setLocation(generateRandomCordinates());
-            users.add(user);
-        }
+    public static User getUser(String uid) {
+        User user = new User();
+        user = FirebaseDatabase.getInstance().getReference("users").child(uid).get().getResult().getValue(User.class);
+
+        return user;
     }
+
+    // Create a list of 25 random users with real String UID, String nickname, String email, boolean isMale, String profileurl, Date birthDate
+//    private void initUsers() {
+//        users = new ArrayList<>();
+//        for (int i = 0; i < 25; i++) {
+//            User user = new User();
+//            user.setUid("uid" + i);
+//            user.setNickname("nickname" + i);
+//            user.setEmail("email" + i);
+//            user.setMale(i % 2 == 0);
+//            user.setProfileurl("profileurl" + i);
+//            user.setBirthDate(new Date());
+//            user.setLocation(generateRandomCordinates());
+//            users.add(user);
+//        }
+//    }
 
     //Create a list of 50 randoms Chats with senderID, recever is and 25 random messages each
     private void initChats(){
@@ -58,12 +68,12 @@ public class DataRepository {
 
 
 
-    private Location generateRandomCordinates() {
-        // Generate random coordinates
-        double lat = Math.random() * 180 - 90;
-        double lng = Math.random() * 360 - 180;
-        return new Location(lat, lng);
-    }
+//    private Location generateRandomCordinates() {
+//        // Generate random coordinates
+//        double lat = Math.random() * 180 - 90;
+//        double lng = Math.random() * 360 - 180;
+//        return new Location(lat, lng);
+//    }
 
     public static synchronized DataRepository getInstance() {
         if (instance == null)
@@ -109,22 +119,26 @@ public class DataRepository {
         FirebaseDatabase.getInstance().getReference().child("users").child(userId).child("status").setValue(status);
     }
 
-    public ArrayList<User> getUsers() {
-        return users;
-    }
+//    public ArrayList<User> getUsers() {
+//        return users;
+//    }
 
     public LiveData getMessage() {
         return message;
     }
 
-    public User getUserById(String userId) {
-        for (User user : users) {
-            if (user.getUid().equals(userId)) {
-                return user;
-            }
-        }
-        return null;
+    public UserListLiveData getUsersList() {
+        return userListLiveData;
     }
+
+//    public User getUserById(String userId) {
+//        for (User user : users) {
+//            if (user.getUid().equals(userId)) {
+//                return user;
+//            }
+//        }
+//        return null;
+//    }
 
 
     public ArrayList<Chat> getChats() {

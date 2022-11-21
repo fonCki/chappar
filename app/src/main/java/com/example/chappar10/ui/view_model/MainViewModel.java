@@ -8,8 +8,10 @@ import androidx.lifecycle.AndroidViewModel;
 
 import com.example.chappar10.data.DataRepository;
 import com.example.chappar10.data.User;
+import com.example.chappar10.data.UserListLiveData;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainViewModel extends AndroidViewModel {
 
@@ -20,7 +22,11 @@ public class MainViewModel extends AndroidViewModel {
         this.dataRepository = DataRepository.getInstance();
     }
 
-    public ArrayList<User> getUsers() {
-        return dataRepository.getUsers();
+    public static User getUser(String uid) {
+        return DataRepository.getUser(uid);
+    }
+
+    public UserListLiveData getUsers() {
+        return dataRepository.getUsersList();
     }
 }

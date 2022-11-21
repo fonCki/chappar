@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -16,7 +17,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.chappar10.R;
 import com.example.chappar10.data.DataRepository;
 import com.example.chappar10.data.User;
+import com.example.chappar10.data.UserListLiveData;
 import com.example.chappar10.ui.adapters.UsersAdapter;
+import com.example.chappar10.ui.view_model.MainFragmentViewModel;
+import com.example.chappar10.ui.view_model.MainViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -34,7 +38,10 @@ public class UserListFragment extends Fragment {
 
     DataRepository dataRepository;
 
+    MainViewModel viewModel;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         return inflater.inflate(R.layout.fragment_user_list, container, false);
     }
 
@@ -44,7 +51,7 @@ public class UserListFragment extends Fragment {
         userList.setLayoutManager(new GridLayoutManager(getContext(), 2));
         dataRepository = DataRepository.getInstance();
 
-        adapter = new UsersAdapter(getUserList());
+        adapter = new UsersAdapter(new ArrayList<>());
 
         adapter.setOnClickListener(user -> {
             //send user to next fragment
@@ -55,39 +62,11 @@ public class UserListFragment extends Fragment {
         });
         userList.setAdapter(adapter);
 
+        viewModel.getUsers().observe(getViewLifecycleOwner(), users -> {
+            adapter.setUsers(users);
 
 
-
-
+    });
     }
 
-    private ArrayList<User> getUserList() {
-        ArrayList<User> users = new ArrayList<>();
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users");
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                users.clear();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    User user = dataSnapshot.getValue(User.class);
-                    if (!user.getUid().equals(currentUser.getUid())) {
-                        users.add(user);
-                    }
-                }
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        return users;
-    }
-
-    private void move(User user) {
-        // move to another fragment
-
-    }
 }

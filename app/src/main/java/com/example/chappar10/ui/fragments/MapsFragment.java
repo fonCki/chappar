@@ -49,38 +49,26 @@ import java.util.ArrayList;
 
 public class MapsFragment extends Fragment {
 
+    GoogleMap googleMap;
+
     private MainViewModel mainViewModel;
     private final OnMapReadyCallback callback = new OnMapReadyCallback() {
 
         @Override
         public void onMapReady(GoogleMap googleMap) {
-            ArrayList<User> users = DataRepository.getInstance().getUsers();
-            for (User user : users) {
-                LatLng latLng = new LatLng(user.location.latitude, user.location.longitude);
-                MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.position(latLng);
-                markerOptions.title(user.getUid());
-                Drawable circleDrawable = getResources().getDrawable(R.drawable.angelina);
-                markerOptions.icon(BitmapDescriptorFactory.fromBitmap(ImageConverter.getCircleBitmap(circleDrawable, 150)));
-                googleMap.addMarker(markerOptions);
-                googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                    @Override
-                    public boolean onMarkerClick(Marker marker) {
-                        navigateToUserDetails(marker.getTitle());
-                        return false;
-                    }
-                });
-            }
-
+            googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            MapsFragment.this.googleMap = googleMap;
         }
     };
 
     private void navigateToUserDetails(String uid) {
-        User user = DataRepository.getInstance().getUserById(uid);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("user", user);
-        NavController navController = Navigation.findNavController(getView());
-        navController.navigate(R.id.nav_user_details, bundle);
+
+        User user = MainViewModel.getUser(uid);
+        Toast.makeText(getContext(), user.getNickname(), Toast.LENGTH_SHORT).show();
+//        Bundle bundle = new Bundle();
+//        bundle.putSerializable("user", user);
+//        NavController navController = Navigation.findNavController(getView());
+//        navController.navigate(R.id.nav_user_details, bundle);
     }
 
     @Nullable
@@ -101,6 +89,28 @@ public class MapsFragment extends Fragment {
             mapFragment.getMapAsync(callback);
             mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
         }
+
+        mainViewModel.getUsers().observe(getViewLifecycleOwner(), users -> {
+            //clear map
+            googleMap.clear();
+            //add markers
+            for (User user : users) {
+                LatLng latLng = new LatLng(user.location.latitude, user.location.longitude);
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.position(latLng);
+                markerOptions.title(user.getUid());
+                Drawable circleDrawable = getResources().getDrawable(R.drawable.angelina);
+                markerOptions.icon(BitmapDescriptorFactory.fromBitmap(ImageConverter.getCircleBitmap(circleDrawable, 150)));
+                googleMap.addMarker(markerOptions);
+                googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+                        navigateToUserDetails(marker.getTitle());
+                        return false;
+                    }
+                });
+            }
+        });
     }
 
 }
