@@ -1,19 +1,48 @@
 package com.example.chappar10.data;
 
-public class Message {
-    private String message;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
-    public Message(String message) {
+public class Message implements Serializable {
+    private String message;
+    private String senderId;
+    private String receiverId;
+    private LocalDateTime date;
+
+    public Message(String message, String senderId, String receiverId) {
         this.message = message;
+        this.senderId = senderId;
+        this.receiverId = receiverId;
+        this.date = LocalDateTime.now();
     }
 
     public Message() {}
 
-    public String getBody() {
+    public String getMessage() {
         return message;
     }
 
-    public void setBody(String name) {
-        this.message = name;
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getSenderId() {
+        return senderId;
+    }
+
+    public void setSenderId(String senderId) {
+        this.senderId = senderId;
+    }
+
+    public String getReceiverId() {
+        return receiverId;
+    }
+
+    public void setReceiverId(String receiverId) {
+        this.receiverId = receiverId;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
     }
 }

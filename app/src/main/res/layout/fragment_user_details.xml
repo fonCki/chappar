@@ -16,6 +16,32 @@
         android:scaleType="centerCrop"
         android:layout_weight="1"
         android:src="@drawable/angelina" />
+    <LinearLayout
+        app:shapeAppearanceOverlay="@style/roundedImageView"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_weight="2"
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        android:layout_marginTop="8dp">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/love" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/hate" />
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_margin="18dp"
@@ -40,37 +66,36 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="28" />
-        </LinearLayout>
 
-        <TextView
-            android:id="@+id/user_location"
-            android:layout_marginTop="8dp"
-            android:textSize="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="location" />
+        </LinearLayout>
 
         <LinearLayout
-            app:shapeAppearanceOverlay="@style/roundedImageView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="20dp"
-            android:layout_marginTop="8dp">
-
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
+            android:gravity="fill_vertical"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/user_location"
                 android:layout_marginTop="8dp"
-                android:src="@drawable/love" />
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="0dp"
                 android:layout_weight="1"
+                android:textSize="20dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/hate" />
+                android:text="location" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/start_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="@dimen/fab_margin"
+                android:src="@drawable/send" />
+
         </LinearLayout>
-</LinearLayout>
+
+
+
+
+
+
+    </LinearLayout>
 </LinearLayout>

@@ -49,7 +49,7 @@ public class MainFragment extends Fragment {
 
             viewModel.getMessage().observe(this, message -> {
                 if (message != null)
-                    viewMessage.setText(message.getBody());
+                    viewMessage.setText(message.getMessage());
             });
 
 

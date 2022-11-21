@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class User implements Serializable {
 
+
     public User(String uid, String nickname, String email, boolean isMale, Date birthDate) {
         this.uid = uid;
         this.nickname = nickname;

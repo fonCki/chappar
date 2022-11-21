@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.chappar10.R;
+import com.example.chappar10.utils.SetImageTask;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -56,7 +57,7 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onSuccess(Uri uri) {
                 Log.d("TAG", uri.toString());
-                new DownloadImageTask(profile).execute(uri.toString());
+                new SetImageTask(profile).execute(uri.toString());
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -65,31 +66,5 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-    }
-
-
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
-
-        public DownloadImageTask(ImageView bmImage) {
-            this.bmImage = bmImage;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String urldisplay = urls[0];
-            Bitmap mIcon11 = null;
-            try {
-                InputStream in = new java.net.URL(urldisplay).openStream();
-                mIcon11 = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return mIcon11;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
-        }
     }
 }

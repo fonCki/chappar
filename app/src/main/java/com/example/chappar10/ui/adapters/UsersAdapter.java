@@ -1,11 +1,8 @@
-package com.example.chappar10.ui;
+package com.example.chappar10.ui.adapters;
 
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,8 +13,6 @@ import com.example.chappar10.data.User;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> {
 
@@ -66,7 +61,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
             });
             }
         }
-
 
     public interface OnClickListener {
         void onClick(User user);
