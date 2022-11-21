@@ -25,7 +25,6 @@ public class UserListFragment extends Fragment {
     RecyclerView userList;
     UsersAdapter adapter;
 
-    UsersDataRepository dataRepository;
 
     MainViewModel viewModel;
 
@@ -37,8 +36,8 @@ public class UserListFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         userList = view.findViewById(R.id.user_list);
         userList.hasFixedSize();
-        userList.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        dataRepository = UsersDataRepository.getInstance();
+        userList.setLayoutManager(new GridLayoutManager(getContext(), 3));
+
 
         adapter = new UsersAdapter(new ArrayList<>());
 
@@ -53,8 +52,6 @@ public class UserListFragment extends Fragment {
 
         viewModel.getUsers().observe(getViewLifecycleOwner(), users -> {
             adapter.setUsers(users);
-
-
     });
     }
 

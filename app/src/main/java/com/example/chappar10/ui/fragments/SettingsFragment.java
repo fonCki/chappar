@@ -48,8 +48,7 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        CircleImageView profile;
-        profile = view.findViewById(R.id.profile_img);
+        CircleImageView profile = view.findViewById(R.id.profile_img);
         mAuth = FirebaseAuth.getInstance();
         storage = FirebaseStorage.getInstance();
 

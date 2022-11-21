@@ -7,8 +7,12 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +29,12 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class MapsFragment extends Fragment {
 
@@ -80,9 +90,26 @@ public class MapsFragment extends Fragment {
                     MarkerOptions markerOptions = new MarkerOptions();
                     markerOptions.position(latLng);
                     markerOptions.title(user.getUid());
-                    Drawable circleDrawable = getResources().getDrawable(R.drawable.angelina);
-                    markerOptions.icon(BitmapDescriptorFactory.fromBitmap(ImageConverter.getCircleBitmap(circleDrawable, 150)));
+                    Picasso.get().load(user.profileurl).into(new Target() {
+                        @Override
+                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                            bitmap = Bitmap.createScaledBitmap(bitmap, 150, 150, false);
+                            Bitmap circleBitmap = ImageConverter.getCircleBitmap(bitmap, 150);
+                            markerOptions.icon(BitmapDescriptorFactory.fromBitmap(circleBitmap));
+                        }
+
+                        @Override
+                        public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+
+                        }
+
+                        @Override
+                        public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                        }
+                    });
                     googleMap.addMarker(markerOptions);
+                    googleMap.moveCamera(com.google.android.gms.maps.CameraUpdateFactory.newLatLng(latLng));
                     googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                         @Override
                         public boolean onMarkerClick(Marker marker) {

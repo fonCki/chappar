@@ -1,7 +1,9 @@
 package com.example.chappar10.utils;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
@@ -10,10 +12,24 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 public class ImageConverter {
     //Static class that get as an input a drawable and size, return a bitmap in circle shape with the image in the center of the circle and the rest of the circle is transparent
+
     public static Bitmap getCircleBitmap(Drawable drawable, int size) {
         Bitmap bitmap = drawableToBitmap(drawable);
+        return getCircleBitmap(bitmap, size);
+    }
+
+    public static Bitmap getCircleBitmap(Bitmap bitmap, int size) {
         Bitmap output = Bitmap.createBitmap(size,
                 size, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(output);
@@ -43,6 +59,22 @@ public class ImageConverter {
         drawable.draw(canvas);
 
         return bitmap;
+    }
+
+    //convert a URI to a bitmap
+    public static Bitmap getBitmapFromURL(String src) {
+        try {
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

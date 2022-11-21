@@ -1,17 +1,25 @@
 package com.example.chappar10.ui.adapters;
 
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chappar10.R;
 import com.example.chappar10.model.User;
+import com.example.chappar10.utils.Converter;
+import com.example.chappar10.utils.SetImageTask;
 import com.google.android.material.imageview.ShapeableImageView;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,10 +46,17 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.name.setText(users.get(position).getNickname());
-//        Uri uri = Uri.parse("https://i.picsum.photos/id/25/200/300.jpg?hmac=ScdLbPfGd_kI3MUHvJUb12Fsg1meDQEaHY_mM613BVM");
-//        holder.avatar.setImageURI(uri);
-        holder.avatar.setImageResource(R.drawable.brad_pitt);
+        User user = users.get(position);
+        String photoUrl = user.getProfileurl();
+        if (photoUrl != null) {
+            new SetImageTask(holder.avatar).execute(photoUrl);
+        }
+        holder.name.setText(user.getNickname());
+        //convert type Date to int Birthday
+        holder.status.setText(user.getStatus().equals(User.Status.ONLINE) ? "🟢" : "🔴");
+        int age = Converter.getAge(user.getBirthDate());
+
+        holder.age.setText(String.valueOf(age));
     }
 
     @Override
@@ -57,11 +72,15 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView name;
+        TextView status;
+        TextView age;
         ShapeableImageView avatar;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.tv_name);
+            status = itemView.findViewById(R.id.tv_status);
+            age = itemView.findViewById(R.id.tv_age);
             avatar = itemView.findViewById(R.id.tv_image);
             itemView.setOnClickListener(v -> {
                 onClickListener.onClick(users.get(getBindingAdapterPosition()));

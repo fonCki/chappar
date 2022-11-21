@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.chappar10.R;
 import com.example.chappar10.ui.view_model.AccessViewModel;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -103,6 +104,7 @@ public class SignUpActivity extends AppCompatActivity {
         nickNameString = nickName.getText().toString();
         emailString = email.getText().toString();
         passwordString = password.getText().toString();
+
         birthDate = new Date(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
 
         if (emailString.isEmpty()) {

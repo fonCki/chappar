@@ -1,6 +1,7 @@
 package com.example.chappar10.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class User implements Serializable {
@@ -101,5 +102,4 @@ public class User implements Serializable {
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
-
 }
