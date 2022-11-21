@@ -62,13 +62,14 @@ public class MapsFragment extends Fragment {
     };
 
     private void navigateToUserDetails(String uid) {
-
-        User user = MainViewModel.getUser(uid);
-        Toast.makeText(getContext(), user.getNickname(), Toast.LENGTH_SHORT).show();
-//        Bundle bundle = new Bundle();
-//        bundle.putSerializable("user", user);
-//        NavController navController = Navigation.findNavController(getView());
-//        navController.navigate(R.id.nav_user_details, bundle);
+        DataRepository.getInstance().getUserLiveData(uid).observe(getViewLifecycleOwner(), user -> {
+            if (user != null) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("user", user);
+                NavController navController = Navigation.findNavController(getView());
+                navController.navigate(R.id.nav_user_details, bundle);
+            }
+        });
     }
 
     @Nullable

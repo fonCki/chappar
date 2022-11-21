@@ -8,25 +8,22 @@ import androidx.lifecycle.LiveData;
 
 import com.example.chappar10.data.DataRepository;
 import com.example.chappar10.data.Message;
-import com.example.chappar10.data.User;
-import com.example.chappar10.data.UserRepository;
-
-import java.util.List;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainFragmentViewModel extends AndroidViewModel {
 
-    private final UserRepository userRepository;
+//    private final UserRepository userRepository;
     private final DataRepository dataRepository;
 
     public MainFragmentViewModel(@NonNull Application application) {
         super(application);
-        userRepository = UserRepository.getInstance(application);
+//        userRepository = UserRepository.getInstance(application);
         dataRepository = DataRepository.getInstance();
     }
 
     public void init() {
-        String userId = userRepository.getCurrentUser().getUid();
-        dataRepository.init(userId);
+//        String userId = userRepository.getCurrentUser().getUid();
+        dataRepository.init(FirebaseAuth.getInstance().getCurrentUser().getUid());
     }
 
     public void saveMessage(String message) {

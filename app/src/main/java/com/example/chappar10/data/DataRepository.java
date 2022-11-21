@@ -32,12 +32,16 @@ public class DataRepository {
         initChats();
     }
 
-    public static User getUser(String uid) {
-        User user = new User();
-        user = FirebaseDatabase.getInstance().getReference("users").child(uid).get().getResult().getValue(User.class);
-
-        return user;
+    public UserLiveData getUserLiveData(String uid) {
+        return new UserLiveData(uid);
     }
+
+//    public static User getUser(String uid) {
+//        User user = new User();
+//        user = FirebaseDatabase.getInstance().getReference("users").child(uid).get().getResult().getValue(User.class);
+//
+//        return user;
+//    }
 
     // Create a list of 25 random users with real String UID, String nickname, String email, boolean isMale, String profileurl, Date birthDate
 //    private void initUsers() {
