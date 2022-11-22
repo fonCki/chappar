@@ -6,16 +6,22 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
+import com.example.chappar10.data.ChatsDataRepository;
 import com.example.chappar10.data.UsersDataRepository;
 import com.example.chappar10.data.UserListLiveData;
 import com.example.chappar10.data.UserLiveData;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainViewModel extends AndroidViewModel {
 
+
+
     private final UsersDataRepository dataRepository;
+    private final ChatsDataRepository chatsDataRepository;
 
     public MainViewModel(@NonNull Application application) {
         super(application);
+        this.chatsDataRepository = ChatsDataRepository.getInstance();
         this.dataRepository = UsersDataRepository.getInstance();
     }
 
@@ -27,7 +33,13 @@ public class MainViewModel extends AndroidViewModel {
         return dataRepository.getUsersListLiveData();
     }
 
-//    public LiveData<List<Chat>> getChats() {
-//        return dataRepository.getChatLiveData(FirebaseAuth.getInstance().getUid());
-//    }
+
+    public String getMyUserID(){
+        // TODO delete implementation Auth
+        return FirebaseAuth.getInstance().getCurrentUser().getUid();
+    }
+
+    public void sendMessage(String messageText, String myUserID, String finalReceiverId) {
+        chatsDataRepository.sendMessage(messageText, myUserID, finalReceiverId);
+    }
 }

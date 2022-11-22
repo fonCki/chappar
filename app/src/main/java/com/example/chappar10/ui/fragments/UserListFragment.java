@@ -29,7 +29,7 @@ public class UserListFragment extends Fragment {
     MainViewModel viewModel;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+
         return inflater.inflate(R.layout.fragment_user_list, container, false);
     }
 
@@ -37,6 +37,7 @@ public class UserListFragment extends Fragment {
         userList = view.findViewById(R.id.user_list);
         userList.hasFixedSize();
         userList.setLayoutManager(new GridLayoutManager(getContext(), 3));
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
 
         adapter = new UsersAdapter(new ArrayList<>());

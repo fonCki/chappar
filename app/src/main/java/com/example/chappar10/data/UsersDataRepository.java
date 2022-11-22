@@ -2,6 +2,8 @@ package com.example.chappar10.data;
 
 import android.net.Uri;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.chappar10.model.Location;
 import com.example.chappar10.model.User;
 import com.google.firebase.database.DatabaseReference;
@@ -23,7 +25,6 @@ public class UsersDataRepository {
         storageReference = FirebaseStorage.getInstance().getReference().child("profile");
         userListLiveData = new UserListLiveData(usersDBRef);
     }
-
 
     public static synchronized UsersDataRepository getInstance() {
         if (instance == null)
@@ -60,6 +61,7 @@ public class UsersDataRepository {
     public UserLiveData getUserLiveData(String uid) {
         return new UserLiveData(uid);
     }
+
 
 //    public ChatLiveData getChatLiveData(String userId) {
 ////        return new ChatLiveData(userId);
