@@ -10,6 +10,7 @@ import com.example.chappar10.data.ChatsDataRepository;
 import com.example.chappar10.data.UsersDataRepository;
 import com.example.chappar10.data.UserListLiveData;
 import com.example.chappar10.data.UserLiveData;
+import com.example.chappar10.model.Message;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainViewModel extends AndroidViewModel {
@@ -40,6 +41,7 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public void sendMessage(String messageText, String myUserID, String finalReceiverId) {
-        chatsDataRepository.sendMessage(messageText, myUserID, finalReceiverId);
+        Message message = new Message(messageText, myUserID, finalReceiverId);
+        chatsDataRepository.sendMessage(message);
     }
 }

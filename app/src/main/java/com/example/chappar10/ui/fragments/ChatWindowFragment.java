@@ -24,6 +24,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 
 public class ChatWindowFragment extends Fragment {
     MainViewModel mainViewModel;
@@ -39,17 +40,26 @@ public class ChatWindowFragment extends Fragment {
         TextView nickName = view.findViewById(R.id.tv_name);
         TextView status = view.findViewById(R.id.tv_status);
         TextView message = view.findViewById(R.id.tv_message);
+
+        //Parameters
         Chat chat = (Chat) getArguments().getSerializable("chat");
         User user = (User) getArguments().getSerializable("user");
+
+        //Values
+        String myId = mainViewModel.getMyUserID();
+        String receiverId = user != null ? user.getUid() : (chat.getReceiverId().equals(myId) ? chat.getSenderId() : chat.getReceiverId());
+
+        //components
         EditText editText = view.findViewById(R.id.et_message);
         Button button = view.findViewById(R.id.btn_send);
-        String receiverId = "";
+
+
         String finalReceiverId = receiverId;
         button.setOnClickListener(v -> {
             String messageText = editText.getText().toString();
             if (!messageText.isEmpty()) {
                 // send the message
-                mainViewModel.sendMessage(messageText, mainViewModel.getMyUserID(), finalReceiverId);
+                mainViewModel.sendMessage(messageText, myId, finalReceiverId);
                 editText.setText("");
             }
         });
@@ -58,19 +68,21 @@ public class ChatWindowFragment extends Fragment {
         if (chat != null) {
             nickName.setText(chat.getSenderId());
             message.setText(chat.getLatestMessage().getMessage());
-            receiverId = chat.getReceiverId() == mainViewModel.getMyUserID() ? chat.getSenderId() : chat.getReceiverId();
-
-        }
-
-        if (user != null) {
+        } else {
             nickName.setText(user.getNickname());
             status.setText("ONLINE");
-            receiverId = user.getUid();
         }
+
+
+
+        CollectionReference collectionReference = FirebaseFirestore.getInstance().collection("chats");
+
+        Query query = collectionReference.whereEqualTo("senderId", mainViewModel.getMyUserID()).whereEqualTo("receiverId", receiverId);
 
 
 
         final DocumentReference docRef = FirebaseFirestore.getInstance().collection("chats").document("xkz8eT0qXDRTOW3WTLRYiHZ03S42").collection("messages").document("1AqN79rpRiAkwEVBDXu7");
+
         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot snapshot,
