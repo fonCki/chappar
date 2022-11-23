@@ -42,6 +42,16 @@ public class MainViewModel extends AndroidViewModel {
 
     public void sendMessage(String messageText, String myUserID, String finalReceiverId) {
         Message message = new Message(messageText, myUserID, finalReceiverId);
-        chatsDataRepository.sendMessage(message);
+        chatsDataRepository.sendMessage(message, getChatId(message));
+    }
+
+    public String getChatId(Message message){
+        return getChatId(message.getSenderId(), message.getReceiverId());
+    }
+
+    public String getChatId(String senderId, String receiverId){
+        return (senderId.compareTo(receiverId) > 0) ?
+                senderId + receiverId :
+                receiverId + senderId;
     }
 }

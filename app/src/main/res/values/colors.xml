@@ -7,4 +7,6 @@
     <color name="black_alpha40">#66000000</color>
     <color name="white_alpha40">#66ffffff</color>
     <color name="ic_launcher_background">#D32F2F</color>
+    <color name="my_buble_message">#e9e9eb</color>
+    <color name="other_buble_message">#007aff</color>
 </resources>

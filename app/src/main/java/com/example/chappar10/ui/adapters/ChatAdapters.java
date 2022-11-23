@@ -55,6 +55,8 @@ public class ChatAdapters extends RecyclerView.Adapter<ChatAdapters.ViewHolder> 
         this.chats.clear();
         this.chats.addAll(chats);
         notifyDataSetChanged();
+
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

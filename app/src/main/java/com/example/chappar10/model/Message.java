@@ -1,19 +1,21 @@
 package com.example.chappar10.model;
 
+import com.google.firebase.Timestamp;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public class Message implements Serializable {
-    private String message;
-    private String senderId;
-    private String receiverId;
-    private LocalDateTime date;
+    public String message;
+    public String senderId;
+    public String receiverId;
+    public Timestamp timestamp;
 
     public Message(String message, String senderId, String receiverId) {
         this.message = message;
         this.senderId = senderId;
         this.receiverId = receiverId;
-        this.date = LocalDateTime.now();
+        this.timestamp = Timestamp.now();
     }
 
     public Message() {}
@@ -42,7 +44,11 @@ public class Message implements Serializable {
         this.receiverId = receiverId;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
     }
 }
