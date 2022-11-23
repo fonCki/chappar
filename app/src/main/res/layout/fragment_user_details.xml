@@ -77,6 +77,8 @@
                 android:id="@+id/user_location"
                 android:layout_marginTop="8dp"
                 android:layout_weight="1"
+                android:textStyle="bold"
+                android:textColor="@color/other_buble_message"
                 android:textSize="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -10,7 +10,9 @@ import com.example.chappar10.data.ChatsDataRepository;
 import com.example.chappar10.data.UsersDataRepository;
 import com.example.chappar10.data.UserListLiveData;
 import com.example.chappar10.data.UserLiveData;
+import com.example.chappar10.model.Location;
 import com.example.chappar10.model.Message;
+import com.example.chappar10.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainViewModel extends AndroidViewModel {
@@ -54,4 +56,5 @@ public class MainViewModel extends AndroidViewModel {
                 senderId + receiverId :
                 receiverId + senderId;
     }
+
 }
