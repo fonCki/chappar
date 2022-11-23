@@ -1,103 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_gravity="bottom|end"
     tools:context=".ui.fragments.UserDetailsFragment">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        app:shapeAppearanceOverlay="@style/roundedImageView"
-        android:id="@+id/imageView"
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="18dp"
-        android:scaleType="centerCrop"
-        android:layout_weight="1"
-        android:src="@drawable/angelina" />
-    <LinearLayout
-        app:shapeAppearanceOverlay="@style/roundedImageView"
-        android:layout_gravity="center"
-        android:layout_width="match_parent"
-        android:layout_weight="2"
-        android:layout_height="match_parent"
-        android:padding="20dp"
-        android:layout_marginTop="8dp">
+        android:orientation="vertical">
 
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/love" />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/hate" />
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_margin="18dp"
-        android:layout_weight="2"
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
-        <LinearLayout
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:textSize="20dp"
-                android:id="@+id/user_details"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="thisIsANickName," />
-
-            <TextView
-                android:layout_marginLeft="8dp"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="28" />
-
-        </LinearLayout>
+            android:layout_height="match_parent"
+            android:layout_margin="18dp"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:src="@drawable/angelina"
+            app:shapeAppearanceOverlay="@style/roundedImageView" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:gravity="fill_vertical"
-            android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/user_location"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_weight="2"
+            android:padding="20dp"
+            app:shapeAppearanceOverlay="@style/roundedImageView">
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_weight="1"
-                android:textStyle="bold"
-                android:textColor="@color/other_buble_message"
-                android:textSize="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="location" />
+                android:src="@drawable/love" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/start_message"
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:layout_margin="@dimen/fab_margin"
-                android:src="@drawable/send" />
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:src="@drawable/hate" />
 
         </LinearLayout>
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="18dp"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/user_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="thisIsANickName,"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="28"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="fill_vertical">
+
+                <TextView
+                    android:id="@+id/user_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    android:text="location"
+                    android:textColor="@color/other_buble_message"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
 
+            </LinearLayout>
 
-
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+
+    <com.example.chappar10.MovableFloatingActionButton
+        android:id="@+id/start_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/send"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout" />
+</androidx.constraintlayout.widget.ConstraintLayout>
