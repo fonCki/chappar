@@ -73,8 +73,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         notifyDataSetChanged();
     }
 
-    public Attr getItem(int i) {
-        return (Attr) users.get(i);
+    public User getItem(int i) {
+        return users.get(i);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

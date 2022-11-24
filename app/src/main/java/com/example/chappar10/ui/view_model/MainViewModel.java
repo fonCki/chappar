@@ -69,4 +69,10 @@ public class MainViewModel extends AndroidViewModel {
     public Location getLocation() {
         return getUser(getMyUserID()).getValue().getLocation();
     }
+
+    public void like() {
+    }
+
+    public void dislike() {
+    }
 }

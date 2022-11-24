@@ -33,75 +33,69 @@ import java.util.ArrayList;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements CardStackListener {
 
     CardAdapter adapter;
     MainViewModel viewModel;
+    CardStackLayoutManager manager;
+    CardStackView cardStackView;
 
 
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             return inflater.inflate(R.layout.fragment_main, container, false);
-
-
         }
 
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
-            CardStackView cardStackView = view.findViewById(R.id.card_stack_view);
-            CardStackLayoutManager manager = new CardStackLayoutManager(getContext());
+            //set the variables
+            cardStackView = view.findViewById(R.id.card_stack_view);
+            manager = new CardStackLayoutManager(getContext(), this);
+            viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+
+
+            //set the adapter
             manager.setStackFrom(StackFrom.Top);
             cardStackView.setLayoutManager(manager);
-
-            viewModel = new ViewModelProvider(this).get(MainViewModel.class);
             adapter = new CardAdapter(new ArrayList<>());
-
-           cardStackView.setAdapter(adapter);
+            cardStackView.setAdapter(adapter);
 
             viewModel.getUsers().observe(getViewLifecycleOwner(), users -> {
                 adapter.setUsers(users);
             });
-            
-            //set the listener for the card
-//
-//            CardStackListener listener = new CardStackListener() {
-//                @Override
-//                public void onCardDragging(Direction direction, float ratio) {
-//
-//                }
-//
-//                @Override
-//                public void onCardSwiped(Direction direction) {
-//                    if (direction == Direction.Right) {
-//                        Log.d("TAG123", "onCardSwiped: " + adapter.getItem(manager.getTopPosition() - 1).getName());
-//                    }
-//                    if (direction == Direction.Left) {
-//                        Log.d("TAG123", "onCardSwiped: " + adapter.getItem(manager.getTopPosition() - 1).getName());
-//                    }
-//                }
-//
-//                @Override
-//                public void onCardRewound() {
-//
-//                }
-//
-//                @Override
-//                public void onCardCanceled() {
-//
-//                }
-//
-//                @Override
-//                public void onCardAppeared(View view, int position) {
-//
-//                }
-//
-//                @Override
-//                public void onCardDisappeared(View view, int position) {
-//
-//                }
-//            };
-
-            //set the listener to the card stack view
 
         }
 
+    @Override
+    public void onCardDragging(Direction direction, float ratio) {
+
+    }
+
+    @Override
+    public void onCardSwiped(Direction direction) {
+        if (direction == Direction.Right) {
+            viewModel.like();
+        } else if (direction == Direction.Left) {
+            viewModel.dislike();
+        }
+    }
+
+    @Override
+    public void onCardRewound() {
+
+    }
+
+    @Override
+    public void onCardCanceled() {
+
+    }
+
+    @Override
+    public void onCardAppeared(View view, int position) {
+
+    }
+
+    @Override
+    public void onCardDisappeared(View view, int position) {
+
+    }
 }
