@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,6 +25,7 @@ public class UserDetailsFragment extends Fragment {
 
     MainViewModel viewModel;
 
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_user_details, container, false);
 
@@ -33,10 +35,22 @@ public class UserDetailsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
-        // get the user from the bundle and display it
-        TextView nickName = view.findViewById(R.id.user_details);
+
+        //Declare components
+        LinearLayout linearLayout = view.findViewById(R.id.match_tools);
+        TextView nickName = view.findViewById(R.id.user_details_name);
         TextView location = view.findViewById(R.id.user_location);
         FloatingActionButton fab = view.findViewById(R.id.start_message);
+        TextView bio = view.findViewById(R.id.user_bio);
+
+        //set the visibility of the components
+        linearLayout.setVisibility(View.GONE);
+        fab.setVisibility(View.VISIBLE);
+        bio.setVisibility(View.VISIBLE);
+
+
+
+        // get the user from the bundle and display it
         User user = (User) getArguments().getSerializable("user");
         nickName.setText(user.getNickname());
         fab.setOnClickListener(v -> {

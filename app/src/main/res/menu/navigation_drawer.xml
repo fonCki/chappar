@@ -32,7 +32,7 @@
     <group android:id="@+id/status">
 
         <item
-            android:id="@+id/item_logout"
+            android:id="@+id/signOut"
             android:icon="@drawable/logout"
             android:title="@string/logout" />
     </group>

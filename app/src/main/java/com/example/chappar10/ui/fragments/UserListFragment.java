@@ -34,6 +34,7 @@ public class UserListFragment extends Fragment {
     }
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         userList = view.findViewById(R.id.user_list);
         userList.hasFixedSize();
         userList.setLayoutManager(new GridLayoutManager(getContext(), 3));

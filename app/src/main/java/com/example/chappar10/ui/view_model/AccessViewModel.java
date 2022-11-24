@@ -73,7 +73,8 @@ public class AccessViewModel extends AndroidViewModel {
         Toast.makeText(application, "Location Updated", Toast.LENGTH_SHORT).show();
     }
 
-    public void logout() {
+
+    public void signOut() {
         dataRepository.updateStatus(firebaseAuth.getUid(), User.Status.OFFLINE);
         firebaseAuth.signOut();
     }

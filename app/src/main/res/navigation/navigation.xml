@@ -60,5 +60,10 @@
         android:name="com.example.chappar10.ui.fragments.ChatWindowFragment"
         android:label="Chat"
         tools:layout="@layout/fragment_chat_window" />
+    <activity
+        android:id="@+id/signOut"
+        android:name="com.example.chappar10.ui.activities.SignOut"
+        android:label="activity_sign_out"
+        tools:layout="@layout/activity_sign_out" />
 
 </navigation>

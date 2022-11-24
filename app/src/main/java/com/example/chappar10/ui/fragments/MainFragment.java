@@ -3,28 +3,41 @@ package com.example.chappar10.ui.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.chappar10.R;
 import com.example.chappar10.ui.activities.LoginActivity;
+import com.example.chappar10.ui.adapters.CardAdapter;
+import com.example.chappar10.ui.adapters.UsersAdapter;
 import com.example.chappar10.ui.view_model.AccessViewModel;
 import com.example.chappar10.ui.view_model.MainFragmentViewModel;
+import com.example.chappar10.ui.view_model.MainViewModel;
+import com.yuyakaido.android.cardstackview.CardStackLayoutManager;
+import com.yuyakaido.android.cardstackview.CardStackListener;
+import com.yuyakaido.android.cardstackview.CardStackView;
+import com.yuyakaido.android.cardstackview.Direction;
+import com.yuyakaido.android.cardstackview.StackFrom;
+
+import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class MainFragment extends Fragment {
-    EditText message;
-    TextView viewMessage, viewList;
-    MainFragmentViewModel viewModel;
-    AccessViewModel accessViewModel;
-    Button button;
+
+    CardAdapter adapter;
+    MainViewModel viewModel;
+
 
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             return inflater.inflate(R.layout.fragment_main, container, false);
@@ -33,38 +46,61 @@ public class MainFragment extends Fragment {
         }
 
         public void onViewCreated(View view, Bundle savedInstanceState) {
-            accessViewModel = new ViewModelProvider(this).get(AccessViewModel.class);
-            button = view.findViewById(R.id.button);
-            button.setOnClickListener(v -> {
-                accessViewModel.logout();
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                startActivity(intent);
+            super.onViewCreated(view, savedInstanceState);
+            CardStackView cardStackView = view.findViewById(R.id.card_stack_view);
+            CardStackLayoutManager manager = new CardStackLayoutManager(getContext());
+            manager.setStackFrom(StackFrom.Top);
+            cardStackView.setLayoutManager(manager);
+
+            viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+            adapter = new CardAdapter(new ArrayList<>());
+
+           cardStackView.setAdapter(adapter);
+
+            viewModel.getUsers().observe(getViewLifecycleOwner(), users -> {
+                adapter.setUsers(users);
             });
-            viewModel = new ViewModelProvider(this).get(MainFragmentViewModel.class);
-//            viewModel.init();
-            viewMessage = view.findViewById(R.id.textView3);
-            viewList = view.findViewById(R.id.textView4);
+            
+            //set the listener for the card
+//
+//            CardStackListener listener = new CardStackListener() {
+//                @Override
+//                public void onCardDragging(Direction direction, float ratio) {
+//
+//                }
+//
+//                @Override
+//                public void onCardSwiped(Direction direction) {
+//                    if (direction == Direction.Right) {
+//                        Log.d("TAG123", "onCardSwiped: " + adapter.getItem(manager.getTopPosition() - 1).getName());
+//                    }
+//                    if (direction == Direction.Left) {
+//                        Log.d("TAG123", "onCardSwiped: " + adapter.getItem(manager.getTopPosition() - 1).getName());
+//                    }
+//                }
+//
+//                @Override
+//                public void onCardRewound() {
+//
+//                }
+//
+//                @Override
+//                public void onCardCanceled() {
+//
+//                }
+//
+//                @Override
+//                public void onCardAppeared(View view, int position) {
+//
+//                }
+//
+//                @Override
+//                public void onCardDisappeared(View view, int position) {
+//
+//                }
+//            };
 
-//            viewModel.getMessage().observe(this, message -> {
-//                if (message != null)
-//                    viewMessage.setText(message.getMessage());
-//            });
-
-
-
-            Button sendButton = view.findViewById(R.id.send);
-//            sendButton.setOnClickListener(v -> {
-//                message = view.findViewById(R.id.message);
-//                String messagev= message.getText().toString();
-//                Toast.makeText(getActivity(), messagev, Toast.LENGTH_SHORT).show();
-//                viewModel.saveMessage(messagev);
-//            });
-
-//            NavigationView navigationView = getActivity().findViewById(R.id.item_logout);
-//            navigationView.getMenu().findItem(R.id.item_logout).setOnMenuItemClickListener(menuItem -> {
-//                Log.d("TAG", "onViewCreated: ");
-//                return true;
-//            });
+            //set the listener to the card stack view
 
         }
 

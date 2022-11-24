@@ -66,6 +66,7 @@ public class MainViewModel extends AndroidViewModel {
                 senderId + receiverId :
                 receiverId + senderId;
     }
-
-
+    public Location getLocation() {
+        return getUser(getMyUserID()).getValue().getLocation();
+    }
 }

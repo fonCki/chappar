@@ -2,12 +2,17 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="60dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="bottom|end"
     tools:context=".ui.fragments.UserDetailsFragment">
 
     <LinearLayout
+        android:background="@drawable/circular_white_solid"
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -24,6 +29,7 @@
             app:shapeAppearanceOverlay="@style/roundedImageView" />
 
         <LinearLayout
+            android:id="@+id/match_tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -34,6 +40,7 @@
 
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_like"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -41,6 +48,7 @@
                 android:src="@drawable/love" />
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_dislike"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -62,13 +70,14 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/user_details"
+                    android:id="@+id/user_details_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="thisIsANickName,"
                     android:textSize="36dp" />
 
                 <TextView
+                    android:id="@+id/user_details_age"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
@@ -80,7 +89,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="fill_vertical">
 
                 <TextView
@@ -96,11 +105,24 @@
 
 
             </LinearLayout>
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/user_bio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:text="This is a brief description of myself, a bunch of lies"
+                android:textColor="@color/black_alpha40"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
 
         </LinearLayout>
     </LinearLayout>
 
     <com.example.chappar10.MovableFloatingActionButton
+        android:visibility="gone"
         android:id="@+id/start_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
