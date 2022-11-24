@@ -3,6 +3,7 @@ package com.example.chappar10.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Set;
 
 public class User implements Serializable {
 
@@ -20,7 +21,6 @@ public class User implements Serializable {
         this.email = email;
         this.status = Status.OFFLINE;
         this.isMale = isMale;
-        this.profileurl = profileurl;
         this.birthDate = birthDate;
         location = new Location();
     }
@@ -34,8 +34,6 @@ public class User implements Serializable {
     public boolean isMale;
     public String profileurl;
     public Date birthDate;
-
-
 
     public User() {}
 

@@ -92,34 +92,6 @@ public class ChatWindowFragment extends Fragment {
             status.setText("ONLINE");
         }
 
-//        messageArea.setText("this is a text message");
-
-//
-//        CollectionReference collectionReference = FirebaseFirestore.getInstance().collection("chats");
-//
-//        Query query = collectionReference.whereEqualTo("senderId", mainViewModel.getMyUserID()).whereEqualTo("receiverId", receiverId);
-
-
-
-//        final DocumentReference docRef = FirebaseFirestore.getInstance().collection("chats").document("iTg6hnJkxWY8sNEcC4FoGmQEWKl1hkQ4aPdQCOXiSXb8lcOEHapgiK53").collection("messages").document();
-//
-//        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-//            @Override
-//            public void onEvent(@Nullable DocumentSnapshot snapshot,
-//                                @Nullable FirebaseFirestoreException e) {
-//                if (e != null) {
-//                    Log.w("TAG66", "Listen failed.", e);
-//                    return;
-//                }
-//
-//                if (snapshot != null && snapshot.exists()) {
-//                    Log.d("TAG66", "Current data: " + snapshot.getData());
-//                } else {
-//                    Log.d("TAG66", "Current data: null");
-//                }
-//            }
-//        });
-//
         CollectionReference db = FirebaseFirestore.getInstance().collection("chats").document(chatId).collection("messages");
 
 
