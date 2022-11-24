@@ -90,6 +90,8 @@ public class MapsFragment extends Fragment {
                     MarkerOptions markerOptions = new MarkerOptions();
                     markerOptions.position(latLng);
                     markerOptions.title(user.getUid());
+
+
                     Picasso.get().load(user.profileurl).into(new Target() {
                         @Override
                         public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
@@ -105,10 +107,10 @@ public class MapsFragment extends Fragment {
 
                         @Override
                         public void onPrepareLoad(Drawable placeHolderDrawable) {
-
                         }
                     });
                     googleMap.addMarker(markerOptions);
+                    googleMap.animateCamera(com.google.android.gms.maps.CameraUpdateFactory.zoomTo(5));
                     googleMap.moveCamera(com.google.android.gms.maps.CameraUpdateFactory.newLatLng(latLng));
                     googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                         @Override

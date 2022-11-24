@@ -1,6 +1,10 @@
 package com.example.chappar10.ui.view_model;
 
 import android.app.Application;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 
 
 import androidx.annotation.NonNull;
@@ -13,7 +17,13 @@ import com.example.chappar10.data.UserLiveData;
 import com.example.chappar10.model.Location;
 import com.example.chappar10.model.Message;
 import com.example.chappar10.model.User;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+
+import java.io.IOException;
+import java.net.URL;
 
 public class MainViewModel extends AndroidViewModel {
 
@@ -56,5 +66,6 @@ public class MainViewModel extends AndroidViewModel {
                 senderId + receiverId :
                 receiverId + senderId;
     }
+
 
 }

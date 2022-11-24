@@ -66,14 +66,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="thisIsANickName,"
-                    android:textSize="20dp" />
+                    android:textSize="36dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:text="28"
-                    android:textSize="20dp"
+                    android:textSize="34dp"
                     android:textStyle="bold" />
 
             </LinearLayout>
