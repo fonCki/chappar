@@ -36,6 +36,7 @@ public class ChatWindowFragment extends Fragment {
 
     TextView nickName;
     TextView status;
+
     TextView messageArea;
     CircleImageView avatar;
 
