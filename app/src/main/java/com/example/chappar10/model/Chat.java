@@ -14,15 +14,31 @@ public class Chat implements Serializable {
     private String receiverId;
     private String LastMessage;
     private Timestamp timestamp;
+    private List<User> InvolvedUsers;
+    private List<String> InvolvedUsersId;
 
     public Chat() {}
 
-    public Chat(String chatId, String senderId, String receiverId, Message message) {
+    public Chat(String chatId, User senderId, User receiverId, Message message) {
         this.chatId = chatId;
-        this.senderId = senderId;
-        this.receiverId = receiverId;
+        this.senderId = senderId.getUid();
+        this.receiverId = receiverId.getUid();
         this.LastMessage = message.getMessage();
         this.timestamp = message.getTimestamp();
+        this.InvolvedUsers = new ArrayList<>();
+        this.InvolvedUsers.add(senderId);
+        this.InvolvedUsers.add(receiverId);
+        this.InvolvedUsersId = new ArrayList<>();
+        this.InvolvedUsersId.add(senderId.getUid());
+        this.InvolvedUsersId.add(receiverId.getUid());
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getChatId() {
@@ -65,11 +81,19 @@ public class Chat implements Serializable {
         this.timestamp = timestamp;
     }
 
-    public String getName() {
-        return name;
+    public List<User> getInvolvedUsers() {
+        return InvolvedUsers;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setInvolvedUsers(List<User> involvedUsers) {
+        InvolvedUsers = involvedUsers;
+    }
+
+    public List<String> getInvolvedUsersId() {
+        return InvolvedUsersId;
+    }
+
+    public void setInvolvedUsersId(List<String> involvedUsersId) {
+        InvolvedUsersId = involvedUsersId;
     }
 }

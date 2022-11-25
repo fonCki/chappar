@@ -21,6 +21,9 @@ import com.example.chappar10.model.User;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -54,9 +57,11 @@ public class MainViewModel extends AndroidViewModel {
         return FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
-    public void sendMessage(String messageText, String myUserID, String finalReceiverId) {
-        Message message = new Message(messageText, myUserID, finalReceiverId);
-        chatsDataRepository.sendMessage(message, getChatId(message));
+    public void sendMessage(String messageText, User myUser, User finalReceiver) {
+        Message message = new Message(messageText, myUser.getUid(), finalReceiver.getUid());
+        Log.i("TAG", "sendMessage: " + message.getMessage() + message.getSenderId() + message.getReceiverId());
+        Log.i("TAG", "sendMessage2: " + myUser.getUid() + finalReceiver.getUid());
+        chatsDataRepository.sendMessage(message, getChatId(message), myUser, finalReceiver);
     }
 
     public String getChatId(Message message){
@@ -92,4 +97,12 @@ public class MainViewModel extends AndroidViewModel {
         return "user.getNickname()";
     }
 
+    // given a String user ID calls to getChats in ChatsDataRepository
+    public Query getChats(String userId) {
+        return chatsDataRepository.getChats(userId);
+    }
+
+    public Query getMessages(String chatId) {
+        return chatsDataRepository.getMessages(chatId);
+    }
 }

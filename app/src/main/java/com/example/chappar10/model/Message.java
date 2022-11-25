@@ -6,10 +6,10 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public class Message implements Serializable {
-    public String message;
-    public String senderId;
-    public String receiverId;
-    public Timestamp timestamp;
+    private String message;
+    private String senderId;
+    private String receiverId;
+    private Timestamp timestamp;
 
     public Message(String message, String senderId, String receiverId) {
         this.message = message;

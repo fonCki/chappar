@@ -15,10 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chappar10.R;
 import com.example.chappar10.data.UsersDataRepository;
+import com.example.chappar10.model.User;
 import com.example.chappar10.ui.adapters.UsersAdapter;
 import com.example.chappar10.ui.view_model.MainViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserListFragment extends Fragment {
 
@@ -40,7 +42,6 @@ public class UserListFragment extends Fragment {
         userList.setLayoutManager(new GridLayoutManager(getContext(), 3));
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
-
         adapter = new UsersAdapter(new ArrayList<>());
 
         adapter.setOnClickListener(user -> {
@@ -52,9 +53,23 @@ public class UserListFragment extends Fragment {
         });
         userList.setAdapter(adapter);
 
+        List<User> list = new ArrayList<>();
         viewModel.getUsers().observe(getViewLifecycleOwner(), users -> {
-            adapter.setUsers(users);
-    });
+            list.clear();
+            for (User user : users) {
+                if (!user.getUid().equals(viewModel.getMyUserID())) {
+                    list.add(user);
+                }
+            }
+            adapter.setUsers(list);
+        });
+
+        viewModel.getUser(viewModel.getMyUserID()).observe(getViewLifecycleOwner(), user -> {
+            list.remove(user);
+            adapter.setUsers(list);
+        });
+
+
     }
 
 }

@@ -3,6 +3,7 @@ package com.example.chappar10.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Set;
 
 public class User implements Serializable {
@@ -99,5 +100,18 @@ public class User implements Serializable {
 
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return isMale() == user.isMale() && Objects.equals(getUid(), user.getUid()) && Objects.equals(getNickname(), user.getNickname()) && Objects.equals(getEmail(), user.getEmail()) && getStatus() == user.getStatus() && Objects.equals(getLocation(), user.getLocation()) && Objects.equals(getProfileurl(), user.getProfileurl()) && Objects.equals(getBirthDate(), user.getBirthDate());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getUid(), getNickname(), getEmail(), getStatus(), getLocation(), isMale(), getProfileurl(), getBirthDate());
     }
 }
