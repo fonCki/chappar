@@ -43,6 +43,7 @@ public class ChatWindowFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         return inflater.inflate(R.layout.fragment_chat_window, container, false);
+
     }
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
