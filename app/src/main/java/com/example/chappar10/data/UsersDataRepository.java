@@ -1,16 +1,17 @@
 package com.example.chappar10.data;
 
 import android.net.Uri;
-
-import androidx.lifecycle.LiveData;
+import android.util.Log;
 
 import com.example.chappar10.model.Location;
 import com.example.chappar10.model.User;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 
 public class UsersDataRepository {
@@ -74,5 +75,17 @@ public class UsersDataRepository {
         likesDBRef.child(userId).child(myUserID).setValue(false);
     }
 
+//    public Task<User> getUser(String uid) {
+//        // get the user from the database
+//        AtomicReference<User> user = new AtomicReference<>();
+//        usersDBRef.child(uid).get().addOnCompleteListener(task -> {
+//            if (task.isSuccessful()) {
+//                user.set(task.getResult().getValue(User.class));
+//            } else {
+//                Log.e("UsersDataRepository", "getUser: ", task.getException());
+//            }
+//        });
+//        return
+//    }
 
 }

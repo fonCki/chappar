@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.chappar10.MovableFloatingActionButton;
 import com.example.chappar10.R;
 import com.example.chappar10.model.Chat;
 import com.example.chappar10.model.Message;
@@ -23,6 +24,7 @@ import com.example.chappar10.model.User;
 import com.example.chappar10.ui.adapters.MessageAdapter;
 import com.example.chappar10.ui.view_model.MainViewModel;
 import com.google.android.gms.common.util.ArrayUtils;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -44,6 +46,7 @@ public class ChatWindowFragment extends Fragment {
         TextView nickName = view.findViewById(R.id.tv_name);
         TextView status = view.findViewById(R.id.tv_status);
         TextView messageArea = view.findViewById(R.id.tv_message);
+        MovableFloatingActionButton jokeButton = view.findViewById(R.id.joke_message);
 
         //Parameters
         Chat chat = (Chat) getArguments().getSerializable("chat");
@@ -68,12 +71,15 @@ public class ChatWindowFragment extends Fragment {
         adapter = new MessageAdapter(new ArrayList<>(), myId);
         messageList.setAdapter(adapter);
 
+        //Ser Snackbar
+        Snackbar snackbar = Snackbar.make(view, "Are you stuck for words? A joke is always a good way to start a conversation! press 💡", Snackbar.ANIMATION_MODE_SLIDE);
+        snackbar.show();
 
+        //Ser the messages empty
         ArrayList<Message> messages = new ArrayList<>();
         adapter.setMessages(messages);
-        //List Messages
 
-
+        //action send the message
         String finalReceiverId = receiverId;
         button.setOnClickListener(v -> {
             String messageText = editText.getText().toString();
@@ -85,6 +91,21 @@ public class ChatWindowFragment extends Fragment {
         });
 
 
+
+
+        //make dissapear the joke button
+        editText.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                snackbar.dismiss();
+                jokeButton.setVisibility(View.GONE);
+            } else {
+                snackbar.show();
+                jokeButton.setVisibility(View.VISIBLE);
+            }
+        });
+
+
+        //TODO change this
         if (chat != null) {
             nickName.setText(chat.getSenderId());
         } else {
@@ -97,7 +118,7 @@ public class ChatWindowFragment extends Fragment {
 
         db.addSnapshotListener((value, error) -> {
             if (error != null) {
-                Toast.makeText(getContext(), "Error while loading!", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Error while loading!", Toast.LENGTH_SHORT).show();
                 Log.w("TAG99", "Listen failed.", error);
                 return;
             }

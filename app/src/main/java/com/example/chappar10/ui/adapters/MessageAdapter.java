@@ -22,7 +22,7 @@ import java.util.List;
 
 public class MessageAdapter  extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder> {
     private final ArrayList<Message> messages;
-    private OnClickListener onClickListener;
+//    private OnClickListener onClickListener;
     private String myId;
 
     public MessageAdapter(ArrayList<Message> messages, String myId) {
@@ -30,9 +30,9 @@ public class MessageAdapter  extends RecyclerView.Adapter<MessageAdapter.Message
         this.messages = messages;
     }
 
-    public void setOnClickListener(OnClickListener listener) {
-        this.onClickListener = listener;
-    }
+//    public void setOnClickListener(OnClickListener listener) {
+//        this.onClickListener = listener;
+//    }
 
     @NonNull
     @Override
@@ -69,14 +69,14 @@ public class MessageAdapter  extends RecyclerView.Adapter<MessageAdapter.Message
             messageContainer = itemView.findViewById(R.id.full_line);
             messageLayout = itemView.findViewById(R.id.container);
             message = itemView.findViewById(R.id.tv_message);
-            itemView.setOnClickListener(v -> {
-                onClickListener.onClick(messages.get(getBindingAdapterPosition()));
-            });
+//            itemView.setOnClickListener(v -> {
+//                onClickListener.onClick(messages.get(getBindingAdapterPosition()));
+//            });
         }
     }
 
-    public interface OnClickListener {
-        void onClick(Message message);
-    }
+//    public interface OnClickListener {
+//        void onClick(Message message);
+//    }
 }
 

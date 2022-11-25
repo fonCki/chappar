@@ -26,14 +26,14 @@ public class User implements Serializable {
     }
 
 
-    public String uid;
-    public String nickname;
-    public String email;
-    public Status status;
-    public Location location;
-    public boolean isMale;
-    public String profileurl;
-    public Date birthDate;
+    private String uid;
+    private String nickname;
+    private String email;
+    private Status status;
+    private Location location;
+    private boolean isMale;
+    private String profileurl;
+    private Date birthDate;
 
     public User() {}
 

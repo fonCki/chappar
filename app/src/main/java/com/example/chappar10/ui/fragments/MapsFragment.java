@@ -86,13 +86,13 @@ public class MapsFragment extends Fragment {
                 googleMap.clear();
                 //add markers
                 for (User user : users) {
-                    LatLng latLng = new LatLng(user.location.latitude, user.location.longitude);
+                    LatLng latLng = new LatLng(user.getLocation().getLatitude(), user.getLocation().getLongitude());
                     MarkerOptions markerOptions = new MarkerOptions();
                     markerOptions.position(latLng);
                     markerOptions.title(user.getUid());
 
 
-                    Picasso.get().load(user.profileurl).into(new Target() {
+                    Picasso.get().load(user.getProfileurl()).into(new Target() {
                         @Override
                         public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                             bitmap = Bitmap.createScaledBitmap(bitmap, 150, 150, false);

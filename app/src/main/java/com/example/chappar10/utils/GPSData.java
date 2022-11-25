@@ -51,7 +51,7 @@ public class GPSData {
                                         int index = locationResult.getLocations().size() - 1;
                                         location[0] = new Location(locationResult.getLocations().get(index).getLatitude(), locationResult.getLocations().get(index).getLongitude());
                                         dataRepository.addLocation(userId, location[0]);
-                                        Log.i("GPSData", "Location: " + location[0].longitude + ", " + location[0].latitude);
+                                        Log.i("GPSData", "Location: " + location[0].getLongitude() + ", " + location[0].getLatitude());
                                     }
                                 }
                             }, Looper.getMainLooper());

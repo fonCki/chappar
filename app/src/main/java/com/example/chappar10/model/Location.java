@@ -1,8 +1,8 @@
 package com.example.chappar10.model;
 
 public class Location {
-    public double latitude;
-    public double longitude;
+    private double latitude;
+    private double longitude;
 
     public Location() {
         latitude = 0;

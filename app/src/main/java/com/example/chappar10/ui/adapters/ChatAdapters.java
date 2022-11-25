@@ -1,5 +1,6 @@
 package com.example.chappar10.ui.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,9 +40,9 @@ public class ChatAdapters extends RecyclerView.Adapter<ChatAdapters.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.name.setText(chats.get(position).getSenderId());
-        holder.message.setText(chats.get(position).getLatestMessage().getMessage());
-        holder.time.setText("9:00 AM");
+        holder.name.setText(chats.get(position).getChatId());
+        holder.message.setText(chats.get(position).getLastMessage());
+//        holder.time.setText(chats.get(position).getTimestamp().toString());
         holder.avatar.setImageResource(R.drawable.brad_pitt);
 
     }

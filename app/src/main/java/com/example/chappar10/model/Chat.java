@@ -1,31 +1,35 @@
 package com.example.chappar10.model;
 
+import com.google.firebase.Timestamp;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class Chat implements Serializable {
-    private UUID chatId;
+    private String name;
+    private String chatId;
     private String senderId;
     private String receiverId;
-    List<Message> messages;
+    private String LastMessage;
+    private Timestamp timestamp;
 
     public Chat() {}
 
-    public Chat(String senderId, String receiverId) {
-        messages = new ArrayList<>();
-        this.chatId = java.util.UUID.randomUUID();
+    public Chat(String chatId, String senderId, String receiverId, Message message) {
+        this.chatId = chatId;
         this.senderId = senderId;
         this.receiverId = receiverId;
-        this.messages = messages;
+        this.LastMessage = message.getMessage();
+        this.timestamp = message.getTimestamp();
     }
 
-    public UUID getChatId() {
+    public String getChatId() {
         return chatId;
     }
 
-    public void setChatId(UUID chatId) {
+    public void setChatId(String chatId) {
         this.chatId = chatId;
     }
 
@@ -45,18 +49,27 @@ public class Chat implements Serializable {
         this.receiverId = receiverId;
     }
 
-    public List<Message> getMessages() {
-        return messages;
+    public String getLastMessage() {
+        return LastMessage;
     }
 
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
+    public void setLastMessage(String lastMessage) {
+        LastMessage = lastMessage;
     }
 
-    public Message getLatestMessage() {
-        if (messages == null || messages.size() == 0) {
-            return new Message("No messages yet", senderId, receiverId);
-        }
-        return messages.get(messages.size() - 1);
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.util.Log;
 
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ import com.example.chappar10.model.Message;
 import com.example.chappar10.model.User;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -77,4 +79,17 @@ public class MainViewModel extends AndroidViewModel {
     public void dislike(String userId) {
         dataRepository.dislike(getMyUserID(), userId);
     }
+
+
+    //Giving a chatId, this method will return the other user's UID
+    public String getReceiverName(String chatId) {
+        Log.d("MainViewModel", "getReceiverName: " + chatId);
+        String myId = getMyUserID();
+        String receiverId = chatId.replace(myId, "");
+        Log.d("MainViewModel", "getReceiverName: " + receiverId);
+//        User user = dataRepository.getUser(receiverId);
+//        Log.i("MainViewModel", "getReceiverName: " + user.getNickname());
+        return "user.getNickname()";
+    }
+
 }

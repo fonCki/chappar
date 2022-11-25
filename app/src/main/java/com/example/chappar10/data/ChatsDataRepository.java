@@ -2,13 +2,11 @@ package com.example.chappar10.data;
 
 
 
-import android.util.Log;
-
+import com.example.chappar10.model.Chat;
 import com.example.chappar10.model.Message;
 import com.example.chappar10.utils.PATH;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.concurrent.atomic.AtomicReference;
+import com.google.firebase.firestore.QuerySnapshot;
 
 
 public class ChatsDataRepository {
@@ -35,9 +33,9 @@ public class ChatsDataRepository {
 
 
     private void addChat(String chatId, Message message) {
+        chatsDBRef.collection(PATH.CHATS).document(chatId).set(new Chat(chatId, message.getSenderId(), message.getReceiverId(), message));
+//        chatsDBRef.collection(PATH.CHATS).add(new Chat(chatId, message.getSenderId(), message.getReceiverId(), message));
         chatsDBRef.collection(PATH.CHATS).document(chatId).collection(PATH.MESSAGES).add(message);
     }
-
-
 
 }
