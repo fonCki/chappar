@@ -18,8 +18,11 @@ import androidx.navigation.Navigation;
 import com.example.chappar10.R;
 import com.example.chappar10.model.User;
 import com.example.chappar10.ui.view_model.MainViewModel;
+import com.example.chappar10.utils.Converter;
 import com.example.chappar10.utils.Distance;
+import com.example.chappar10.utils.SetImageTask;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.imageview.ShapeableImageView;
 
 public class UserDetailsFragment extends Fragment {
 
@@ -35,14 +38,14 @@ public class UserDetailsFragment extends Fragment {
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
         //Declare components
-        LinearLayout linearLayout = view.findViewById(R.id.match_tools);
         TextView nickName = view.findViewById(R.id.user_details_name);
+        TextView age = view.findViewById(R.id.user_details_age);
         TextView location = view.findViewById(R.id.user_location);
+        ShapeableImageView profileImage = view.findViewById(R.id.imageView);
         FloatingActionButton fab = view.findViewById(R.id.start_message);
         TextView bio = view.findViewById(R.id.user_bio);
 
         //set the visibility of the components
-        linearLayout.setVisibility(View.GONE);
         fab.setVisibility(View.VISIBLE);
         bio.setVisibility(View.VISIBLE);
 
@@ -51,6 +54,14 @@ public class UserDetailsFragment extends Fragment {
         // get the user from the bundle and display it
         User user = (User) getArguments().getSerializable("user");
         nickName.setText(user.getNickname());
+        age.setText(String.valueOf(Converter.getAge(user.getBirthDate())));
+        String photoUrl = user.getProfileImageUrl();
+        if (photoUrl != null) {
+            new SetImageTask(profileImage).execute(photoUrl);
+        } else {
+            profileImage.setImageResource(R.drawable.defaul);
+        }
+
         fab.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             bundle.putSerializable("user", user);

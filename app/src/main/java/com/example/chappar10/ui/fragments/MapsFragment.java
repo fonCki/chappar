@@ -13,6 +13,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,8 +48,10 @@ public class MapsFragment extends Fragment {
         public void onMapReady(GoogleMap googleMap) {
             googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
             MapsFragment.this.googleMap = googleMap;
+            putMarkers();
         }
     };
+
 
     private void navigateToUserDetails(String uid) {
         UsersDataRepository.getInstance().getUserLiveData(uid).observe(getViewLifecycleOwner(), user -> {
@@ -63,9 +66,7 @@ public class MapsFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         return inflater.inflate(R.layout.fragment_maps, container, false);
     }
@@ -73,13 +74,16 @@ public class MapsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        SupportMapFragment mapFragment =
-                (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {
             mapFragment.getMapAsync(callback);
             mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
         }
+        Log.i("MapsFragment", "second: ");
+    }
 
+
+    private void putMarkers() {
         mainViewModel.getUsers().observe(getViewLifecycleOwner(), users -> {
             if (googleMap != null) {
                 //clear map
@@ -123,5 +127,4 @@ public class MapsFragment extends Fragment {
             }
         });
     }
-
 }

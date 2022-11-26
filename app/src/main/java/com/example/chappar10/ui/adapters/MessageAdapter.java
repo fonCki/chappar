@@ -18,7 +18,7 @@ import java.util.List;
 
 public class MessageAdapter  extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder> {
     private final ArrayList<Message> messages;
-    private String myId;
+    private final String myId;
 
     public MessageAdapter(ArrayList<Message> messages, String myId) {
         this.myId = myId;

@@ -48,7 +48,11 @@ public class AccessAuth {
     }
 
     public String getMyUserID() {
-        return firebaseAuth.getCurrentUser().getUid();
+        if (firebaseAuth.getCurrentUser() != null) {
+            return firebaseAuth.getCurrentUser().getUid();
+        } else {
+            return null;
+        }
     }
 
     public boolean isUserLoggedIn() {

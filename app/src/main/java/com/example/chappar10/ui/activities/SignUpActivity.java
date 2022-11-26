@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -18,7 +19,6 @@ import android.widget.Toast;
 import com.example.chappar10.R;
 import com.example.chappar10.ui.view_model.AccessViewModel;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -42,7 +42,7 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up2);
+        setContentView(R.layout.activity_sign_up);
 
         viewModel = new ViewModelProvider(this).get(AccessViewModel.class);
 
@@ -69,7 +69,7 @@ public class SignUpActivity extends AppCompatActivity {
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (profileSelected == false) {
-                    profile.setImageResource(isChecked?R.drawable.angelina:R.drawable.brad_pitt);
+                    profile.setImageResource(isChecked?R.drawable.captain_marvel:R.drawable.spidermanmcu);
                 }
             }
         });
@@ -105,7 +105,13 @@ public class SignUpActivity extends AppCompatActivity {
         emailString = email.getText().toString();
         passwordString = password.getText().toString();
 
+        //log the datepicker values
+        Log.i("DatePicker", "Date: " + datePicker.getDayOfMonth() + " ===  " + datePicker.getMonth() + " ===== " + datePicker.getYear());
+
+        birthDate = new Date();
+
         birthDate = new Date(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
+        Log.i("DatePicker", "Date: " + birthDate);
 
         if (emailString.isEmpty()) {
             this.email.setError("Email is required");

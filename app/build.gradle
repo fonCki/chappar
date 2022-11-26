@@ -75,4 +75,5 @@ dependencies {
     //Swipe cards
         implementation "com.yuyakaido.android:card-stack-view:2.3.4"
 
+
 }

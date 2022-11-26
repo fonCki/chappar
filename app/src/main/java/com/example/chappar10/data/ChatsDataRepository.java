@@ -22,8 +22,8 @@ import java.util.List;
 public class ChatsDataRepository {
     private static ChatsDataRepository instance;
     private final CollectionReference chatsDBRef;
-    private MutableLiveData<List<Chat>> chatsLiveData;
-    private MutableLiveData<List<Message>> messagesLiveData;
+    private final MutableLiveData<List<Chat>> chatsLiveData;
+    private final MutableLiveData<List<Message>> messagesLiveData;
 
 
     private ChatsDataRepository() {
@@ -83,7 +83,6 @@ public class ChatsDataRepository {
             if (value != null) {
                 chats.clear();
                 for (QueryDocumentSnapshot document : value) {
-                    Log.i("TAG", "getChats: " + document.getData());
                     chats.add(document.toObject(Chat.class));
                 }
                 chatsLiveData.setValue(chats);

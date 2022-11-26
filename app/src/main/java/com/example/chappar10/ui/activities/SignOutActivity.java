@@ -9,7 +9,7 @@ import android.os.Bundle;
 import com.example.chappar10.R;
 import com.example.chappar10.ui.view_model.AccessViewModel;
 
-public class SignOut extends AppCompatActivity {
+public class SignOutActivity extends AppCompatActivity {
     private AccessViewModel accessViewModel;
 
     @Override

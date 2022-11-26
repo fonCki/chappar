@@ -19,10 +19,10 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class UsersDataRepository {
     private static UsersDataRepository instance;
-    private MutableLiveData<List<User>> userListLiveData;
+    private final MutableLiveData<List<User>> userListLiveData;
     private final CollectionReference usersDBRef;
 
-    private StorageReference storageReference;
+    private final StorageReference storageReference;
 
     private UsersDataRepository(){
         usersDBRef = FirebaseFirestore.getInstance().collection(PATH.USERS);

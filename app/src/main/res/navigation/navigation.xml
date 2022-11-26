@@ -62,7 +62,7 @@
         tools:layout="@layout/fragment_chat_window" />
     <activity
         android:id="@+id/signOut"
-        android:name="com.example.chappar10.ui.activities.SignOut"
+        android:name="com.example.chappar10.ui.activities.SignOutActivity"
         android:label="activity_sign_out"
         tools:layout="@layout/activity_sign_out" />
 

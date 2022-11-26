@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.chappar10.R;
+import com.example.chappar10.model.User;
 import com.example.chappar10.ui.adapters.CardAdapter;
 import com.example.chappar10.ui.view_model.MainViewModel;
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager;
@@ -19,6 +20,9 @@ import com.yuyakaido.android.cardstackview.Direction;
 import com.yuyakaido.android.cardstackview.StackFrom;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class MainFragment extends Fragment implements CardStackListener {
@@ -39,6 +43,20 @@ public class MainFragment extends Fragment implements CardStackListener {
             cardStackView = view.findViewById(R.id.card_stack_view);
             manager = new CardStackLayoutManager(getContext(), this);
             mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+            CircleImageView like = view.findViewById(R.id.iv_like);
+            CircleImageView dislike = view.findViewById(R.id.iv_dislike);
+
+            like.setOnClickListener(v->{
+                cardStackView.swipe();
+                mainViewModel.dislike(adapter.getItem(manager.getTopPosition() - 1).getUid());
+
+            });
+
+            dislike.setOnClickListener(v->{
+                cardStackView.swipe();
+                mainViewModel.like(adapter.getItem(manager.getTopPosition() - 1).getUid());
+
+            });
 
 
             //set the adapter
@@ -48,7 +66,13 @@ public class MainFragment extends Fragment implements CardStackListener {
             cardStackView.setAdapter(adapter);
 
             mainViewModel.getUsers().observe(getViewLifecycleOwner(), users -> {
-                adapter.setUsers(users);
+                List<User> list = new ArrayList<>();
+                users.forEach(user -> {
+                    if (!user.getUid().equals(mainViewModel.getMyUserID())) {
+                        list.add(user);
+                    }
+                });
+                adapter.setUsers(list);
             });
 
         }
@@ -61,9 +85,9 @@ public class MainFragment extends Fragment implements CardStackListener {
     @Override
     public void onCardSwiped(Direction direction) {
         if (direction == Direction.Right) {
-//            viewModel.like(adapter.getItem(manager.getTopPosition() - 1).getUid());
+            mainViewModel.like(adapter.getItem(manager.getTopPosition() - 1).getUid());
         } else if (direction == Direction.Left) {
-//            viewModel.dislike(adapter.getItem(manager.getTopPosition() - 1).getUid());
+            mainViewModel.dislike(adapter.getItem(manager.getTopPosition() - 1).getUid());
         }
     }
 

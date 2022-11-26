@@ -1,10 +1,8 @@
 package com.example.chappar10.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
-import java.util.Set;
 
 public class User implements Serializable {
 

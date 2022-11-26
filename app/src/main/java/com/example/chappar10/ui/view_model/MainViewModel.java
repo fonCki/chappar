@@ -2,6 +2,7 @@ package com.example.chappar10.ui.view_model;
 
 import android.app.Application;
 import android.util.Log;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -61,24 +62,14 @@ public class MainViewModel extends AndroidViewModel {
         return getUser(getMyUserID()).getValue().getLocation();
     }
 
-//    public void like(String userId) {
+    public void like(String userId) {
+        Toast.makeText(getApplication(), "Like", Toast.LENGTH_SHORT).show();
 //        dataRepository.like(getMyUserID(), userId);
-//    }
-//
-//    public void dislike(String userId) {
+    }
+
+    public void dislike(String userId) {
+        Toast.makeText(getApplication(), "Dislike", Toast.LENGTH_SHORT).show();
 //        dataRepository.dislike(getMyUserID(), userId);
-//    }
-
-
-    //Giving a chatId, this method will return the other user's UID
-    public String getReceiverName(String chatId) {
-        Log.d("MainViewModel", "getReceiverName: " + chatId);
-        String myId = getMyUserID();
-        String receiverId = chatId.replace(myId, "");
-        Log.d("MainViewModel", "getReceiverName: " + receiverId);
-//        User user = dataRepository.getUser(receiverId);
-//        Log.i("MainViewModel", "getReceiverName: " + user.getNickname());
-        return "user.getNickname()";
     }
 
     // given a String user ID calls to getChats in ChatsDataRepository

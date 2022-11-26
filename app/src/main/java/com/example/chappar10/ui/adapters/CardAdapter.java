@@ -27,39 +27,42 @@ import java.util.List;
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
     private final ArrayList<User> users;
-    private OnClickListener onClickListener;
+    private MainViewModel mainViewModel;
+    private Location myLocation = new Location(0, 0);
 
 
     public CardAdapter(ArrayList<User> users) {
         this.users = users;
     }
 
-    public void setOnClickListener(OnClickListener listener) {
-        this.onClickListener = listener;
-    }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.fragment_user_details, parent, false);
+        mainViewModel = new ViewModelProvider((ViewModelStoreOwner) parent.getContext()).get(MainViewModel.class);
+        mainViewModel.getUser(mainViewModel.getMyUserID()).observeForever(user -> {
+            myLocation = user.getLocation();
+        });
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
         User user = users.get(position);
         String photoUrl = user.getProfileImageUrl();
         if (photoUrl != null) {
             new SetImageTask(holder.image).execute(photoUrl);
+        } else {
+            holder.image.setImageResource(R.drawable.defaul);
         }
         holder.name.setText(user.getNickname());
         //convert type Date to int Birthday
         int age = Converter.getAge(user.getBirthDate());//
         holder.age.setText(String.valueOf(age));
-//        String distance = String.format("%.1f", Distance.GetDistance(user.getLocation(), myLocation));
-//        holder.location.setText(distance + " km");
+        String distance = String.format("%.1f", Distance.GetDistance(user.getLocation(), myLocation));
+        holder.location.setText(distance + " km");
     }
 
     @Override
@@ -92,7 +95,4 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         }
     }
 
-    public interface OnClickListener {
-        void onClick(User user);
-    }
 }
