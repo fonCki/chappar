@@ -125,25 +125,11 @@ public class ChatWindowFragment extends Fragment {
             }
         });
 
-        //Load the messages
-        mainViewModel.getMessages(chatId).addSnapshotListener((value, error) -> {
-            if (error != null) {
-                Log.w("ChatWindowFragment", "Listen failed.", error);
-                return;
-            }
-            if (value != null) {
-                messages.clear();
-                for (DocumentSnapshot document : value.getDocuments()) {
-                    document.getData();
-                    Message message = document.toObject(Message.class);
-                    messages.add(message);
-                }
-                adapter.setMessages(messages);
-                messageList.scrollToPosition(messages.size() - 1);
-            } else {
-                Log.d("ChatWindowFragment", "Current data: null");
-            }
+        mainViewModel.getMessages(chatId).observe(getViewLifecycleOwner(), mess -> {
+            adapter.setMessages(mess);
+            messageList.scrollToPosition(mess.size() - 1);
         });
+
     }
 
     private void setData(User user) {

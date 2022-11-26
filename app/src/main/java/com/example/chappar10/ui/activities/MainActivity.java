@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.chappar10.R;
+import com.example.chappar10.ui.view_model.AccessViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationDrawer;
     BottomNavigationView bottomNavigationView;
     Toolbar toolbar;
+    AccessViewModel accessViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

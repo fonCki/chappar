@@ -21,29 +21,26 @@ import java.util.List;
 
 public class MainViewModel extends AndroidViewModel {
 
-
-
-    private final UsersDataRepository dataRepository;
+    private final UsersDataRepository usersDataRepository;
     private final ChatsDataRepository chatsDataRepository;
 
     public MainViewModel(@NonNull Application application) {
         super(application);
         this.chatsDataRepository = ChatsDataRepository.getInstance();
-        this.dataRepository = UsersDataRepository.getInstance();
+        this.usersDataRepository = UsersDataRepository.getInstance();
     }
 
     public MutableLiveData<User> getUser(String uid) {
-        return dataRepository.getUserLiveData(uid);
+        return usersDataRepository.getUserLiveData(uid);
     }
 
     public MutableLiveData<List<User>> getUsers() {
-        return dataRepository.getUserListLiveData();
+        return usersDataRepository.getUserListLiveData();
     }
 
 
     public String getMyUserID(){
-        // TODO delete implementation Auth
-        return FirebaseAuth.getInstance().getCurrentUser().getUid();
+        return FirebaseAuth.getInstance().getUid();
     }
 
     public void sendMessage(String messageText, User myUser, User finalReceiver) {
@@ -89,7 +86,7 @@ public class MainViewModel extends AndroidViewModel {
         return chatsDataRepository.getChatsLiveData(userId);
     }
 
-    public Query getMessages(String chatId) {
+    public MutableLiveData<List<Message>> getMessages(String chatId) {
         return chatsDataRepository.getMessages(chatId);
     }
 }

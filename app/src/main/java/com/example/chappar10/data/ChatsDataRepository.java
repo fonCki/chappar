@@ -15,8 +15,6 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,37 +23,59 @@ public class ChatsDataRepository {
     private static ChatsDataRepository instance;
     private final CollectionReference chatsDBRef;
     private MutableLiveData<List<Chat>> chatsLiveData;
+    private MutableLiveData<List<Message>> messagesLiveData;
 
 
     private ChatsDataRepository() {
         chatsDBRef = FirebaseFirestore.getInstance().collection(PATH.CHATS);
         chatsLiveData = new MutableLiveData<>();
+        messagesLiveData = new MutableLiveData<>();
     }
 
 
-    public static ChatsDataRepository getInstance() {
+    public static synchronized ChatsDataRepository getInstance() {
         if (instance == null) {
-            instance = new ChatsDataRepository();
+            synchronized (ChatsDataRepository.class) {
+                if (instance == null) {
+                    instance = new ChatsDataRepository();
+                }
+            }
         }
         return instance;
     }
 
 
-    public void sendMessage(Message message, String chatId, User user, User receiver) {
-        //TODO find a correct collection
-        addMessage(chatId, message, user, receiver);
-    }
-
-
-    private Task addMessage(String chatId, Message message, User user, User receiver) {
-        chatsDBRef.document(chatId).set(new Chat(chatId, user, receiver, message));
+    public Task sendMessage(Message message, String chatId, User user, User receiver) {
+        Chat chat = new Chat(chatId, user, receiver, message);
+        chatsDBRef.document(chatId).set(chat);
         return chatsDBRef.document(chatId).collection(PATH.MESSAGES).add(message);
     }
 
-    public Task getChats(String userId) {
+
+    //get all chats of the specific chat id
+    public MutableLiveData<List<Message>> getMessages(String chatId) {
+        Query query = chatsDBRef.document(chatId)
+                      .collection(PATH.MESSAGES)
+                      .orderBy(PATH.LAST_MESSAGE_TIME, Query.Direction.ASCENDING);
+
+        query.addSnapshotListener((value, error) -> {
+            if (error != null) {
+                return;
+            }
+            List<Message> messages = new ArrayList<>();
+            for (QueryDocumentSnapshot document : value) {
+                messages.add(document.toObject(Message.class));
+            }
+            messagesLiveData.setValue(messages);
+        });
+        return messagesLiveData;
+    }
+
+    //get the chats list live data for the current user
+    public MutableLiveData<List<Chat>> getChatsLiveData(String userId) {
         List<Chat> chats = new ArrayList<>();
         Query query = chatsDBRef.whereArrayContains(PATH.INVOLVED_USERS, userId)
-                        .orderBy(PATH.LAST_MESSAGE_TIME, Query.Direction.DESCENDING);
+                .orderBy(PATH.LAST_MESSAGE_TIME, Query.Direction.DESCENDING);
         query.addSnapshotListener((value, error) -> {
             if (error != null) {
                 return;
@@ -69,16 +89,6 @@ public class ChatsDataRepository {
                 chatsLiveData.setValue(chats);
             }
         });
-        return query.get();
-    }
-
-    public Query getMessages(String chatId) {
-        return chatsDBRef.document(chatId).collection(PATH.MESSAGES);
-    }
-
-    public MutableLiveData<List<Chat>> getChatsLiveData(String userId) {
-        // wait for getChats(userId) and then return chatsLiveData
-        getChats(userId);
         return chatsLiveData;
     }
 }

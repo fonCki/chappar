@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.MutableLiveData;
 
 import com.example.chappar10.data.AccessAuth;
 import com.example.chappar10.data.UsersDataRepository;
@@ -20,6 +21,8 @@ public class AccessViewModel extends AndroidViewModel {
     private final AccessAuth accessAuth;
     private final UsersDataRepository usersDataRepository;
     private final Application application;
+    private String myUserID;
+    private MutableLiveData<User> myUserLiveData;
 
 
     public AccessViewModel(@NonNull Application application) {
@@ -32,9 +35,9 @@ public class AccessViewModel extends AndroidViewModel {
     public Task login(String email, String password) {
         return accessAuth.signIn(email, password).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) { //once the user is logged in
-                        String uid = task.getResult();
+                        myUserID = task.getResult();
                         //Change the status of the user to online
-                        usersDataRepository.updateStatus(uid, User.Status.ONLINE);
+                        usersDataRepository.updateStatus(myUserID, User.Status.ONLINE);
                         Intent intent = new Intent(getApplication(), MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         getApplication().startActivity(intent);
@@ -49,11 +52,11 @@ public class AccessViewModel extends AndroidViewModel {
     public Task createUser(String email, String password, String name, boolean isMale, Uri uri, Date birthDate) {
         return accessAuth.signUp(email, password).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                    String uid = task.getResult();
-                    User user = new User(uid, name, email, isMale,  birthDate);
+                    myUserID = task.getResult();
+                    User user = new User(myUserID, name, email, isMale,  birthDate);
                     usersDataRepository.addUser(user);
-                    usersDataRepository.updateStatus(uid, User.Status.ONLINE);
-                    if (uri != null) usersDataRepository.uploadProfilePicture(uri, uid);
+                    usersDataRepository.updateStatus(myUserID, User.Status.ONLINE);
+                    if (uri != null) usersDataRepository.uploadProfilePicture(uri, myUserID);
                     Intent intent = new Intent(getApplication(), MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     getApplication().startActivity(intent);
@@ -62,6 +65,14 @@ public class AccessViewModel extends AndroidViewModel {
                     Toast.makeText(getApplication(), "Create user failed", Toast.LENGTH_SHORT).show();
                 }
         });
+    }
+
+    public MutableLiveData<User> getMyUserLiveData() {
+        if (myUserLiveData == null) {
+            myUserLiveData = new MutableLiveData<>();
+            usersDataRepository.getUserLiveData(myUserID).observeForever(myUserLiveData::setValue);
+        }
+        return myUserLiveData;
     }
 
     public void updateLocation() {
