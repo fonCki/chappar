@@ -92,7 +92,7 @@ public class MapsFragment extends Fragment {
                     markerOptions.title(user.getUid());
 
 
-                    Picasso.get().load(user.getProfileurl()).into(new Target() {
+                    Picasso.get().load(user.getProfileImageUrl()).into(new Target() {
                         @Override
                         public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                             bitmap = Bitmap.createScaledBitmap(bitmap, 150, 150, false);

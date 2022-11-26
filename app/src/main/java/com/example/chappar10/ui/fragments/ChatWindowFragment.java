@@ -149,8 +149,8 @@ public class ChatWindowFragment extends Fragment {
     private void setData(User user) {
         nickName.setText(user.getNickname());
         status.setText(user.getStatus().toString());
-        if (user.getProfileurl() != null) {
-            new SetImageTask(avatar).execute(user.getProfileurl());
+        if (user.getProfileImageUrl() != null) {
+            new SetImageTask(avatar).execute(user.getProfileImageUrl());
         }
     }
 }

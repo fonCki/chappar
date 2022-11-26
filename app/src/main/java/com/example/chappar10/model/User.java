@@ -8,14 +8,10 @@ import java.util.Set;
 
 public class User implements Serializable {
 
-
     public enum Status {
         ONLINE,
         OFFLINE
     }
-
-
-
     public User(String uid, String nickname, String email, boolean isMale, Date birthDate) {
         this.uid = uid;
         this.nickname = nickname;
@@ -33,7 +29,7 @@ public class User implements Serializable {
     private Status status;
     private Location location;
     private boolean isMale;
-    private String profileurl;
+    private String profileImageUrl;
     private Date birthDate;
 
     public User() {}
@@ -86,12 +82,12 @@ public class User implements Serializable {
         isMale = male;
     }
 
-    public String getProfileurl() {
-        return profileurl;
+    public String getProfileImageUrl() {
+        return profileImageUrl;
     }
 
-    public void setProfileurl(String profileurl) {
-        this.profileurl = profileurl;
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
     }
 
     public Date getBirthDate() {
@@ -107,11 +103,11 @@ public class User implements Serializable {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return isMale() == user.isMale() && Objects.equals(getUid(), user.getUid()) && Objects.equals(getNickname(), user.getNickname()) && Objects.equals(getEmail(), user.getEmail()) && getStatus() == user.getStatus() && Objects.equals(getLocation(), user.getLocation()) && Objects.equals(getProfileurl(), user.getProfileurl()) && Objects.equals(getBirthDate(), user.getBirthDate());
+        return isMale() == user.isMale() && Objects.equals(getUid(), user.getUid()) && Objects.equals(getNickname(), user.getNickname()) && Objects.equals(getEmail(), user.getEmail()) && getStatus() == user.getStatus() && Objects.equals(getLocation(), user.getLocation()) && Objects.equals(getProfileImageUrl(), user.getProfileImageUrl()) && Objects.equals(getBirthDate(), user.getBirthDate());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUid(), getNickname(), getEmail(), getStatus(), getLocation(), isMale(), getProfileurl(), getBirthDate());
+        return Objects.hash(getUid(), getNickname(), getEmail(), getStatus(), getLocation(), isMale(), getProfileImageUrl(), getBirthDate());
     }
 }

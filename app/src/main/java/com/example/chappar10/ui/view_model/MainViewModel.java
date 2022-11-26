@@ -1,10 +1,6 @@
 package com.example.chappar10.ui.view_model;
 
 import android.app.Application;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.util.Log;
 
 
@@ -14,23 +10,13 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.chappar10.data.ChatsDataRepository;
 import com.example.chappar10.data.UsersDataRepository;
-import com.example.chappar10.data.UserListLiveData;
-import com.example.chappar10.data.UserLiveData;
 import com.example.chappar10.model.Chat;
 import com.example.chappar10.model.Location;
 import com.example.chappar10.model.Message;
 import com.example.chappar10.model.User;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.List;
 
 public class MainViewModel extends AndroidViewModel {
@@ -46,12 +32,12 @@ public class MainViewModel extends AndroidViewModel {
         this.dataRepository = UsersDataRepository.getInstance();
     }
 
-    public UserLiveData getUser(String uid) {
+    public MutableLiveData<User> getUser(String uid) {
         return dataRepository.getUserLiveData(uid);
     }
 
-    public UserListLiveData getUsers() {
-        return dataRepository.getUsersListLiveData();
+    public MutableLiveData<List<User>> getUsers() {
+        return dataRepository.getUserListLiveData();
     }
 
 
@@ -62,8 +48,6 @@ public class MainViewModel extends AndroidViewModel {
 
     public void sendMessage(String messageText, User myUser, User finalReceiver) {
         Message message = new Message(messageText, myUser.getUid(), finalReceiver.getUid());
-        Log.i("TAG", "sendMessage: " + message.getMessage() + message.getSenderId() + message.getReceiverId());
-        Log.i("TAG", "sendMessage2: " + myUser.getUid() + finalReceiver.getUid());
         chatsDataRepository.sendMessage(message, getChatId(message), myUser, finalReceiver);
     }
 
@@ -80,13 +64,13 @@ public class MainViewModel extends AndroidViewModel {
         return getUser(getMyUserID()).getValue().getLocation();
     }
 
-    public void like(String userId) {
-        dataRepository.like(getMyUserID(), userId);
-    }
-
-    public void dislike(String userId) {
-        dataRepository.dislike(getMyUserID(), userId);
-    }
+//    public void like(String userId) {
+//        dataRepository.like(getMyUserID(), userId);
+//    }
+//
+//    public void dislike(String userId) {
+//        dataRepository.dislike(getMyUserID(), userId);
+//    }
 
 
     //Giving a chatId, this method will return the other user's UID

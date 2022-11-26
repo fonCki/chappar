@@ -50,7 +50,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         User user = users.get(position);
-        String photoUrl = user.getProfileurl();
+        String photoUrl = user.getProfileImageUrl();
         if (photoUrl != null) {
             new SetImageTask(holder.image).execute(photoUrl);
         }

@@ -6,37 +6,35 @@ import android.util.Log;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+
+import com.example.chappar10.data.AccessAuth;
 import com.example.chappar10.data.UsersDataRepository;
 import com.example.chappar10.model.Location;
 import com.example.chappar10.model.User;
 import com.example.chappar10.ui.activities.MainActivity;
 import com.example.chappar10.utils.GPSData;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-import java.time.LocalDate;
 import java.util.Date;
 
 public class AccessViewModel extends AndroidViewModel {
-    private final FirebaseAuth firebaseAuth;
-    UsersDataRepository dataRepository;
-    Application application = getApplication();
+    private final AccessAuth accessAuth;
+    private final UsersDataRepository usersDataRepository;
+    private final Application application;
 
 
     public AccessViewModel(@NonNull Application application) {
         super(application);
-        firebaseAuth = FirebaseAuth.getInstance();
-        dataRepository = UsersDataRepository.getInstance();
+        usersDataRepository = UsersDataRepository.getInstance();
+        accessAuth = AccessAuth.getInstance();
+        this.application = application;
     }
 
     public Task login(String email, String password) {
-       return firebaseAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(task -> {
+        return accessAuth.signIn(email, password).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) { //once the user is logged in
-                        Log.d("LoginViewModel", "login: success");
+                        String uid = task.getResult();
                         //Change the status of the user to online
-                        dataRepository.updateStatus(firebaseAuth.getCurrentUser().getUid(), User.Status.ONLINE);
+                        usersDataRepository.updateStatus(uid, User.Status.ONLINE);
                         Intent intent = new Intent(getApplication(), MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         getApplication().startActivity(intent);
@@ -49,14 +47,13 @@ public class AccessViewModel extends AndroidViewModel {
     }
 
     public Task createUser(String email, String password, String name, boolean isMale, Uri uri, Date birthDate) {
-       return firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-           if (task.isSuccessful()) {
-                    Log.d("LoginViewModel", "createUser: success");
-                    String userId = firebaseAuth.getCurrentUser().getUid();
-                    User user = new User(userId, name, email, isMale,  birthDate);
-                    dataRepository.addUser(user);
-                    dataRepository.updateStatus(userId, User.Status.ONLINE);
-                    if (uri != null) dataRepository.uploadProfilePicture(uri, userId);
+        return accessAuth.signUp(email, password).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                    String uid = task.getResult();
+                    User user = new User(uid, name, email, isMale,  birthDate);
+                    usersDataRepository.addUser(user);
+                    usersDataRepository.updateStatus(uid, User.Status.ONLINE);
+                    if (uri != null) usersDataRepository.uploadProfilePicture(uri, uid);
                     Intent intent = new Intent(getApplication(), MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     getApplication().startActivity(intent);
@@ -68,14 +65,15 @@ public class AccessViewModel extends AndroidViewModel {
     }
 
     public void updateLocation() {
-        Location location = GPSData.getCurrentLocation(application, firebaseAuth.getUid(), dataRepository);
+        //TODO fix this hack
+        Location location = GPSData.getCurrentLocation(application, accessAuth.getMyUserID(), usersDataRepository);
         //updated directly in the utils class
         Toast.makeText(application, "Location Updated", Toast.LENGTH_SHORT).show();
     }
 
 
     public void signOut() {
-        dataRepository.updateStatus(firebaseAuth.getUid(), User.Status.OFFLINE);
-        firebaseAuth.signOut();
+        usersDataRepository.updateStatus(accessAuth.getMyUserID(), User.Status.OFFLINE);
+        accessAuth.signOut();
     }
 }

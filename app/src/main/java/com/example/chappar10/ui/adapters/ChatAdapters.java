@@ -60,7 +60,7 @@ public class ChatAdapters extends RecyclerView.Adapter<ChatAdapters.ViewHolder> 
         Date date = new Date(chats.get(position).getTimestamp().toDate().getTime());
         // show date in format: 12:00
         holder.time.setText(String.format("%02d:%02d", date.getHours(), date.getMinutes()));
-        String photoUrl = otherUser.get().getProfileurl();
+        String photoUrl = otherUser.get().getProfileImageUrl();
         if (photoUrl != null) {
             new SetImageTask(holder.avatar).execute(photoUrl);
         }

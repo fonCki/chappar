@@ -73,9 +73,9 @@ public class MainFragment extends Fragment implements CardStackListener {
     @Override
     public void onCardSwiped(Direction direction) {
         if (direction == Direction.Right) {
-            viewModel.like(adapter.getItem(manager.getTopPosition() - 1).getUid());
+//            viewModel.like(adapter.getItem(manager.getTopPosition() - 1).getUid());
         } else if (direction == Direction.Left) {
-            viewModel.dislike(adapter.getItem(manager.getTopPosition() - 1).getUid());
+//            viewModel.dislike(adapter.getItem(manager.getTopPosition() - 1).getUid());
         }
     }
 
