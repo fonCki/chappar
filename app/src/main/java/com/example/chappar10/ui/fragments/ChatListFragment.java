@@ -57,21 +57,9 @@ public class ChatListFragment extends Fragment {
         List<Chat> chats = new ArrayList<>();
         adapter.setChats(chats);
 
-        viewModel.getChats(myUserID).addSnapshotListener((value, error) -> {
-            if (error != null) {
-                Log.i("ChatListFragment", "Error getting chats: " + error);
-                Toast.makeText(getContext(), "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                return;
-            }
-            if (value != null) {
-                chats.clear();
-                for (Chat chat : value.toObjects(Chat.class)) {
-                    Log.i("ChatListFragment", "Chats: " + chat.getChatId());
-                        chat.setName(viewModel.getReceiverName(chat.getChatId()));
-                        chats.add(chat);
-                }
-                adapter.setChats(chats);
-            }
+        viewModel.getChats(myUserID).observe(getViewLifecycleOwner(), chatsList -> {
+            adapter.setChats(chatsList);
+            adapter.notifyDataSetChanged();
         });
     }
 }

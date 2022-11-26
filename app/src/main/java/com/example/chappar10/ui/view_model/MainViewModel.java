@@ -10,11 +10,13 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.MutableLiveData;
 
 import com.example.chappar10.data.ChatsDataRepository;
 import com.example.chappar10.data.UsersDataRepository;
 import com.example.chappar10.data.UserListLiveData;
 import com.example.chappar10.data.UserLiveData;
+import com.example.chappar10.model.Chat;
 import com.example.chappar10.model.Location;
 import com.example.chappar10.model.Message;
 import com.example.chappar10.model.User;
@@ -29,6 +31,7 @@ import com.squareup.picasso.Target;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 
 public class MainViewModel extends AndroidViewModel {
 
@@ -98,8 +101,8 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     // given a String user ID calls to getChats in ChatsDataRepository
-    public Query getChats(String userId) {
-        return chatsDataRepository.getChats(userId);
+    public MutableLiveData<List<Chat>> getChats(String userId) {
+        return chatsDataRepository.getChatsLiveData(userId);
     }
 
     public Query getMessages(String chatId) {

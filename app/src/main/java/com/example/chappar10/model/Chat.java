@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.UUID;
 
 public class Chat implements Serializable {
-    private String name;
     private String chatId;
     private String senderId;
     private String receiverId;
@@ -33,13 +32,6 @@ public class Chat implements Serializable {
         this.InvolvedUsersId.add(receiverId.getUid());
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getChatId() {
         return chatId;
