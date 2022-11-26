@@ -27,17 +27,17 @@ public class SignUpActivity extends AppCompatActivity {
 
     private EditText nickName, email, password;
     private String nickNameString, emailString, passwordString;
-    DatePicker datePicker;
+    private DatePicker datePicker;
     private Switch aSwitch;
     private Date birthDate;
-    CircleImageView profile;
+    private CircleImageView profile;
+    private Uri uri;
 
-    AccessViewModel viewModel;
-    Button register;
-
+    private AccessViewModel viewModel;
+    private Button register;
     boolean profileSelected = false;
 
-    Uri uri;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

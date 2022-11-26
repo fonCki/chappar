@@ -5,30 +5,25 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.chappar10.R;
-import com.example.chappar10.data.UsersDataRepository;
 import com.example.chappar10.model.User;
 import com.example.chappar10.ui.adapters.UsersAdapter;
 import com.example.chappar10.ui.view_model.MainViewModel;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserListFragment extends Fragment {
 
+    MainViewModel mainViewModel;
     RecyclerView userList;
     UsersAdapter adapter;
 
-
-    MainViewModel viewModel;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -40,7 +35,7 @@ public class UserListFragment extends Fragment {
         userList = view.findViewById(R.id.user_list);
         userList.hasFixedSize();
         userList.setLayoutManager(new GridLayoutManager(getContext(), 3));
-        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
         adapter = new UsersAdapter(new ArrayList<>());
 
@@ -54,22 +49,20 @@ public class UserListFragment extends Fragment {
         userList.setAdapter(adapter);
 
         List<User> list = new ArrayList<>();
-        viewModel.getUsers().observe(getViewLifecycleOwner(), users -> {
+        mainViewModel.getUsers().observe(getViewLifecycleOwner(), users -> {
             list.clear();
             for (User user : users) {
-                if (!user.getUid().equals(viewModel.getMyUserID())) {
+                if (!user.getUid().equals(mainViewModel.getMyUserID())) {
                     list.add(user);
                 }
             }
             adapter.setUsers(list);
         });
 
-        viewModel.getUser(viewModel.getMyUserID()).observe(getViewLifecycleOwner(), user -> {
+        mainViewModel.getUser(mainViewModel.getMyUserID()).observe(getViewLifecycleOwner(), user -> {
             list.remove(user);
             adapter.setUsers(list);
         });
-
-
     }
 
 }

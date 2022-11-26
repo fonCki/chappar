@@ -23,18 +23,16 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class UserDetailsFragment extends Fragment {
 
-    MainViewModel viewModel;
-
+    MainViewModel mainViewModel;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_user_details, container, false);
-
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
         //Declare components
         LinearLayout linearLayout = view.findViewById(R.id.match_tools);
@@ -60,7 +58,7 @@ public class UserDetailsFragment extends Fragment {
             navController.navigate(R.id.nav_chat_window, bundle);
         });
 
-        viewModel.getUser(viewModel.getMyUserID()).observe(getViewLifecycleOwner(), user1 -> {
+        mainViewModel.getUser(mainViewModel.getMyUserID()).observe(getViewLifecycleOwner(), user1 -> {
             // save distance as a string with 1 decimal place
             String distance = String.format("%.1f", Distance.GetDistance(user.getLocation(), user1.getLocation()));
             location.setText(distance + " km");

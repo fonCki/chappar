@@ -8,31 +8,22 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chappar10.R;
 import com.example.chappar10.model.Message;
-import com.example.chappar10.ui.view_model.AccessViewModel;
-import com.example.chappar10.ui.view_model.MainViewModel;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class MessageAdapter  extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder> {
     private final ArrayList<Message> messages;
-//    private OnClickListener onClickListener;
     private String myId;
 
     public MessageAdapter(ArrayList<Message> messages, String myId) {
         this.myId = myId;
         this.messages = messages;
     }
-
-//    public void setOnClickListener(OnClickListener listener) {
-//        this.onClickListener = listener;
-//    }
 
     @NonNull
     @Override
@@ -69,14 +60,7 @@ public class MessageAdapter  extends RecyclerView.Adapter<MessageAdapter.Message
             messageContainer = itemView.findViewById(R.id.full_line);
             messageLayout = itemView.findViewById(R.id.container);
             message = itemView.findViewById(R.id.tv_message);
-//            itemView.setOnClickListener(v -> {
-//                onClickListener.onClick(messages.get(getBindingAdapterPosition()));
-//            });
         }
     }
-
-//    public interface OnClickListener {
-//        void onClick(Message message);
-//    }
 }
 

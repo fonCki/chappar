@@ -33,10 +33,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ChatWindowFragment extends Fragment {
     MainViewModel mainViewModel;
     MessageAdapter adapter;
-
     TextView nickName;
     TextView status;
-
     TextView messageArea;
     CircleImageView avatar;
 

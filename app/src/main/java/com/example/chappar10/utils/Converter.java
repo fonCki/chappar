@@ -11,7 +11,6 @@ public class Converter {
         return getAge(date.getDay(), date.getMonth(), date.getYear());
     }
 
-
     public static int getAge(int day, int month, int year) {
         Calendar dob = Calendar.getInstance();
         Calendar today = Calendar.getInstance();

@@ -67,6 +67,10 @@ public class AccessViewModel extends AndroidViewModel {
         });
     }
 
+    public String getMyUserID() {
+        return accessAuth.getMyUserID();
+    }
+
     public MutableLiveData<User> getMyUserLiveData() {
         if (myUserLiveData == null) {
             myUserLiveData = new MutableLiveData<>();

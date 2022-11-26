@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -24,22 +25,19 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
-    NavController navController;
-    AppBarConfiguration appBarConfiguration;
-    DrawerLayout drawerLayout;
-    NavigationView navigationDrawer;
-    BottomNavigationView bottomNavigationView;
-    Toolbar toolbar;
+    private NavController navController;
+    private AppBarConfiguration appBarConfiguration;
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationDrawer;
+    private BottomNavigationView bottomNavigationView;
+    private Toolbar toolbar;
     AccessViewModel accessViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        startActivity(new Intent(this, GPSActivity.class));
-        mAuth = FirebaseAuth.getInstance();
-        if (mAuth.getCurrentUser() == null) {
-            Log.i("User", "Not logged in");
+        accessViewModel = new ViewModelProvider(this).get(AccessViewModel.class);
+        if (accessViewModel.getMyUserID() == null) {
             startActivity(new Intent(this, LoginActivity.class));
         } else {
             setContentView(R.layout.activity_main);
@@ -105,7 +103,6 @@ public class MainActivity extends AppCompatActivity {
             getMenuInflater().inflate(R.menu.appbar, menu);
             return true;
         }
-//        getMenuInflater().inflate(R.menu.appbar, menu);
         return true;
     }
 

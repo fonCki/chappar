@@ -23,8 +23,8 @@ import java.util.ArrayList;
 
 public class MainFragment extends Fragment implements CardStackListener {
 
+    MainViewModel mainViewModel;
     CardAdapter adapter;
-    MainViewModel viewModel;
     CardStackLayoutManager manager;
     CardStackView cardStackView;
 
@@ -38,7 +38,7 @@ public class MainFragment extends Fragment implements CardStackListener {
             //set the variables
             cardStackView = view.findViewById(R.id.card_stack_view);
             manager = new CardStackLayoutManager(getContext(), this);
-            viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+            mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
 
             //set the adapter
@@ -47,7 +47,7 @@ public class MainFragment extends Fragment implements CardStackListener {
             adapter = new CardAdapter(new ArrayList<>());
             cardStackView.setAdapter(adapter);
 
-            viewModel.getUsers().observe(getViewLifecycleOwner(), users -> {
+            mainViewModel.getUsers().observe(getViewLifecycleOwner(), users -> {
                 adapter.setUsers(users);
             });
 

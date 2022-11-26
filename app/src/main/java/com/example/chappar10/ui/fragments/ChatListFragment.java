@@ -29,10 +29,10 @@ public class ChatListFragment extends Fragment {
     RecyclerView chatList;
     ChatAdapters adapter;
     UsersDataRepository dataRepository;
-    MainViewModel viewModel;
+    MainViewModel mainViewModel;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         return inflater.inflate(R.layout.fragment_chat_list, container, false);
     }
 
@@ -42,7 +42,7 @@ public class ChatListFragment extends Fragment {
         chatList.setLayoutManager(new LinearLayoutManager(getContext()));
         dataRepository = UsersDataRepository.getInstance();
         adapter = new ChatAdapters(new ArrayList<>());
-        String myUserID = viewModel.getMyUserID();
+        String myUserID = mainViewModel.getMyUserID();
 
 
         adapter.setOnClickListener(chat -> {
@@ -57,7 +57,7 @@ public class ChatListFragment extends Fragment {
         List<Chat> chats = new ArrayList<>();
         adapter.setChats(chats);
 
-        viewModel.getChats(myUserID).observe(getViewLifecycleOwner(), chatsList -> {
+        mainViewModel.getChats(myUserID).observe(getViewLifecycleOwner(), chatsList -> {
             adapter.setChats(chatsList);
             adapter.notifyDataSetChanged();
         });
