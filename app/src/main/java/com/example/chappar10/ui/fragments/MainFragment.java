@@ -65,6 +65,7 @@ public class MainFragment extends Fragment implements CardStackListener {
             adapter = new CardAdapter(new ArrayList<>());
             cardStackView.setAdapter(adapter);
 
+
             mainViewModel.getUsers().observe(getViewLifecycleOwner(), users -> {
                 List<User> list = new ArrayList<>();
                 users.forEach(user -> {

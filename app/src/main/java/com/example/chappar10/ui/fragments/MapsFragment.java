@@ -23,6 +23,7 @@ import com.example.chappar10.data.UsersDataRepository;
 import com.example.chappar10.model.User;
 import com.example.chappar10.ui.view_model.MainViewModel;
 import com.example.chappar10.utils.ImageConverter;
+import com.example.chappar10.utils.PicassoMarker;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -94,28 +95,19 @@ public class MapsFragment extends Fragment {
                     MarkerOptions markerOptions = new MarkerOptions();
                     markerOptions.position(latLng);
                     markerOptions.title(user.getUid());
+                    String photoUrl = user.getProfileImageUrl();
+                    Marker marker = googleMap.addMarker(markerOptions);
+
+                    Picasso.with(getContext())
+                            .load(photoUrl)
+                            .placeholder(R.drawable.defaul)
+                            .into(new PicassoMarker(marker));
+
+                    if (user.getUid().equals(mainViewModel.getMyUserID())) {
+                        googleMap.moveCamera(com.google.android.gms.maps.CameraUpdateFactory.newLatLngZoom(latLng, 7));
+                    }
 
 
-                    Picasso.get().load(user.getProfileImageUrl()).into(new Target() {
-                        @Override
-                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                            bitmap = Bitmap.createScaledBitmap(bitmap, 150, 150, false);
-                            Bitmap circleBitmap = ImageConverter.getCircleBitmap(bitmap, 150);
-                            markerOptions.icon(BitmapDescriptorFactory.fromBitmap(circleBitmap));
-                        }
-
-                        @Override
-                        public void onBitmapFailed(Exception e, Drawable errorDrawable) {
-
-                        }
-
-                        @Override
-                        public void onPrepareLoad(Drawable placeHolderDrawable) {
-                        }
-                    });
-                    googleMap.addMarker(markerOptions);
-                    googleMap.animateCamera(com.google.android.gms.maps.CameraUpdateFactory.zoomTo(5));
-                    googleMap.moveCamera(com.google.android.gms.maps.CameraUpdateFactory.newLatLng(latLng));
                     googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                         @Override
                         public boolean onMarkerClick(Marker marker) {

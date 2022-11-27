@@ -1,7 +1,9 @@
 package com.example.chappar10.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 public class User implements Serializable {
@@ -95,6 +97,7 @@ public class User implements Serializable {
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
+
 
     @Override
     public boolean equals(Object o) {

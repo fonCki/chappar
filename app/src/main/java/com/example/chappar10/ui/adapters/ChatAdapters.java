@@ -16,6 +16,7 @@ import com.example.chappar10.model.Chat;
 import com.example.chappar10.model.User;
 import com.example.chappar10.ui.view_model.MainViewModel;
 import com.example.chappar10.utils.SetImageTask;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -58,12 +59,17 @@ public class ChatAdapters extends RecyclerView.Adapter<ChatAdapters.ViewHolder> 
         holder.name.setText(otherUser.get().getNickname());
         holder.message.setText(chats.get(position).getLastMessage());
         Date date = new Date(chats.get(position).getTimestamp().toDate().getTime());
+        //if date is today do not show the day, otherwise show the day
         // show date in format: 12:00
         holder.time.setText(String.format("%02d:%02d", date.getHours(), date.getMinutes()));
+
         String photoUrl = otherUser.get().getProfileImageUrl();
-        if (photoUrl != null) {
-            new SetImageTask(holder.avatar).execute(photoUrl);
-        }
+        Picasso.with(holder.avatar.getContext())
+                .load(photoUrl)
+                .fit()
+                .centerCrop()
+                .placeholder(R.drawable.defaul)
+                .into(holder.avatar);
     }
 
     @Override

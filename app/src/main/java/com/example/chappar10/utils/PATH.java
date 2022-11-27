@@ -10,4 +10,6 @@ public class PATH {
     public static final String PROFILE_IMAGES = "profile_photo" ;
     public static final String PROFILE_URL = "profileImageUrl";
     public static final String LOCATION = "location";
+    public static final String LIKES_RECEIVED = "likesReceived";
+    public static final String LIKES_SENT = "likesSent";
 }

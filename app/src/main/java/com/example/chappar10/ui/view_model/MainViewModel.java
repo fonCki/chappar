@@ -39,6 +39,10 @@ public class MainViewModel extends AndroidViewModel {
         return usersDataRepository.getUserListLiveData();
     }
 
+    public MutableLiveData<List<User>> getNotLikedUsers() {
+        return usersDataRepository.getGetNotLikedUsersLiveData(getMyUserID());
+    }
+
 
     public String getMyUserID(){
         return FirebaseAuth.getInstance().getUid();
@@ -63,13 +67,11 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public void like(String userId) {
-        Toast.makeText(getApplication(), "Like", Toast.LENGTH_SHORT).show();
-//        dataRepository.like(getMyUserID(), userId);
+        usersDataRepository.like(getMyUserID(), userId);
     }
 
     public void dislike(String userId) {
-        Toast.makeText(getApplication(), "Dislike", Toast.LENGTH_SHORT).show();
-//        dataRepository.dislike(getMyUserID(), userId);
+        usersDataRepository.dislike(getMyUserID(), userId);
     }
 
     // given a String user ID calls to getChats in ChatsDataRepository

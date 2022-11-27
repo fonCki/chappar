@@ -9,7 +9,9 @@ import com.example.chappar10.model.User;
 import com.example.chappar10.utils.PATH;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -18,16 +20,20 @@ import java.util.concurrent.atomic.AtomicReference;
 
 
 public class UsersDataRepository {
+    private static AccessAuth accessAuth;
     private static UsersDataRepository instance;
-    private final MutableLiveData<List<User>> userListLiveData;
     private final CollectionReference usersDBRef;
+    private final MutableLiveData<List<User>> fullUserListLiveData;
+    private final MutableLiveData<List<User>> getNotLikedUsersLiveData;
 
     private final StorageReference storageReference;
 
     private UsersDataRepository(){
+        accessAuth = AccessAuth.getInstance();
         usersDBRef = FirebaseFirestore.getInstance().collection(PATH.USERS);
         storageReference = FirebaseStorage.getInstance().getReference().child(PATH.PROFILE_IMAGES);
-        userListLiveData = new MutableLiveData<>();
+        fullUserListLiveData = new MutableLiveData<>();
+        getNotLikedUsersLiveData = new MutableLiveData<>();
         initUserListLiveData();
     }
 
@@ -49,11 +55,12 @@ public class UsersDataRepository {
                 return;
             }
             List<User> users = value.toObjects(User.class);
-            userListLiveData.setValue(users);
+            fullUserListLiveData.setValue(users);
         });
         return null;
-    }
 
+
+    }
 
     public void addLocation(String userId, Location location) {
         usersDBRef.document(userId).update(PATH.LOCATION, location);
@@ -81,14 +88,14 @@ public class UsersDataRepository {
 
     //get the MutableLiveData List
     public MutableLiveData<List<User>> getUserListLiveData() {
-        return userListLiveData;
+        return fullUserListLiveData;
     }
 
     //get the user LiveData object
     public MutableLiveData<User> getUserLiveData(String userId) {
         AtomicReference<MutableLiveData<User>> userLiveData = new AtomicReference<>();
         //Get the user with the userId from the userListLiveData
-        userListLiveData.getValue().stream().filter(user -> user.getUid().equals(userId)).findFirst().ifPresent(user -> {
+        fullUserListLiveData.getValue().stream().filter(user -> user.getUid().equals(userId)).findFirst().ifPresent(user -> {
             userLiveData.set(new MutableLiveData<>());
             userLiveData.get().setValue(user);
             return;
@@ -96,5 +103,19 @@ public class UsersDataRepository {
         return userLiveData.get();
     }
 
+    public MutableLiveData<List<User>> getGetNotLikedUsersLiveData(String userId) {
 
+        return getNotLikedUsersLiveData;
+       // create a list with all the users that are in the array likesSent
+    }
+
+    public void like(String myUserID, String userId) {
+        usersDBRef.document(userId).update(PATH.LIKES_RECEIVED, FieldValue.arrayUnion(myUserID));
+        usersDBRef.document(myUserID).update(PATH.LIKES_SENT, FieldValue.arrayUnion(userId));
+    }
+
+    public void dislike(String myUserID, String userId) {
+        usersDBRef.document(userId).update(PATH.LIKES_RECEIVED, FieldValue.arrayRemove(myUserID));
+        usersDBRef.document(myUserID).update(PATH.LIKES_SENT, FieldValue.arrayRemove(userId));
+    }
 }

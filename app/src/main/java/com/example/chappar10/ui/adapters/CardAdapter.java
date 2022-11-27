@@ -18,6 +18,7 @@ import com.example.chappar10.utils.Converter;
 import com.example.chappar10.utils.Distance;
 import com.example.chappar10.utils.SetImageTask;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Attr;
 
@@ -51,18 +52,20 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         User user = users.get(position);
-        String photoUrl = user.getProfileImageUrl();
-        if (photoUrl != null) {
-            new SetImageTask(holder.image).execute(photoUrl);
-        } else {
-            holder.image.setImageResource(R.drawable.defaul);
-        }
         holder.name.setText(user.getNickname());
         //convert type Date to int Birthday
         int age = Converter.getAge(user.getBirthDate());//
         holder.age.setText(String.valueOf(age));
         String distance = String.format("%.1f", Distance.GetDistance(user.getLocation(), myLocation));
         holder.location.setText(distance + " km");
+
+        String photoUrl = user.getProfileImageUrl();
+        Picasso.with(holder.image.getContext())
+                .load(photoUrl)
+                .fit()
+                .centerCrop()
+                .placeholder(R.drawable.defaul)
+                .into(holder.image);
     }
 
     @Override

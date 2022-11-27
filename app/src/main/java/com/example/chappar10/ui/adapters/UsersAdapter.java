@@ -11,6 +11,8 @@ import com.example.chappar10.model.User;
 import com.example.chappar10.utils.Converter;
 import com.example.chappar10.utils.SetImageTask;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,15 +41,18 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, int position) {
         User user = users.get(position);
         String photoUrl = user.getProfileImageUrl();
-        if (photoUrl != null) {
-            new SetImageTask(holder.avatar).execute(photoUrl);
-        }
+
+        Picasso.with(holder.avatar.getContext())
+                .load(photoUrl)
+                .fit()
+                .centerCrop()
+                .placeholder(R.drawable.defaul)
+                .into(holder.avatar);
+
         holder.name.setText(user.getNickname());
         //convert type Date to int Birthday
         holder.status.setText(user.getStatus().equals(User.Status.ONLINE) ? "🟢" : "🔴");
-        int age = Converter.getAge(user.getBirthDate());
-
-        holder.age.setText(String.valueOf(age));
+        holder.age.setText(String.valueOf(Converter.getAge(user.getBirthDate())));
     }
 
     @Override
