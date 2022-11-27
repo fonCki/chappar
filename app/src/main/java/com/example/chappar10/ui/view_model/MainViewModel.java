@@ -1,8 +1,6 @@
 package com.example.chappar10.ui.view_model;
 
 import android.app.Application;
-import android.util.Log;
-import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -10,13 +8,13 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.chappar10.data.ChatsDataRepository;
+import com.example.chappar10.data.Joke;
 import com.example.chappar10.data.UsersDataRepository;
 import com.example.chappar10.model.Chat;
 import com.example.chappar10.model.Location;
 import com.example.chappar10.model.Message;
 import com.example.chappar10.model.User;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.Query;
 
 import java.util.List;
 
@@ -39,12 +37,14 @@ public class MainViewModel extends AndroidViewModel {
         return usersDataRepository.getUserListLiveData();
     }
 
-    public MutableLiveData<List<User>> getNotLikedUsers() {
-        return usersDataRepository.getGetNotLikedUsersLiveData(getMyUserID());
+
+    //Virgin users are users that have not been liked or disliked by the current user
+    public MutableLiveData<List<User>> getViginUsers() {
+        return usersDataRepository.getVirginUsers(getMyUserID());
     }
 
 
-    public String getMyUserID(){
+    public String getMyUserID() {
         return FirebaseAuth.getInstance().getUid();
     }
 
@@ -53,15 +53,16 @@ public class MainViewModel extends AndroidViewModel {
         chatsDataRepository.sendMessage(message, getChatId(message), myUser, finalReceiver);
     }
 
-    public String getChatId(Message message){
+    public String getChatId(Message message) {
         return getChatId(message.getSenderId(), message.getReceiverId());
     }
 
-    public String getChatId(String senderId, String receiverId){
+    public String getChatId(String senderId, String receiverId) {
         return (senderId.compareTo(receiverId) > 0) ?
                 senderId + receiverId :
                 receiverId + senderId;
     }
+
     public Location getLocation() {
         return getUser(getMyUserID()).getValue().getLocation();
     }
@@ -81,5 +82,9 @@ public class MainViewModel extends AndroidViewModel {
 
     public MutableLiveData<List<Message>> getMessages(String chatId) {
         return chatsDataRepository.getMessages(chatId);
+    }
+
+    public MutableLiveData<Joke> getJoke() {
+        return chatsDataRepository.getJoke();
     }
 }

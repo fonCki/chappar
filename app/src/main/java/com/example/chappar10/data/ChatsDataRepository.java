@@ -18,18 +18,24 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class ChatsDataRepository {
     private static ChatsDataRepository instance;
     private final CollectionReference chatsDBRef;
     private final MutableLiveData<List<Chat>> chatsLiveData;
     private final MutableLiveData<List<Message>> messagesLiveData;
+    private MutableLiveData<Joke> jokeLiveData;
 
 
     private ChatsDataRepository() {
         chatsDBRef = FirebaseFirestore.getInstance().collection(PATH.CHATS);
         chatsLiveData = new MutableLiveData<>();
         messagesLiveData = new MutableLiveData<>();
+        jokeLiveData = new MutableLiveData<>();
     }
 
 
@@ -89,5 +95,24 @@ public class ChatsDataRepository {
             }
         });
         return chatsLiveData;
+    }
+
+    public MutableLiveData<Joke> getJoke() {
+        jokeLiveData = new MutableLiveData<>();
+        JokeApi jokeApi = ServiceGenerator.getJokeApi();
+        Call<Joke> call = jokeApi.getJoke();
+        call.enqueue(new Callback<Joke>() {
+            @Override
+            public void onResponse(Call<Joke> call, Response<Joke> response) {
+                if (response.isSuccessful()) {
+                    jokeLiveData.setValue(response.body());
+                }
+            }
+            @Override
+            public void onFailure(Call<Joke> call, Throwable t) {
+                Log.d("TAG", "onFailure: " + t.getMessage());
+            }
+        });
+        return jokeLiveData;
     }
 }

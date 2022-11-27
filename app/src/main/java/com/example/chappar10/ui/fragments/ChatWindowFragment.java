@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chappar10.MovableFloatingActionButton;
 import com.example.chappar10.R;
+import com.example.chappar10.data.Joke;
 import com.example.chappar10.model.Chat;
 import com.example.chappar10.model.Message;
 import com.example.chappar10.model.User;
@@ -122,6 +123,19 @@ public class ChatWindowFragment extends Fragment {
                 jokeButton.setVisibility(View.VISIBLE);
             }
         });
+
+        //action joke button
+        jokeButton.setOnClickListener(v -> {
+            mainViewModel.getJoke().observe(getViewLifecycleOwner(), joke -> {
+                if (joke != null) {
+                    mainViewModel.sendMessage(joke.getSetup(), myUser.get(), otherUser.get());
+                    editText.setText(joke.getPunchline() + " 😂");
+                    jokeButton.setVisibility(View.GONE);
+                }
+                //clear the joke
+            });
+        });
+
 
         mainViewModel.getMessages(chatId).observe(getViewLifecycleOwner(), mess -> {
             adapter.setMessages(mess);

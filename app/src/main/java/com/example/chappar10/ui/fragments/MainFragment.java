@@ -20,6 +20,7 @@ import com.yuyakaido.android.cardstackview.Direction;
 import com.yuyakaido.android.cardstackview.StackFrom;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -46,16 +47,11 @@ public class MainFragment extends Fragment implements CardStackListener {
             CircleImageView like = view.findViewById(R.id.iv_like);
             CircleImageView dislike = view.findViewById(R.id.iv_dislike);
 
-            like.setOnClickListener(v->{
-                cardStackView.swipe();
-                mainViewModel.dislike(adapter.getItem(manager.getTopPosition() - 1).getUid());
-
-            });
-
             dislike.setOnClickListener(v->{
                 cardStackView.swipe();
-                mainViewModel.like(adapter.getItem(manager.getTopPosition() - 1).getUid());
+            });
 
+            like.setOnClickListener(v->{
             });
 
 
@@ -66,7 +62,7 @@ public class MainFragment extends Fragment implements CardStackListener {
             cardStackView.setAdapter(adapter);
 
 
-            mainViewModel.getUsers().observe(getViewLifecycleOwner(), users -> {
+            mainViewModel.getViginUsers().observe(getViewLifecycleOwner(), users -> {
                 List<User> list = new ArrayList<>();
                 users.forEach(user -> {
                     if (!user.getUid().equals(mainViewModel.getMyUserID())) {
