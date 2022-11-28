@@ -17,6 +17,7 @@ import com.example.chappar10.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
+import java.util.Set;
 
 public class MainViewModel extends AndroidViewModel {
 
@@ -86,5 +87,21 @@ public class MainViewModel extends AndroidViewModel {
 
     public MutableLiveData<Joke> getJoke() {
         return chatsDataRepository.getJoke();
+    }
+
+//    public MutableLiveData<Set<String>> getLikesSent() {
+//        return usersDataRepository.getLikesSentLiveData(getMyUserID());
+//    }
+//
+//    public MutableLiveData<Set<String>> getLikesReceived() {
+//        return usersDataRepository.getLikesReceivedLiveData(getMyUserID());
+//    }
+//
+//    public MutableLiveData<Set<String>> getMatches() {
+//        return usersDataRepository.getMatchesLiveData(getMyUserID());
+//    }
+
+    public MutableLiveData<List<User>> getMatchesList() {
+        return usersDataRepository.getMatchesListLiveData(getMyUserID());
     }
 }

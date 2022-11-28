@@ -63,7 +63,12 @@
     <activity
         android:id="@+id/signOut"
         android:name="com.example.chappar10.ui.activities.SignOutActivity"
-        android:label="activity_sign_out"
+        android:label="SIGN OUT"
         tools:layout="@layout/activity_sign_out" />
+    <fragment
+        android:id="@+id/nav_match"
+        android:name="com.example.chappar10.ui.fragments.MatchListFragment"
+        android:label="Matches"
+        tools:layout="@layout/fragment_match_list" />
 
 </navigation>

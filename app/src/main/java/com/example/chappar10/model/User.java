@@ -1,5 +1,7 @@
 package com.example.chappar10.model;
 
+import com.google.firebase.firestore.GeoPoint;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
