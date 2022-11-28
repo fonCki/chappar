@@ -23,6 +23,7 @@ import com.example.chappar10.model.User;
 import com.example.chappar10.ui.adapters.MessageAdapter;
 import com.example.chappar10.ui.view_model.MainViewModel;
 import com.example.chappar10.utils.SetImageTask;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentSnapshot;
 
@@ -80,7 +81,7 @@ public class ChatWindowFragment extends Fragment {
 
         //components
         EditText editText = view.findViewById(R.id.et_message);
-        Button button = view.findViewById(R.id.btn_send);
+        FloatingActionButton button = view.findViewById(R.id.btn_send);
 
         //Chat ID
         String chatId = mainViewModel.getChatId(myUserID, otherUserID);

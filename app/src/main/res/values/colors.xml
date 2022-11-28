@@ -9,4 +9,9 @@
     <color name="ic_launcher_background">#D32F2F</color>
     <color name="my_buble_message">#e9e9eb</color>
     <color name="other_buble_message">#007aff</color>
+    <color name="Esmerald_green">#5CA277</color>
+    <color name="Coffee_Pot">#988686</color>
+    <color name="Amber">#E4A527</color>
+    <color name="Black">#050200</color>
+    <color name="Cream">#F6EEF0</color>
 </resources>

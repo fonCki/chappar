@@ -17,14 +17,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:background="@drawable/circular_orange_solid"
+            android:layout_margin="1dp"
+            android:background="@drawable/half_chat_ind"
             android:orientation="horizontal">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_profile_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="3"
                 android:src="@drawable/defaul" />
 
@@ -60,6 +61,7 @@
             android:gravity="center">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:layout_margin="1dp"
                 android:id="@+id/message_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -71,13 +73,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="3.2">
+            android:layout_height="90dp">
 
             <LinearLayout
+                android:gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/circular_white_border"
+                android:layout_height="match_parent"
+                android:background="@color/Cream"
                 android:orientation="horizontal"
                 android:padding="10dp">
 
@@ -85,15 +87,22 @@
                     android:id="@+id/et_message"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_margin="8dp"
+                    android:paddingStart="20dp"
+                    android:gravity="start"
+                    android:background="@drawable/circular_white_solid"
                     android:layout_weight="1"
                     android:hint="Type a message"
                     android:inputType="text" />
 
-                <Button
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/btn_send"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Send" />
+                    android:layout_gravity="center"
+                    android:layout_margin="20dp"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:src="@drawable/send"/>
+
             </LinearLayout>
 
         </LinearLayout>
