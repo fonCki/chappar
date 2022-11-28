@@ -18,6 +18,7 @@ import com.example.chappar10.data.UsersDataRepository;
 import com.example.chappar10.model.Chat;
 import com.example.chappar10.ui.adapters.ChatAdapters;
 import com.example.chappar10.ui.view_model.MainViewModel;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -61,5 +62,6 @@ public class ChatListFragment extends Fragment {
             adapter.setChats(chatsList);
             adapter.notifyDataSetChanged();
         });
+
     }
 }

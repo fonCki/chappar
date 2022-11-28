@@ -69,6 +69,7 @@
                 app:reverseLayout="true"
                 app:stackFromEnd="true" />
 
+
         </LinearLayout>
 
         <LinearLayout
@@ -88,17 +89,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="8dp"
-                    android:paddingStart="20dp"
-                    android:gravity="start"
-                    android:background="@drawable/circular_white_solid"
                     android:layout_weight="1"
+                    android:background="@drawable/circular_white_solid"
                     android:hint="Type a message"
-                    android:inputType="text" />
+                    android:inputType="textMultiLine"
+                    android:paddingStart="20dp"
+                    android:textSize="18dp"
+                    android:gravity="start|top" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/btn_send"
                     android:layout_gravity="center"
-                    android:layout_margin="20dp"
+                    android:layout_margin="10dp"
                     android:layout_width="55dp"
                     android:layout_height="55dp"
                     android:src="@drawable/send"/>
