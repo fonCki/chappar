@@ -1,10 +1,23 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
+<!--    <style name="Theme.Chappar10" parent="Theme.MaterialComponents.DayNight.NoActionBar">-->
+<!--        &lt;!&ndash; Primary brand color. &ndash;&gt;-->
+<!--        <item name="colorPrimary">@color/colorPrimary</item>-->
+<!--        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>-->
+<!--        <item name="colorOnPrimary">@color/colorAccent</item>-->
+<!--        &lt;!&ndash; Secondary brand color. &ndash;&gt;-->
+<!--        <item name="colorSecondary">@color/design_default_color_background</item>-->
+<!--        <item name="colorSecondaryVariant">@color/cardview_shadow_end_color</item>-->
+<!--        <item name="colorOnSecondary">@color/design_default_color_secondary_variant</item>-->
+<!--        &lt;!&ndash; Status bar color. &ndash;&gt;-->
+<!--        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>-->
+<!--        &lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+<!--    </style>-->
     <style name="Theme.Chappar10" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
-        <item name="colorOnPrimary">@color/colorAccent</item>
+        <item name="colorPrimary">@color/Esmerald_green</item>
+        <item name="colorPrimaryVariant">#8dbea0</item>
+        <item name="colorOnPrimary">@color/Coffee_Pot</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/design_default_color_background</item>
         <item name="colorSecondaryVariant">@color/cardview_shadow_end_color</item>
@@ -13,4 +26,6 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+
 </resources>

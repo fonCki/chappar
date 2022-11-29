@@ -4,6 +4,7 @@
 
     <group android:id="@+id/data">
         <item
+
             android:id="@+id/nav_match"
             android:icon="@drawable/matches"
             android:title="@string/title_matches" />

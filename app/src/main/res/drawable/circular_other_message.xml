@@ -2,8 +2,8 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="rectangle">
-            <corners android:radius="30dp" />
-            <solid android:color="@color/other_buble_message"/>
+            <corners android:radius="15dp" />
+            <solid android:color="@color/other_buble_message" />
         </shape>
     </item>
 </selector>

@@ -36,6 +36,7 @@ public class MessageAdapter  extends RecyclerView.Adapter<MessageAdapter.Message
     @Override
     public void onBindViewHolder(@NonNull MessageAdapter.MessageViewHolder holder, int position) {
         holder.message.setText(messages.get(position).getMessage());
+        holder.message.setTextColor(messages.get(position).getSenderId().equals(myId) ? holder.itemView.getContext().getColor(R.color.white) : holder.itemView.getContext().getColor(R.color.black));
         holder.messageLayout.setBackground(messages.get(position).getSenderId().equals(myId) ? holder.itemView.getContext().getDrawable(R.drawable.circular_my_message) : holder.itemView.getContext().getDrawable(R.drawable.circular_other_message));
         holder.messageContainer.setGravity(messages.get(position).getSenderId().equals(myId) ? Gravity.END : Gravity.START);
     }
