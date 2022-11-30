@@ -1,69 +1,154 @@
 package com.example.chappar10.ui.fragments;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.os.AsyncTask;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.chappar10.R;
+import com.example.chappar10.ui.view_model.AccessViewModel;
+import com.example.chappar10.ui.view_model.MainViewModel;
 import com.example.chappar10.utils.SetImageTask;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SettingsFragment extends Fragment {
 
+    private EditText nickName, email, password, confirmPassword, bio;
+    private String nickNameString, emailString, passwordString, confirmPasswordString, bioString;
+    private CircleImageView profile;
+    Button cancel, save, delete;
+
+    private AccessViewModel accessViewModel;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        accessViewModel = new ViewModelProvider(this).get(AccessViewModel.class);
         return inflater.inflate(R.layout.fragment_settings, container, false);
 
     }
 
-    FirebaseStorage storage;
-    private FirebaseAuth mAuth;
-
-    Drawable drawable;
-
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        CircleImageView profile = view.findViewById(R.id.profile_img);
-        mAuth = FirebaseAuth.getInstance();
-        storage = FirebaseStorage.getInstance();
 
-        FirebaseStorage.getInstance().getReference().child("profile").child(mAuth.getUid()).child("profile_photo").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Log.d("TAG", uri.toString());
-                new SetImageTask(profile).execute(uri.toString());
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d("TAG", "onFailure: " + e.getMessage());
+        nickName = view.findViewById(R.id.editTextNickName);
+        email = view.findViewById(R.id.editTextEmail);
+        password = view.findViewById(R.id.editTextPassword);
+        confirmPassword = view.findViewById(R.id.editTextConfirmPassword);
+        bio = view.findViewById(R.id.editTextBio);
+        profile = view.findViewById(R.id.profile_img);
+        cancel = view.findViewById(R.id.cancel_button);
+        save = view.findViewById(R.id.update_button);
+        delete = view.findViewById(R.id.delete_button);
+
+
+
+        accessViewModel.getMyUserLiveData().observe(getViewLifecycleOwner(), user -> {
+            Log.i("SettingsFragment", "onViewCreated: " + user.getNickname());
+            nickName.setText(user.getNickname());
+            email.setText(user.getEmail());
+            bio.setText(user.getBio());
+            String photoUrl = user.getProfileImageUrl();
+            if (photoUrl != null) {
+                new SetImageTask(profile).execute(photoUrl);
+            } else {
+                profile.setImageResource(R.drawable.defaul);
             }
         });
 
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+            }
+        });
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nickNameString = nickName.getText().toString();
+                emailString = email.getText().toString();
+                passwordString = password.getText().toString();
+                confirmPasswordString = confirmPassword.getText().toString();
+                bioString = bio.getText().toString();
+
+                if (validateForm()) {
+                    accessViewModel.updateUser(nickNameString, emailString, passwordString, bioString);
+                    getActivity().onBackPressed();
+                } else {
+                    Toast.makeText(getContext(), "Error validating data", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                accessViewModel.deleteUser();
+                getActivity().onBackPressed();
+            }
+        });
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                startActivityForResult(intent, 33);
+            }
+        });
     }
+        @Override
+        public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+            super.onActivityResult(requestCode, resultCode, data);
+            if (data.getData() != null) {
+                profile.setImageURI(data.getData());
+            }
+
+        }
+
+        private boolean validateForm() {
+            nickNameString = nickName.getText().toString();
+            emailString = email.getText().toString();
+            passwordString = password.getText().toString();
+            confirmPasswordString = confirmPassword.getText().toString();
+
+            if (emailString.isEmpty()) {
+                this.email.setError("Email is required");
+                this.email.requestFocus();
+                return false;
+            }
+            if (passwordString.isEmpty()) {
+                this.password.setError("Password is required");
+                this.password.requestFocus();
+                return false;
+            }
+            if (nickNameString.isEmpty()) {
+                this.nickName.setError("nickname is required");
+                this.nickName.requestFocus();
+                return false;
+            }
+
+            if (!passwordString.equals(confirmPasswordString)) {
+                this.confirmPassword.setError("Passwords do not match");
+                this.confirmPassword.requestFocus();
+                return false;
+            }
+
+            return true;
+
+        }
+
+
 }

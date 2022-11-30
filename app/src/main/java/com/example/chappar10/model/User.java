@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class User implements Serializable {
-
     public enum Status {
         ONLINE,
         OFFLINE
@@ -22,6 +21,7 @@ public class User implements Serializable {
         this.isMale = isMale;
         this.birthDate = birthDate;
         location = new Location();
+        bio = "";
     }
 
 
@@ -33,6 +33,7 @@ public class User implements Serializable {
     private boolean isMale;
     private String profileImageUrl;
     private Date birthDate;
+    private String bio;
 
     public User() {}
 
@@ -100,6 +101,13 @@ public class User implements Serializable {
         this.birthDate = birthDate;
     }
 
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
 
     @Override
     public boolean equals(Object o) {

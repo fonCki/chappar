@@ -113,13 +113,13 @@ public class SignUpActivity extends AppCompatActivity {
         birthDate = new Date(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
         Log.i("DatePicker", "Date: " + birthDate);
 
-        if (emailString.isEmpty()) {
-            this.email.setError("Email is required");
+        if (emailString.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(emailString).matches()) {
+            this.email.setError("Email is required and must be valid");
             this.email.requestFocus();
             return false;
         }
-        if (passwordString.isEmpty()) {
-            this.password.setError("Password is required");
+        if (passwordString.isEmpty() || passwordString.length() < 6) {
+            this.password.setError("Password is required and must be at least 6 characters");
             this.password.requestFocus();
             return false;
         }

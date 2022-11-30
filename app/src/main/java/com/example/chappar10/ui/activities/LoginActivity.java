@@ -58,8 +58,8 @@ public class LoginActivity extends AppCompatActivity {
             return false;
         }
         // if password is not valid
-        if (passwordString.isEmpty() || passwordString.length() < 6) {
-            this.password.setError("Password is required and must be at least 6 characters");
+        if (passwordString.isEmpty()) {
+            this.password.setError("Password is required");
             this.password.requestFocus();
             return false;
         }

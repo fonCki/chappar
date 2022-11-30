@@ -30,6 +30,7 @@ public class AccessViewModel extends AndroidViewModel {
         usersDataRepository = UsersDataRepository.getInstance();
         accessAuth = AccessAuth.getInstance();
         this.application = application;
+        myUserLiveData = new MutableLiveData<>();
     }
 
     public Task login(String email, String password) {
@@ -90,5 +91,13 @@ public class AccessViewModel extends AndroidViewModel {
     public void signOut() {
         usersDataRepository.updateStatus(accessAuth.getMyUserID(), User.Status.OFFLINE);
         accessAuth.signOut();
+    }
+
+    public void updateUser(String nickNameString, String emailString, String passwordString, String bioString) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public void deleteUser() {
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 }
