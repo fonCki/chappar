@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -14,6 +15,7 @@ import com.example.chappar10.R;
 import com.example.chappar10.model.User;
 import com.example.chappar10.ui.adapters.CardAdapter;
 import com.example.chappar10.ui.view_model.MainViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager;
 import com.yuyakaido.android.cardstackview.CardStackListener;
 import com.yuyakaido.android.cardstackview.CardStackView;
@@ -45,8 +47,8 @@ public class MainFragment extends Fragment implements CardStackListener {
             cardStackView = view.findViewById(R.id.card_stack_view);
             manager = new CardStackLayoutManager(getContext(), this);
             mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-            CircleImageView like = view.findViewById(R.id.iv_like);
-            CircleImageView dislike = view.findViewById(R.id.iv_dislike);
+            CircleImageView like = view.findViewById(R.id.fab_like);
+            CircleImageView dislike = view.findViewById(R.id.fab_dislike);
 
             dislike.setOnClickListener(v->{
                 cardStackView.swipe();

@@ -21,5 +21,14 @@
     <color name="Black">#050200</color>
     <color name="Cream">#F6EEF0</color>
 
+
+    <color name="greenPastel">#f2f8f3</color>
+    <color name="bluePastel">#dbeefd</color>
+    <color name="redPastel">#f8b6b6</color>
+    <color name="yellowPastel">#f8f6b6</color>
+    <color name="purpleBeige">#ebe7d8</color>
+
+
+
     <color name="tint_logo">#ffefed</color>
 </resources>

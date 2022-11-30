@@ -15,40 +15,71 @@
 <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
 
         <com.yuyakaido.android.cardstackview.CardStackView
+            android:background="@drawable/background_captain"
             android:id="@+id/card_stack_view"
-
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:layout_margin="0dp"
+            android:layout_marginBottom="1dp"
             />
 
-
-
-
-<!--    </androidx.recyclerview.widget.RecyclerView>-->
         <LinearLayout
+            android:background="@drawable/background_captain"
+            android:layout_marginTop="0dp"
             android:id="@+id/match_tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:paddingBottom="70dp"
-            android:layout_weight="5"
+            android:gravity="center"
+            android:layout_marginBottom="30dp"
+            android:layout_weight="4"
             app:shapeAppearanceOverlay="@style/roundedImageView">
 
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:background="@android:color/transparent"
+                    android:layout_marginHorizontal="50dp"
+                    android:scaleType="centerCrop"
+                    android:id="@+id/fab_dislike"
+                    android:layout_width="66dp"
+                    android:layout_height="66dp"
+                    android:layout_marginBottom="16dp"
+                    app:civ_border_color="@color/white"
+                    app:civ_border_width="5dp"
+                    app:civ_border_overlay="true"
+                    android:elevation="8dp"
+                    android:src="@drawable/x"/>
+
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/iv_like"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:src="@drawable/hate" />
+                    android:background="@android:color/transparent"
+                    android:layout_marginHorizontal="50dp"
+                    android:scaleType="centerCrop"
+                    android:id="@+id/fab_like"
+                    android:layout_width="66dp"
+                    android:layout_height="66dp"
+                    android:layout_marginBottom="16dp"
+                    app:civ_border_color="#ec5268"
+                    app:civ_border_width="5dp"
+                    app:civ_border_overlay="true"
+                    android:elevation="8dp"
+                    android:src="@drawable/love"/>
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/iv_dislike"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:src="@drawable/love" />
+
+
+
+<!--                <de.hdodenhof.circleimageview.CircleImageView-->
+<!--                    android:id="@+id/iv_like"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:src="@drawable/hate" />-->
+
+<!--                <de.hdodenhof.circleimageview.CircleImageView-->
+<!--                    android:id="@+id/iv_dislike"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:src="@drawable/love" />-->
 
 
         </LinearLayout>

@@ -57,9 +57,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:scaleType="centerCrop"
             android:gravity="center">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:background="@drawable/background_image"
                 android:layout_margin="1dp"
                 android:id="@+id/message_list"
                 android:layout_width="match_parent"

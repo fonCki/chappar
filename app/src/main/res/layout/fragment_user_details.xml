@@ -23,6 +23,7 @@
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:minHeight="600dp"
             android:layout_margin="18dp"
             android:layout_weight="1"
             android:scaleType="centerCrop"
@@ -71,7 +72,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_weight="1"
                     android:text="location"
-                    android:textColor="@color/other_buble_message"
+                    android:textColor="@color/my_buble_message"
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
