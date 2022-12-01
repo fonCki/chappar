@@ -11,7 +11,7 @@ import com.squareup.picasso.Target;
 import java.util.Objects;
 
 public class PicassoMarker implements Target {
-    private Marker mMarker;
+    private final Marker mMarker;
 
     public PicassoMarker(Marker marker) {
         mMarker = marker;

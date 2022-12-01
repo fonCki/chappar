@@ -1,5 +1,7 @@
 package com.example.chappar10.data;
 
+import android.util.Log;
+
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -53,6 +55,16 @@ public class AccessAuth {
         } else {
             return null;
         }
+    }
+
+    public Task updatePassword(String newPassword) {
+        return firebaseAuth.getCurrentUser().updatePassword(newPassword).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Log.i("AccessAuth", "updatePassword: success");
+            } else {
+                Log.i("AccessAuth", "updatePassword: failure");
+            }
+        });
     }
 
     public boolean isUserLoggedIn() {

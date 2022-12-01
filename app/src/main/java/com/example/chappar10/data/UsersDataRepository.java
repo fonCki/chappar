@@ -97,9 +97,6 @@ public class UsersDataRepository {
         usersDBRef.document(user.getUid()).set(user);
     }
 
-    public void updateUser(User user) {
-        usersDBRef.document(user.getUid()).set(user);
-    }
 
     public void uploadProfilePicture(Uri uri, String uid) {
         storageReference.child(uid).child(PATH.PROFILE_IMAGES).putFile(uri).addOnSuccessListener(taskSnapshot -> {
@@ -245,4 +242,18 @@ public class UsersDataRepository {
         return matchesLiveData;
     }
 
+    public void updateUser(String uid, String nickNameString, String bioString) {
+        if (nickNameString != null) {
+            usersDBRef.document(uid).update(PATH.NICKNAME, nickNameString).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Log.i("TAG777", "updateUser: nickname updated");
+                } else {
+                    Log.i("TAG777", "updateUser: nickname update failed");
+                }
+            });
+        }
+        if (bioString != null) {
+            usersDBRef.document(uid).update(PATH.BIO, bioString);
+        }
+    }
 }

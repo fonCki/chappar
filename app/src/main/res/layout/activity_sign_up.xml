@@ -83,7 +83,7 @@
                 android:inputType="textPassword"
                 android:padding="10dp"
                 android:textColor="@color/my_buble_message"
-                android:text="password"
+                android:text="Password"
                 android:textColorHint="@color/black_alpha40" />
 
             <LinearLayout

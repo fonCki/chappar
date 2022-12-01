@@ -55,6 +55,7 @@ public class UserDetailsFragment extends Fragment {
         User user = (User) getArguments().getSerializable("user");
         nickName.setText(user.getNickname());
         age.setText(String.valueOf(Converter.getAge(user.getBirthDate())));
+        bio.setText(user.getBio());
         String photoUrl = user.getProfileImageUrl();
         if (photoUrl != null) {
             new SetImageTask(profileImage).execute(photoUrl);

@@ -1,6 +1,7 @@
 package com.example.chappar10.ui.fragments;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,19 +16,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.example.chappar10.R;
 import com.example.chappar10.ui.view_model.AccessViewModel;
-import com.example.chappar10.ui.view_model.MainViewModel;
 import com.example.chappar10.utils.SetImageTask;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SettingsFragment extends Fragment {
 
     private EditText nickName, email, password, confirmPassword, bio;
-    private String nickNameString, emailString, passwordString, confirmPasswordString, bioString;
+    private String nickNameString, passwordString, confirmPasswordString, bioString, photoUrl;
     private CircleImageView profile;
-    Button cancel, save, delete;
+    private Button cancel, save, delete;
+    private Uri uri;
 
     private AccessViewModel accessViewModel;
 
@@ -53,12 +53,14 @@ public class SettingsFragment extends Fragment {
 
 
 
+
         accessViewModel.getMyUserLiveData().observe(getViewLifecycleOwner(), user -> {
             Log.i("SettingsFragment", "onViewCreated: " + user.getNickname());
             nickName.setText(user.getNickname());
             email.setText(user.getEmail());
             bio.setText(user.getBio());
-            String photoUrl = user.getProfileImageUrl();
+            photoUrl = user.getProfileImageUrl();
+            Log.i("SettingsFragment", "onViewCreated: " + photoUrl);
             if (photoUrl != null) {
                 new SetImageTask(profile).execute(photoUrl);
             } else {
@@ -77,13 +79,12 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 nickNameString = nickName.getText().toString();
-                emailString = email.getText().toString();
                 passwordString = password.getText().toString();
                 confirmPasswordString = confirmPassword.getText().toString();
                 bioString = bio.getText().toString();
 
                 if (validateForm()) {
-                    accessViewModel.updateUser(nickNameString, emailString, passwordString, bioString);
+                    accessViewModel.updateUser(nickNameString, passwordString, bioString, uri);
                     getActivity().onBackPressed();
                 } else {
                     Toast.makeText(getContext(), "Error validating data", Toast.LENGTH_SHORT).show();
@@ -113,36 +114,31 @@ public class SettingsFragment extends Fragment {
         public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
             super.onActivityResult(requestCode, resultCode, data);
             if (data.getData() != null) {
-                profile.setImageURI(data.getData());
+                uri = data.getData();
+                profile.setImageURI(uri);
             }
 
         }
 
         private boolean validateForm() {
             nickNameString = nickName.getText().toString();
-            emailString = email.getText().toString();
             passwordString = password.getText().toString();
             confirmPasswordString = confirmPassword.getText().toString();
 
-            if (emailString.isEmpty()) {
-                this.email.setError("Email is required");
-                this.email.requestFocus();
-                return false;
+            if (!passwordString.isEmpty() || !confirmPasswordString.isEmpty()) {
+                if (passwordString.length() < 6) {
+                    password.setError("Password must be at least 6 characters");
+                    return false;
+                }
+                if (!passwordString.equals(confirmPasswordString)) {
+                    confirmPassword.setError("Passwords do not match");
+                    return false;
+                }
             }
-            if (passwordString.isEmpty()) {
-                this.password.setError("Password is required");
-                this.password.requestFocus();
-                return false;
-            }
+
             if (nickNameString.isEmpty()) {
                 this.nickName.setError("nickname is required");
                 this.nickName.requestFocus();
-                return false;
-            }
-
-            if (!passwordString.equals(confirmPasswordString)) {
-                this.confirmPassword.setError("Passwords do not match");
-                this.confirmPassword.requestFocus();
                 return false;
             }
 

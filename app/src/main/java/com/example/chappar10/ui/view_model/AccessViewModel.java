@@ -22,7 +22,6 @@ public class AccessViewModel extends AndroidViewModel {
     private final UsersDataRepository usersDataRepository;
     private final Application application;
     private String myUserID;
-    private MutableLiveData<User> myUserLiveData;
 
 
     public AccessViewModel(@NonNull Application application) {
@@ -30,7 +29,6 @@ public class AccessViewModel extends AndroidViewModel {
         usersDataRepository = UsersDataRepository.getInstance();
         accessAuth = AccessAuth.getInstance();
         this.application = application;
-        myUserLiveData = new MutableLiveData<>();
     }
 
     public Task login(String email, String password) {
@@ -73,11 +71,7 @@ public class AccessViewModel extends AndroidViewModel {
     }
 
     public MutableLiveData<User> getMyUserLiveData() {
-        if (myUserLiveData == null) {
-            myUserLiveData = new MutableLiveData<>();
-            usersDataRepository.getUserLiveData(myUserID).observeForever(myUserLiveData::setValue);
-        }
-        return myUserLiveData;
+            return usersDataRepository.getUserLiveData(getMyUserID());
     }
 
     public void updateLocation() {
@@ -93,8 +87,16 @@ public class AccessViewModel extends AndroidViewModel {
         accessAuth.signOut();
     }
 
-    public void updateUser(String nickNameString, String emailString, String passwordString, String bioString) {
-        throw new UnsupportedOperationException("Not yet implemented");
+    public void updateUser(String nickNameString, String passwordString, String bioString, Uri uri) {
+        //Update Password
+        if (passwordString != null && !passwordString.isEmpty())
+            accessAuth.updatePassword(passwordString);
+
+        //Update Image
+        if (uri != null)  usersDataRepository.uploadProfilePicture(uri, getMyUserID());
+
+        //Update NickName and Bio
+        usersDataRepository.updateUser(getMyUserID(), nickNameString, bioString);
     }
 
     public void deleteUser() {
