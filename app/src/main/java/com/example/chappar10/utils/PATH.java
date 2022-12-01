@@ -15,4 +15,5 @@ public class PATH {
     public static final String MATCHES = "matches";
     public static final String NICKNAME = "nickname";
     public static final String BIO = "bio";
+    public static final String PREFERENCES = "preferences";
 }

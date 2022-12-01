@@ -33,12 +33,13 @@
             android:icon="@drawable/settings"
             android:title="@string/menu_settings" />
 
+
+    </group>
+    <group android:id="@+id/status">
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/about"
             android:title="@string/menu_about" />
-    </group>
-    <group android:id="@+id/status">
 
         <item
             android:id="@+id/signOut"

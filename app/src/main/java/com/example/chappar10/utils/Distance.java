@@ -34,6 +34,6 @@ public class Distance {
 
         distance = Math.pow(distance, 2) + Math.pow(height, 2);
 
-        return Math.sqrt(distance) / 1000;
+        return Math.sqrt(distance) / 1000; // convert to km
     }
 }
