@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/Amber"
+    android:gravity="center"
+    tools:context=".ui.fragments.PreferencesFragment">
+
+    <ScrollView
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:background="@color/Amber"
+            android:padding="30dp"
+            android:layout_marginHorizontal="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <!--        edit text with white solid background-->
+
+            <LinearLayout
+                android:background="@drawable/bio_border_button"
+                android:paddingVertical="20dp"
+                android:layout_marginVertical="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                            <Switch
+                                android:paddingHorizontal="20dp"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/black_alpha40"
+                                android:id="@+id/switch_discovery"
+                                android:layout_width="300dp"
+                                android:layout_height="wrap_content"
+                                android:theme="@style/SCBSwitch"
+                                android:text="Show me on Discovery" />
+            </LinearLayout>
+
+        <LinearLayout
+            android:paddingVertical="20dp"
+            android:background="@drawable/bio_border_button"
+            android:layout_marginVertical="10dp"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+                        <TextView
+                            android:paddingHorizontal="20dp"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/black_alpha40"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Show me" />
+
+                        <Switch
+                            android:paddingHorizontal="20dp"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/my_buble_message"
+                            android:id="@+id/switch_man"
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            android:theme="@style/SCBSwitch"
+                            android:text="Men" />
+                        <Switch
+                            android:paddingHorizontal="20dp"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/my_buble_message"
+                            android:id="@+id/switch_women"
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            android:theme="@style/SCBSwitch"
+                            android:text="Women" />
+
+        </LinearLayout>
+
+            <LinearLayout
+                android:background="@drawable/bio_border_button"
+                android:padding="20dp"
+                android:layout_marginVertical="10dp"
+
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                <TextView
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black_alpha40"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Maximun Distance" />
+
+                <TextView
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black_alpha40"
+                    android:id="@+id/text_distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1 km" />
+            </LinearLayout>
+
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/discreteSlider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp"
+                    android:stepSize="1"
+                    android:valueFrom="1"
+                    android:valueTo="100"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/continuousRangeSlider" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:background="@drawable/bio_border_button"
+                android:padding="20dp"
+                android:layout_marginVertical="10dp"
+
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                <TextView
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black_alpha40"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Show Ages" />
+
+                <TextView
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black_alpha40"
+                    android:id="@+id/age_from"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="20" />
+
+                    <TextView
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black_alpha40"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" - " />
+
+                <TextView
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black_alpha40"
+                    android:id="@+id/age_to"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="77" />
+                </LinearLayout>
+
+                <com.google.android.material.slider.RangeSlider
+                    android:id="@+id/range_seek_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:stepSize="1"
+                    android:valueFrom="18"
+                    android:valueTo="99"
+                    app:values="@array/initial_slider_values" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:paddingHorizontal="50dp">
+
+        <Button
+            android:id="@+id/cancel_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/login_border_button"
+            android:backgroundTintMode="add"
+            android:text="Cancel"
+            android:textColor="@color/white"
+            android:theme="@style/Theme.Design" />
+
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/login_border_button"
+            android:backgroundTintMode="add"
+            android:text="Save"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+</LinearLayout>

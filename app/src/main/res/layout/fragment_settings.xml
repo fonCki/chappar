@@ -89,6 +89,7 @@
         android:textColor="@color/my_buble_message"
         android:textColorHint="@color/black_alpha40" />
 
+
     <EditText
         android:id="@+id/editTextBio"
         android:layout_width="300dp"
@@ -145,51 +146,6 @@
         android:text="Delete Account"
         android:textColor="@color/white" />
 
-
-
-
-    <!--    <de.hdodenhof.circleimageview.CircleImageView-->
-<!--        android:id="@+id/profile_img"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_marginTop="16dp"-->
-<!--        android:src="@drawable/defaul"-->
-<!--        android:layout_weight="2"-->
-<!--        app:civ_border_color="#FF000000"/>-->
-
-<!--    <LinearLayout-->
-<!--        android:background="@color/black_alpha40"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_weight="1">-->
-
-<!--        <EditText-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_margin="16dp"-->
-<!--            android:hint="My Name"-->
-<!--            android:textColor="#FFFFFF"-->
-<!--            android:textColorHint="#FFFFFF"-->
-<!--            android:textSize="18sp"-->
-<!--            android:inputType="textPersonName"/>-->
-
-<!--        <EditText-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_margin="16dp"-->
-<!--            android:hint="My Name"-->
-<!--            android:textColor="#FFFFFF"-->
-<!--            android:textColorHint="#FFFFFF"-->
-<!--            android:textSize="18sp"-->
-<!--            android:inputType="textPersonName"/>-->
-
-<!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent">-->
-
-<!--        </androidx.recyclerview.widget.RecyclerView>-->
-
-<!--    </LinearLayout>-->
     </LinearLayout>
 </ScrollView>
 </LinearLayout>

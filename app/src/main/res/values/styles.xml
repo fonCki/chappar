@@ -17,4 +17,12 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">10dp</item>
     </style>
+
+    <style name="SCBSwitch" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">#46bdbf</item>
+        <item name="colorSwitchThumbNormal">#f1f1f1
+        </item>
+        <item name="android:colorForeground">#42221f1f
+        </item>
+    </style>
 </resources>
