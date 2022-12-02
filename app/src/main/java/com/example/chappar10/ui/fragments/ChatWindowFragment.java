@@ -95,7 +95,7 @@ public class ChatWindowFragment extends Fragment {
         messageList.setAdapter(adapter);
 
         //Ser Snackbar
-        Snackbar snackbar = Snackbar.make(view, "Are you stuck for words? A joke is always a good way to start a conversation! press 💡", Snackbar.ANIMATION_MODE_SLIDE);
+        Snackbar snackbar = Snackbar.make(view,getString(R.string.snackbar_text), Snackbar.LENGTH_LONG);
         snackbar.setAnchorView(jokeButton);
         snackbar.show();
 

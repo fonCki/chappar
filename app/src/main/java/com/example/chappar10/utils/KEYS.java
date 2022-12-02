@@ -8,4 +8,11 @@ public class KEYS {
     public static final String DISTANCE = "Distance";
     public static final String AGE_FROM = "AgeFrom";
     public static final String AGE_TO = "AgeTo";
+
+
+    //transient data
+    public static final String NICKNAME = "nickname";
+    public static final String BIO = "bio";
+    public static final String PROFILE_URL = "profileImageUrl";
+    public static final String STATUS = "status";
 }

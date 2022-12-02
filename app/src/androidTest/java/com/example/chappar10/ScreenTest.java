@@ -30,7 +30,7 @@ public class ScreenTest {
 
         onView(withId(R.id.register))
                 .perform(click())
-                .check()
+                .check(matches(isDisplayed()));
 
 //        onData(anything())
 //                .inAdapterView(withId(R.id.list))

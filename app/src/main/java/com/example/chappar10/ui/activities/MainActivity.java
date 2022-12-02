@@ -21,6 +21,7 @@ import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
+
     private NavController navController;
     private AppBarConfiguration appBarConfiguration;
     private DrawerLayout drawerLayout;

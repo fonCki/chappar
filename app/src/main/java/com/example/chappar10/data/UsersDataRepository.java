@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.chappar10.model.Location;
 import com.example.chappar10.model.UID;
 import com.example.chappar10.model.User;
+import com.example.chappar10.utils.KEYS;
 import com.example.chappar10.utils.PATH;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -101,13 +102,13 @@ public class UsersDataRepository {
     public void uploadProfilePicture(Uri uri, String uid) {
         storageReference.child(uid).child(PATH.PROFILE_IMAGES).putFile(uri).addOnSuccessListener(taskSnapshot -> {
             taskSnapshot.getMetadata().getReference().getDownloadUrl().addOnSuccessListener(uriFinal -> {
-                usersDBRef.document(uid).update(PATH.PROFILE_URL, uriFinal.toString());
+                usersDBRef.document(uid).update(KEYS.PROFILE_URL, uriFinal.toString());
             });
         });
     }
 
     public void updateStatus(String userId, User.Status status) {
-        usersDBRef.document(userId).update(PATH.STATUS, status);
+        usersDBRef.document(userId).update(KEYS.STATUS, status);
     }
 
     //get the MutableLiveData List
@@ -244,7 +245,7 @@ public class UsersDataRepository {
 
     public void updateUser(String uid, String nickNameString, String bioString) {
         if (nickNameString != null) {
-            usersDBRef.document(uid).update(PATH.NICKNAME, nickNameString).addOnCompleteListener(task -> {
+            usersDBRef.document(uid).update(KEYS.NICKNAME, nickNameString).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     Log.i("TAG777", "updateUser: nickname updated");
                 } else {
@@ -253,7 +254,7 @@ public class UsersDataRepository {
             });
         }
         if (bioString != null) {
-            usersDBRef.document(uid).update(PATH.BIO, bioString);
+            usersDBRef.document(uid).update(KEYS.BIO, bioString);
         }
     }
 }
