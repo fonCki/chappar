@@ -3,6 +3,13 @@ package com.example.chappar10.utils;
 import com.example.chappar10.model.Location;
 import com.example.chappar10.model.User;
 
+/*  Here is an implementation of the Haversine method in
+    Java which also takes into account height differences between two points.
+    the calculus was copied from https://stackoverflow.com/questions/3694380/calculating-distance-between-two-points-using-latitude-longitude
+    and adapted to take into account height differences.
+    The method is used to calculate the distance between two users.
+ */
+
 public class Distance {
 
     public static double GetDistance(Location location1, Location location2) {
