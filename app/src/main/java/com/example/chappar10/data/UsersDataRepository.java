@@ -32,7 +32,6 @@ import retrofit2.Response;
 
 
 public class UsersDataRepository {
-    private static AccessAuth accessAuth;
     private static UsersDataRepository instance;
     private final CollectionReference usersDBRef;
     private final MutableLiveData<List<User>> fullUserListLiveData;
@@ -42,15 +41,9 @@ public class UsersDataRepository {
     private  MutableLiveData<Set<String>> likesSentLiveData;
     private  MutableLiveData<Set<String>> matchesLiveData;
     private  MutableLiveData<List<User>> matchesListLiveData;
-
-
-
-
-
     private final StorageReference storageReference;
 
     private UsersDataRepository(){
-        accessAuth = AccessAuth.getInstance();
         usersDBRef = FirebaseFirestore.getInstance().collection(PATH.USERS);
         storageReference = FirebaseStorage.getInstance().getReference().child(PATH.PROFILE_IMAGES);
         fullUserListLiveData = new MutableLiveData<>();
