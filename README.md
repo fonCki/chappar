@@ -47,7 +47,7 @@ Chap.ar is the fasting dating app. We revolutionize dating so much that we creat
 
 ## Video
 
-![Youtube Video](https://youtu.be/Vzv8XbWBlNU)
+[Youtube](https://youtu.be/Vzv8XbWBlNU)
 
 
 
