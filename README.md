@@ -25,6 +25,7 @@ By swiping left or right, you'll be able to access as many matches as you want.
 
 
 It does not matter if you don't know what to say, just press the 💡 and let the app choose the best jokes to break the ice for you.
+
 ![App Screenshot](https://github.com/fonCki/Chappar1.0/blob/e0d7138d92400c9840d71e3dfe0d588cc453ef1e/resources/Reduced6.png) &nbsp;&nbsp;&nbsp;&nbsp; ![App Screenshot](https://github.com/fonCki/Chappar1.0/blob/e0d7138d92400c9840d71e3dfe0d588cc453ef1e/resources/Reduced4.png)
 
 
