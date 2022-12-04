@@ -47,7 +47,7 @@ Chap.ar is the fasting dating app. We revolutionize dating so much that we creat
 
 ## Video
 
-![App Screenshot](https://github.com/fonCki/Chappar1.0/blob/b4d4e5834e8c0ba5e12b3e555bf4339c279f92bf/resources/Screen_Recording_2022-12-04_at_11_27_52_AM_AdobeExpress.gif)
+![Youtube Video](https://youtu.be/Vzv8XbWBlNU)
 
 
 
@@ -64,6 +64,7 @@ Chap.ar is the fasting dating app. We revolutionize dating so much that we creat
 - [Assignment Description](https://github.com/fonCki/Chappar1.0/blob/4eeb154b8a0dec5a3a1ec0994444350afaa16c03/resources/and1.pdf)
 ## 🚀 About Me
 I'm a time traveler
+
 
 
 
