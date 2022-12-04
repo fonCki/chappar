@@ -19,6 +19,7 @@ Your preferences can be set up based on whether you're looking for men, women, o
 
 
 By swiping left or right, you'll be able to access as many matches as you want.
+
 ![App Screenshot](https://github.com/fonCki/Chappar1.0/blob/b4d4e5834e8c0ba5e12b3e555bf4339c279f92bf/resources/Screen_Recording_2022-12-04_at_11_27_52_AM_AdobeExpress.gif) ![App Screenshot](https://github.com/fonCki/Chappar1.0/blob/e0d7138d92400c9840d71e3dfe0d588cc453ef1e/resources/Reduced7.png) ![App Screenshot](https://github.com/fonCki/Chappar1.0/blob/e0d7138d92400c9840d71e3dfe0d588cc453ef1e/resources/Reduced9.png)
 
 
@@ -29,37 +30,20 @@ It does not matter if you don't know what to say, just press the 💡 and let th
 
 Chap.ar is the fasting dating app. We revolutionize dating so much that we create a new category among apps, not “dating apps” but concretize apps. “
 
+## Prioritized Requirements
 
-
-
-
-..
-
-
-
-
-
-
-
-
-
-## Authors
-
-- [Alfonso Ridao](https://alfonso.ridao.ar)
-- For support, email alfonso@ridao.ar.
-
-
-## Appendix
-
-
-- [Assignment Description](https://github.com/fonCki/BinarySearchTree/blob/a785444af118b6ae020ac83fc2ee1d95ef72bc83/extras/Assignment%20%20BST%20with%20a%20rebalance%20operation.pdf)
-## Screenshots
-
-![App Screenshot](https://github.com/fonCki/Chappar1.0/blob/b4d4e5834e8c0ba5e12b3e555bf4339c279f92bf/resources/Screen_Recording_2022-12-04_at_11_27_52_AM_AdobeExpress.gif)
-
-
-
-
+- As a user, I want to create a personal account to interact with the system.  ✅
+- As a user, I want to see all the connected users around me. ✅
+- As a user, I want to see the location of all the users around me. ✅
+- As a user, I want to be able to change my status to online or offline. ✅
+- As a user, I want to see details about the other users. ✅
+- As a user, I want to be able to like any user in the users' list.✅
+- As a user, I want to be able to change my profile information. ✅
+- As a user, I want to see my “points” accumulated. ❌
+- As a user, I want to be able to chat with my crushes. ✅
+- As a user, I want to see the location of my crushes. ✅
+- As a user, I want to give some reviews about my met crushes. ❌
+- As a user, I want to be able to see the reviews made for my crushes about me. ❌
 
 ## Authors
 
@@ -70,5 +54,10 @@ Chap.ar is the fasting dating app. We revolutionize dating so much that we creat
 ## Appendix
 
 
-- [Assignment Description](https://github.com/fonCki/BinarySearchTree/blob/a785444af118b6ae020ac83fc2ee1d95ef72bc83/extras/Assignment%20%20BST%20with%20a%20rebalance%20operation.pdf)
+- [Assignment Description](https://github.com/fonCki/Chappar1.0/blob/4eeb154b8a0dec5a3a1ec0994444350afaa16c03/resources/and1.pdf)
+## 🚀 About Me
+I'm a time traveler
+
+
+
 
