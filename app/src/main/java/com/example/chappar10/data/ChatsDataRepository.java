@@ -1,11 +1,11 @@
 package com.example.chappar10.data;
 
-
-
 import android.util.Log;
-
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.chappar10.data.api.Joke;
+import com.example.chappar10.data.api.JokeApi;
+import com.example.chappar10.data.api.ServiceGenerator;
 import com.example.chappar10.model.Chat;
 import com.example.chappar10.model.Message;
 import com.example.chappar10.model.User;
@@ -17,7 +17,6 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

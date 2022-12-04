@@ -112,7 +112,7 @@
 
     </LinearLayout>
 
-    <com.example.chappar10.MovableFloatingActionButton
+    <com.example.chappar10.utils.MovableFloatingActionButton
         android:id="@+id/joke_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

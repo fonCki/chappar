@@ -1,6 +1,5 @@
 package com.example.chappar10.ui.adapters;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,7 +102,6 @@ public class ChatAdapters extends RecyclerView.Adapter<ChatAdapters.ViewHolder> 
         }
 
     }
-
 
     public interface OnClickListener {
         void onClick(Chat chat);

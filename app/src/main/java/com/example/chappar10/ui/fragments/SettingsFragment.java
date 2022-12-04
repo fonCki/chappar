@@ -51,9 +51,6 @@ public class SettingsFragment extends Fragment {
         save = view.findViewById(R.id.update_button);
         delete = view.findViewById(R.id.delete_button);
 
-
-
-
         accessViewModel.getMyUserLiveData().observe(getViewLifecycleOwner(), user -> {
             Log.i("SettingsFragment", "onViewCreated: " + user.getNickname());
             nickName.setText(user.getNickname());
@@ -119,7 +116,6 @@ public class SettingsFragment extends Fragment {
             }
 
         }
-
         private boolean validateForm() {
             nickNameString = nickName.getText().toString();
             passwordString = password.getText().toString();

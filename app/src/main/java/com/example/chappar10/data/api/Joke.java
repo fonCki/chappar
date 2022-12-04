@@ -1,4 +1,4 @@
-package com.example.chappar10.data;
+package com.example.chappar10.data.api;
 
 public class Joke {
  private String setup;

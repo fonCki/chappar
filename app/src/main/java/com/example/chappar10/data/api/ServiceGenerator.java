@@ -1,7 +1,7 @@
-package com.example.chappar10.data;
+package com.example.chappar10.data.api;
 
 
-import com.example.chappar10.data.JokeApi;
+import com.example.chappar10.data.api.JokeApi;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

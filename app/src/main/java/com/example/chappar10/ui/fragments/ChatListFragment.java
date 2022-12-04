@@ -2,11 +2,9 @@ package com.example.chappar10.ui.fragments;
 
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -18,8 +16,6 @@ import com.example.chappar10.data.UsersDataRepository;
 import com.example.chappar10.model.Chat;
 import com.example.chappar10.ui.adapters.ChatAdapters;
 import com.example.chappar10.ui.view_model.MainViewModel;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -32,7 +32,6 @@ public class SignUpActivity extends AppCompatActivity {
     private Date birthDate;
     private CircleImageView profile;
     private Uri uri;
-
     private AccessViewModel viewModel;
     private Button register;
     boolean profileSelected = false;

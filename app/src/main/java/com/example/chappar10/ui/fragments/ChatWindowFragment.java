@@ -1,11 +1,9 @@
 package com.example.chappar10.ui.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -14,9 +12,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.chappar10.MovableFloatingActionButton;
+import com.example.chappar10.utils.MovableFloatingActionButton;
 import com.example.chappar10.R;
-import com.example.chappar10.data.Joke;
 import com.example.chappar10.model.Chat;
 import com.example.chappar10.model.Message;
 import com.example.chappar10.model.User;
@@ -25,7 +22,6 @@ import com.example.chappar10.ui.view_model.MainViewModel;
 import com.example.chappar10.utils.SetImageTask;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;

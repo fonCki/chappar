@@ -30,8 +30,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     private final ArrayList<User> users;
     private MainViewModel mainViewModel;
     private Location myLocation = new Location(0, 0);
-
-
     public CardAdapter(ArrayList<User> users) {
         this.users = users;
     }

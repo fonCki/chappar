@@ -1,4 +1,4 @@
-package com.example.chappar10;
+package com.example.chappar10.utils;
 
 import android.content.Context;
 import android.util.AttributeSet;

@@ -8,7 +8,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.chappar10.data.ChatsDataRepository;
-import com.example.chappar10.data.Joke;
+import com.example.chappar10.data.api.Joke;
 import com.example.chappar10.data.UsersDataRepository;
 import com.example.chappar10.model.Chat;
 import com.example.chappar10.model.Location;
@@ -17,7 +17,6 @@ import com.example.chappar10.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
-import java.util.Set;
 
 public class MainViewModel extends AndroidViewModel {
 
@@ -37,7 +36,6 @@ public class MainViewModel extends AndroidViewModel {
     public MutableLiveData<List<User>> getUsers() {
         return usersDataRepository.getUserListLiveData();
     }
-
 
     //Virgin users are users that have not been liked or disliked by the current user
     public MutableLiveData<List<User>> getViginUsers() {
@@ -89,17 +87,6 @@ public class MainViewModel extends AndroidViewModel {
         return chatsDataRepository.getJoke();
     }
 
-//    public MutableLiveData<Set<String>> getLikesSent() {
-//        return usersDataRepository.getLikesSentLiveData(getMyUserID());
-//    }
-//
-//    public MutableLiveData<Set<String>> getLikesReceived() {
-//        return usersDataRepository.getLikesReceivedLiveData(getMyUserID());
-//    }
-//
-//    public MutableLiveData<Set<String>> getMatches() {
-//        return usersDataRepository.getMatchesLiveData(getMyUserID());
-//    }
 
     public MutableLiveData<List<User>> getMatchesList() {
         return usersDataRepository.getMatchesListLiveData(getMyUserID());
