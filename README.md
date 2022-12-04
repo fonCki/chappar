@@ -17,25 +17,25 @@ Your preferences can be set up based on whether you're looking for men, women, o
 
 By swiping left or right, you'll be able to access as many matches as you want.
 
-![App Screenshot](https://github.com/fonCki/Chappar1.0/blob/b4d4e5834e8c0ba5e12b3e555bf4339c279f92bf/resources/Reduced2.png) ![App Screenshot](https://github.com/fonCki/Chappar1.0/blob/b4d4e5834e8c0ba5e12b3e555bf4339c279f92bf/resources/Reduced3.png)
+![App Screenshot](https://github.com/fonCki/Chappar1.0/blob/e0d7138d92400c9840d71e3dfe0d588cc453ef1e/resources/Reduced2.png) ![App Screenshot](https://github.com/fonCki/Chappar1.0/blob/e0d7138d92400c9840d71e3dfe0d588cc453ef1e/resources/Reduced3.png)
 
 
-![App Screenshot](https://github.com/fonCki/Chappar1.0/blob/cab328cb217930ad35d8ecb8ef2eb2e2640ba47f/resources/Reduced1.png4)
+![App Screenshot](https://github.com/fonCki/Chappar1.0/blob/e0d7138d92400c9840d71e3dfe0d588cc453ef1e/resources/Reduced4.png)
 
 It does not matter if you don't know what to say, just press the 💡 and let the app choose the best jokes to break the ice for you.
 
-![App Screenshot](https://github.com/fonCki/Chappar1.0/blob/cab328cb217930ad35d8ecb8ef2eb2e2640ba47f/resources/Reduced5.png)
+![App Screenshot](https://github.com/fonCki/Chappar1.0/blob/e0d7138d92400c9840d71e3dfe0d588cc453ef1e/resources/Reduced5.png)
 
 Chap.ar is the fasting dating app. We revolutionize dating so much that we create a new category among apps, not “dating apps” but concretize apps. “
 
-![App Screenshot](https://github.com/fonCki/Chappar1.0/blob/cab328cb217930ad35d8ecb8ef2eb2e2640ba47f/resources/Reduced6.png)
+![App Screenshot](https://github.com/fonCki/Chappar1.0/blob/e0d7138d92400c9840d71e3dfe0d588cc453ef1e/resources/Reduced6.png)
 
 
 ..
 
-![App Screenshot](https://github.com/fonCki/Chappar1.0/blob/cab328cb217930ad35d8ecb8ef2eb2e2640ba47f/resources/Reduced7.png)
-![App Screenshot](https://github.com/fonCki/Chappar1.0/blob/cab328cb217930ad35d8ecb8ef2eb2e2640ba47f/resources/Reduced8.png)
-![App Screenshot](https://github.com/fonCki/Chappar1.0/blob/cab328cb217930ad35d8ecb8ef2eb2e2640ba47f/resources/Reduced9.png)
+![App Screenshot](https://github.com/fonCki/Chappar1.0/blob/e0d7138d92400c9840d71e3dfe0d588cc453ef1e/resources/Reduced7.png)
+![App Screenshot](https://github.com/fonCki/Chappar1.0/blob/e0d7138d92400c9840d71e3dfe0d588cc453ef1e/resources/Reduced8.png)
+![App Screenshot](https://github.com/fonCki/Chappar1.0/blob/e0d7138d92400c9840d71e3dfe0d588cc453ef1e/resources/Reduced9.png)
 
 
 
