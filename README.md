@@ -9,7 +9,7 @@ Chap.ar is the new dating app; we have come to solve some errors found in the ac
 You must register for a user account to use Chapp.ar, and it is free of charge. You can find your crush immediately by uploading your best photo and some information about yourself.
 
 ![App Screenshot](https://github.com/fonCki/Chappar1.0/blob/b4d4e5834e8c0ba5e12b3e555bf4339c279f92bf/resources/Screen_Recording_2022-12-04_at_11_27_52_AM_AdobeExpress.gif) \
-![App Screenshot](https://github.com/fonCki/Chappar1.0/blob/cab328cb217930ad35d8ecb8ef2eb2e2640ba47f/resources/Screenshot%202022-12-04%20at%2011.27.35%20AM.png){:height="36px" width="36px"}
+![App Screenshot](https://github.com/fonCki/Chappar1.0/blob/cab328cb217930ad35d8ecb8ef2eb2e2640ba47f/resources/Screenshot%202022-12-04%20at%2011.27.35%20AM.png){:height="16px" width="16px"}
 
 
 Your preferences can be set up based on whether you're looking for men, women, or both, as well as the radius you'd like to include in your search!!
