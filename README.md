@@ -46,13 +46,6 @@ Chap.ar is the fasting dating app. We revolutionize dating so much that we creat
 - As a user, I want to give some reviews about my met crushes. ❌
 - As a user, I want to be able to see the reviews made for my crushes about me. ❌
 
-## Video
-
-[Youtube](https://youtu.be/Vzv8XbWBlNU)
-
-
-
-
 ## Authors
 
 - [Alfonso Ridao](https://alfonso.ridao.ar)
